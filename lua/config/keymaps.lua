@@ -8,10 +8,6 @@ local opts = { noremap = true, silent = true }
 
 keymap.set("n", "x", '"_x')
 
--- Comments
-keymap.set("n", "<C-_>", "gtc", opts ) -- Ctrl-_ in Normal mode
-keymap.set("v", "<C-_>", "goc", opts ) -- Ctrl-_ in Visual mode
-
 -- Increment/decrement
 keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")

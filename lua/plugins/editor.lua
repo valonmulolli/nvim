@@ -31,7 +31,7 @@ return {
 			},
 		},
 	},
-
+	"mg979/vim-visual-multi",
 	{
 		"dinhhuy258/git.nvim",
 		event = "BufReadPre",
