@@ -16,20 +16,19 @@ opt.clipboard = "unnamedplus"
 opt.cmdheight = 1
 opt.termguicolors = true
 opt.laststatus = 2
-opt.expandtab = true
+-- opt.expandtab = true
 opt.linebreak = true
 opt.autoindent = true
 opt.breakindent = true
-opt.smartindent = true 
-opt.backspace = "indent,eol,start"
+opt.smartindent = true
 opt.scrolloff = 10
 opt.backupskip = { "/tmp/*", "/private/tmp/*" }
 opt.inccommand = "split"
 opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
-opt.smarttab = true
+-- opt.smarttab = true
 opt.breakindent = true
 opt.shiftwidth = 2
-opt.tabstop = 2
+-- opt.tabstop = 2
 opt.wrap = true -- No Wrap lines
 opt.backspace = { "start", "eol", "indent" }
 opt.path:append({ "**" }) -- Finding files - Search down into subfolders
@@ -39,6 +38,7 @@ opt.splitright = true -- Put new windows right of current
 opt.splitkeep = "cursor"
 opt.iskeyword:append("-")
 opt.mouse = "a"
+opt.completeopt = "menuone,noselect"
 
 
 -- Undercurl
@@ -56,18 +56,18 @@ if vim.fn.has("nvim-0.8") == 1 then
 end
 
 opt.guicursor =
-	"n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
+  "n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 opt.encoding = "UTF-8"
 vim.g.editorconfig = false
-vim.g.clipboard = {
-	name = "WslClipboard",
-	copy = {
-		["+"] = "clip.exe",
-		["*"] = "clip.exe",
-	},
-	paste = {
-		["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).ToString().Replace("\r", ""))',
-		["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).ToString().Replace("\r", ""))',
-	},
-	cache_enabled = 0,
-}
+-- vim.g.clipboard = {
+--   name = "WslClipboard",
+--   copy = {
+--     ["+"] = "clip.exe",
+--     ["*"] = "clip.exe",
+--   },
+--   paste = {
+--     ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).ToString().Replace("\r", ""))',
+--     ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).ToString().Replace("\r", ""))',
+--   },
+--   cache_enabled = 0,
+-- }

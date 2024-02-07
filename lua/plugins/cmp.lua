@@ -9,7 +9,8 @@ return {
     "saadparwaiz1/cmp_luasnip",     -- for autocompletion
     "rafamadriz/friendly-snippets", -- useful snippets
     "onsails/lspkind.nvim",         -- vs-code like pictograms
-    "Exafunction/codeium.nvim",
+    -- "Exafunction/codeium.nvim",
+    "David-Kunz/gen.nvim",
   },
   config = function()
     local cmp_status_ok, cmp = pcall(require, "cmp")
@@ -55,6 +56,7 @@ return {
 
     local kind_icons = {
       Codeium = "󰘦",
+      Gen = "",
       Text = '  ',
       Method = '  ',
       Function = '  ',
@@ -142,7 +144,8 @@ return {
           -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
           
           vim_item.menu = ({
-            codeium = "[Codeium]",
+            -- Gen = "[Gen]",
+            -- codeium = "[Codeium]",
             nvim_lsp = "[LSP]",
             luasnip = "[Snippet]",
             buffer = "[Buffer]",
@@ -153,7 +156,8 @@ return {
         end,
       },
       sources = {
-        { name = "codeium" },
+        -- { name = "codeium" },
+        -- { name = "gen" },
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer" },

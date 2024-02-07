@@ -2,7 +2,6 @@ local discipline = require("valon.discipline")
 
 discipline.bablok()
 
-
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
@@ -33,8 +32,8 @@ keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
 -- New tab
 keymap.set("n", "te", ":tabedit")
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
+keymap.set("n", "<leader>tf", ":tabnext<Return>", opts)
+keymap.set("n", "<<leader>tb>", ":tabprev<Return>", opts)
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
@@ -51,24 +50,50 @@ keymap.set("n", "<C-w><up>", "<C-w>+")
 keymap.set("n", "<C-w><down>", "<C-w>-")
 
 -- Code Runner
-keymap.set('n', '<leader>r', ':RunCode<CR>', opts)
-keymap.set('n', '<leader>rf', ':RunFile<CR>', opts)
-keymap.set('n', '<leader>rft', ':RunFile tab<CR>', opts)
-keymap.set('n', '<leader>rp', ':RunProject<CR>', opts)
-keymap.set('n', '<leader>rc', ':RunClose<CR>', opts)
-keymap.set('n', '<leader>crf', ':CRFiletype<CR>', opts)
-keymap.set('n', '<leader>crp', ':CRProjects<CR>', opts)
+keymap.set("n", "<leader>r", ":RunCode<CR>", opts)
+keymap.set("n", "<leader>rf", ":RunFile<CR>", opts)
+keymap.set("n", "<leader>rft", ":RunFile tab<CR>", opts)
+keymap.set("n", "<leader>rp", ":RunProject<CR>", opts)
+keymap.set("n", "<leader>rc", ":RunClose<CR>", opts)
+keymap.set("n", "<leader>crf", ":CRFiletype<CR>", opts)
+keymap.set("n", "<leader>crp", ":CRProjects<CR>", opts)
+
+--copy and paste
+vim.g.neovide_input_use_logo = 1
+vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+
+--Llama
+vim.keymap.set({ 'n', 'v' }, '<leader>]', ':Gen<CR>')
 
 -- Diagnostics
 keymap.set("n", "<C-j>", function()
-	vim.diagnostic.goto_next()
+  vim.diagnostic.goto_next()
 end, opts)
 
--- Tab
+-- TmuxNaviagor
+-- keymap.set("n", "<C-h>", ":TmuxNavigateLeft<CR>", { noremap = true, silent = true, description = 'window left' })
+-- keymap.set("n", "<C-l>", ":TmuxNavigateRight<CR>", { noremap = true, silent = true, description = 'window right' })
+-- keymap.set("n", "<C-j>", ":TmuxNavigateDown<CR>", { noremap = true, silent = true, description = 'window down' })
+-- keymap.set("n", "<C-k>", ":TmuxNavigateUp<CR>", { noremap = true, silent = true, description = 'window up' })
+
+
+-- completion Tab
 vim.api.nvim_set_keymap(
-	"i",
-	"<Tab>",
-	'pumvisible() ? "<C-n>" : "<Tab>"',
-	{ expr = true, noremap = true, silent = true }
+  "i",
+  "<Tab>",
+  'pumvisible() ? "<C-n>" : "<Tab>"',
+  { expr = true, noremap = true, silent = true }
+
 )
-vim.api.nvim_set_keymap("i", "<S-Tab>", 'pumvisible() ? "<C-p>" : "<C-h>"', { expr = true, noremap = true })
+
+vim.api.nvim_set_keymap(
+  "i",
+  "<S-Tab>",
+  'pumvisible() ? "<C-p>" : "<C-h>"',
+  { expr = true, noremap = true, silent = true }
+)
+
+

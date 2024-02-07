@@ -5,7 +5,7 @@ return {
   opts = function()
     return {
       style = "dark",
-      transparent = false,
+      transparent = true,
       italic_comments = false,
       disable_nvimtree_bg = true,
       color_overrides = {
@@ -31,6 +31,7 @@ return {
         LspFloatWinNormal = { link = "NormalFloat" },
         LspInfoBorder = { link = "FloatBorder" },
       },
+      -- vim.cmd("colorscheme vscode"),
     }
   end,
   {
@@ -41,27 +42,12 @@ return {
     priority = 1000,
     opts = function()
       return {
-        transparent = false,
+        transparent = true,
         disable_italic = false,
         color_overrides = {
           vscFoldBackground = "#070707",
         },
-        vim.cmd("colorscheme arctic"),
-      }
-    end,
-  },
-  {
-    "Abstract-IDE/Abstract-cs",
-    colorscheme = "abscs",
-    lazy = true,
-    priority = 1000,
-    opts = function()
-      return {
-        transparent = false,
-        disable_italic = false,
-        color_overrides = {
-          vscFoldBackground = "#070707",
-        },
+        -- vim.cmd("colorscheme arctic"),
       }
     end,
   },
@@ -72,7 +58,7 @@ return {
     config = function()
       require("citruszest").setup({
         option = {
-          transparent = false, -- Enable/Disable transparency
+          transparent = true,
           bold = false,
           italic = false,
         },
@@ -82,7 +68,7 @@ return {
       })
     end,
     init = function()
-      vim.cmd("colorscheme citruszest")
+      -- vim.cmd("colorscheme citruszest")
     end,
   },
   {
@@ -92,8 +78,62 @@ return {
     colorscheme = "bloop",
     branch = "main",
     priority = 1000,
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
     config = function()
-      vim.cmd("colorscheme bloop")
+      -- vim.cmd("colorscheme bloop")
+    end,
+  },
+  {
+    "Yazeed1s/oh-lucy.nvim",
+    lazy = false,
+    colorscheme = "oh-lucy",
+    branch = "main",
+    priority = 1000,
+    opts = {
+      transparent_background = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+    config = function()
+      vim.cmd("colorscheme oh-lucy-evening")
+    end,
+  },
+  {
+    "Yazeed1s/minimal.nvim",
+    lazy = false,
+    colorscheme = "minimal",
+    opts = {
+      minimal_transparent_background = false,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+    branch = "main",
+    priority = 1000,
+    config = function()
+      -- vim.cmd("colorscheme colorscheme minimal")
+    end,
+  },
+  {
+    "raphamorim/vim-rio",
+    -- lazy = false,
+    colorscheme = "rio",
+    opts = {
+      transparent_background = true,
+    },  
+    branch = "main",
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme rio")
     end,
   },
 }

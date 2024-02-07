@@ -12,6 +12,38 @@ return {
 			},
 		},
 	},
+	{
+		"numToStr/Comment.nvim",
+		dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
+		keys = {
+			{ "gc", mode = { "n", "v" }, desc = "Comment toggle linewise" },
+			{ "gb", mode = { "n", "v" }, desc = "Comment toggle blockwise" },
+		},
+		opts = {
+			pre_hook = function(ctx)
+				-- Only calculate commentstring for tsx filetypes
+				if vim.bo.filetype == "typescriptreact" then
+					local U = require("Comment.utils")
+
+					-- Determine whether to use linewise or blockwise commentstring
+					local type = ctx.ctype == U.ctype.linewise and "__default" or "__multiline"
+
+					-- Determine the location where to calculate commentstring from
+					local location = nil
+					if ctx.ctype == U.ctype.blockwise then
+						location = require("ts_context_commentstring.utils").get_cursor_location()
+					elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+						location = require("ts_context_commentstring.utils").get_visual_start_location()
+					end
+
+					return require("ts_context_commentstring.internal").calculate_commentstring({
+						key = type,
+						location = location,
+					})
+				end
+			end,
+		},
+	},
 
 	{
 		"echasnovski/mini.hipatterns",
@@ -81,7 +113,8 @@ return {
 					local builtin = require("telescope.builtin")
 					builtin.live_grep()
 				end,
-				desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
+				desc =
+				"Search for a string in your current working directory and get results live as you type, respects .gitignore",
 			},
 			{
 				"\\\\",
@@ -205,4 +238,30 @@ return {
 			require("telescope").load_extension("file_browser")
 		end,
 	},
+	{
+		"xiyaowong/transparent.nvim",
+		lazy = false,
+		opts = {
+			extra_groups = {
+				"NormalFloat", -- plugins which have float panel such as Lazy, Mason, LspInfo
+				"NvimTreeNormal", -- NvimTree
+			},
+			lualine_style = "default",
+			-- lualine_style = "stealth",
+		},
+		config = function()
+			require("transparent").setup({ -- Optional, you don't have to run setup.
+				groups = {                -- table: default groups
+					'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+					'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+					'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
+					'SignColumn', 'CursorLine', 'CursorLineNr', 'StatusLine', 'StatusLineNC',
+					'EndOfBuffer',
+				},
+				extra_groups = {}, -- table: additional groups that should be cleared
+				exclude_groups = {}, -- table: groups you don't want to clear
+			})
+		end,
+	}
+
 }
