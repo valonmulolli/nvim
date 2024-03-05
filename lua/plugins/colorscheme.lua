@@ -103,7 +103,7 @@ return {
       },
     },
     config = function()
-      vim.cmd("colorscheme oh-lucy-evening")
+      -- vim.cmd("colorscheme oh-lucy-evening")
     end,
   },
   {
@@ -128,12 +128,38 @@ return {
     -- lazy = false,
     colorscheme = "rio",
     opts = {
-      transparent_background = true,
-    },  
+      transparent = true,
+      italic = true,
+    },
     branch = "main",
     priority = 1000,
     config = function()
       vim.cmd("colorscheme rio")
+    end,
+  },
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("cyberdream").setup({
+        -- Recommended - see "Configuring" below for more config options
+        transparent = true,
+        italic_comments = true,
+        hide_fillchars = true,
+        borderless_telescope = true,
+      })
+      -- vim.cmd("colorscheme cyberdream") -- set the colorscheme
+    end,
+  },
+  {
+    "rockyzhang24/arctic.nvim",
+    dependencies = { "rktjmp/lush.nvim" },
+    name = "arctic",
+    branch = "main",
+    priority = 1000,
+    config = function()
+      -- vim.cmd("colorscheme arctic")
     end,
   },
 }

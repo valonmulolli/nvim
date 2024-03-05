@@ -32,8 +32,8 @@ keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
 -- New tab
 keymap.set("n", "te", ":tabedit")
-keymap.set("n", "<leader>tf", ":tabnext<Return>", opts)
-keymap.set("n", "<<leader>tb>", ":tabprev<Return>", opts)
+keymap.set("n", "<tab>", ":tabnext<Return>", opts)
+keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
@@ -58,6 +58,9 @@ keymap.set("n", "<leader>rc", ":RunClose<CR>", opts)
 keymap.set("n", "<leader>crf", ":CRFiletype<CR>", opts)
 keymap.set("n", "<leader>crp", ":CRProjects<CR>", opts)
 
+-- Simulator
+vim.api.nvim_set_keymap('n', '<leader>em', ':Telescope simulators run<CR>', { noremap = true, silent = true })
+
 --copy and paste
 vim.g.neovide_input_use_logo = 1
 vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
@@ -66,7 +69,7 @@ vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true 
 vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 
 --Llama
-vim.keymap.set({ 'n', 'v' }, '<leader>]', ':Gen<CR>')
+vim.keymap.set({ "n", "v" }, "<leader>]", ":Gen<CR>")
 
 -- Diagnostics
 keymap.set("n", "<C-j>", function()
@@ -79,21 +82,9 @@ end, opts)
 -- keymap.set("n", "<C-j>", ":TmuxNavigateDown<CR>", { noremap = true, silent = true, description = 'window down' })
 -- keymap.set("n", "<C-k>", ":TmuxNavigateUp<CR>", { noremap = true, silent = true, description = 'window up' })
 
-
--- completion Tab
-vim.api.nvim_set_keymap(
-  "i",
-  "<Tab>",
-  'pumvisible() ? "<C-n>" : "<Tab>"',
-  { expr = true, noremap = true, silent = true }
-
-)
-
-vim.api.nvim_set_keymap(
-  "i",
-  "<S-Tab>",
-  'pumvisible() ? "<C-p>" : "<C-h>"',
-  { expr = true, noremap = true, silent = true }
-)
-
-
+-- vim.api.nvim_set_keymap(
+--   "i",
+--   "<S-Tab>",
+--   'pumvisible() ? "<C-p>" : "<C-h>"',
+--   { expr = true, noremap = true, silent = true }
+-- )

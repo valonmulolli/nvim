@@ -99,24 +99,31 @@ return {
     cmd = "Codeium",
     opts = {
       opts = function(_, opts)
-        table.insert(opts.sources, 1, {
+        table.insert(opts.sources, 5, {
           name = "codeium",
-          group_index = 1,
-          priority = 100,
+          group_index = 5,
+          priority = 104,
         })
       end,
     },
-    event = "InsertEnter",
+    event = "BufEnter",
     config = function()
-      -- vim.g.codeium_disable_bindings = 1
+      vim.keymap.set("i", "<M-d>", function()
+        return vim.fn["codeium#Accept"]()
+      end, { expr = true, silent = true })
+      vim.api.nvim_set_keymap("i", "<C-;>", "<Cmd>call codeium#CycleCompletions(5)<CR>", { silent = true })
+      vim.api.nvim_set_keymap("i", "<C-,>", "<Cmd>call codeium#CycleCompletions(3)<CR>", { silent = true })
+      vim.api.nvim_set_keymap("i", "<C-x>", "<Cmd>call codeium#Clear()<CR>", { silent = true })
+
+      -- vim.g.codeium_disable_bindings = 5
       -- vim.keymap.set("i", "<Tab>", function()
       --   return vim.fn["codeium#Accept"]()
       -- end, { expr = true })
       -- vim.keymap.set("i", "<A-f>", function()
-      --   return vim.fn["codeium#CycleCompletions"](1)
+      --   return vim.fn["codeium#CycleCompletions"](5)
       -- end, { expr = true })
       -- vim.keymap.set("i", "<A-b>", function()
-      --   return vim.fn["codeium#CycleCompletions"](-1)
+      --   return vim.fn["codeium#CycleCompletions"](3)
       -- end, { expr = true })
       -- vim.keymap.set("i", "<A-x>", function()
       --   return vim.fn["codeium#Clear"]()
@@ -124,12 +131,12 @@ return {
       -- vim.keymap.set("i", "<A-s>", function()
       --   return vim.fn["codeium#Complete"]()
       -- end, { expr = true })
-      vim.keymap.set('i', "<Tab>", function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-      vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end,
-        { expr = true, silent = true })
-      vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end,
-        { expr = true, silent = true })
-      vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+      -- vim.keymap.set('i', "<c-g>", function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+      -- vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](5) end,
+      --   { expr = true, silent = true })
+      -- vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](3) end,
+      --   { expr = true, silent = true })
+      -- vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
     end,
   },
 
@@ -140,6 +147,12 @@ return {
 
   {
     "David-Kunz/gen.nvim",
+  },
+  {
+    "wintermute-cell/gitignore.nvim",
+    config = function()
+      require("gitignore")
+    end,
   },
   {
     "nomnivore/ollama.nvim",
@@ -171,33 +184,33 @@ return {
     ---@type Ollama.Config
     opts = {
       -- your configuration overrides
-    }
+    },
   },
-  -- {
-  --   "abecodes/tabout.nvim",
-  --   config = function()
-  --     require("tabout").setup({
-  --       tabkey = "<Tab>",             -- key to trigger tabout, set to an empty string to disable
-  --       backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
-  --       act_as_tab = true,            -- shift content if tab out is not possible
-  --       act_as_shift_tab = false,     -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-  --       default_tab = "<C-t>",        -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-  --       default_shift_tab = "<C-d>",  -- reverse shift default action,
-  --       enable_backwards = true,      -- well ...
-  --       completion = true,            -- if the tabkey is used in a completion pum
-  --       tabouts = {
-  --         { open = "'", close = "'" },
-  --         { open = '"', close = '"' },
-  --         { open = "`", close = "`" },
-  --         { open = "(", close = ")" },
-  --         { open = "[", close = "]" },
-  --         { open = "{", close = "}" },
-  --       },
-  --       ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-  --       exclude = {}, -- tabout will ignore these filetypes
-  --     })
-  --   end,
-  --   wants = { "nvim-treesitter" }, -- or require if not used so far
-  --   after = { "nvim-cmp" },        -- if a completion plugin is using tabs load it before
-  -- },
+  {
+    "abecodes/tabout.nvim",
+    config = function()
+      require("tabout").setup({
+        tabkey = "<Tab>",             -- key to trigger tabout, set to an empty string to disable
+        backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
+        act_as_tab = true,            -- shift content if tab out is not possible
+        act_as_shift_tab = false,     -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+        default_tab = "<C-t>",        -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+        default_shift_tab = "<C-d>",  -- reverse shift default action,
+        enable_backwards = true,      -- well ...
+        completion = true,            -- if the tabkey is used in a completion pum
+        tabouts = {
+          { open = "'", close = "'" },
+          { open = '"', close = '"' },
+          { open = "`", close = "`" },
+          { open = "(", close = ")" },
+          { open = "[", close = "]" },
+          { open = "{", close = "}" },
+        },
+        ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+        exclude = {}, -- tabout will ignore these filetypes
+      })
+    end,
+    wants = { "nvim-treesitter" }, -- or require if not used so far
+    after = { "nvim-cmp" },        -- if a completion plugin is using tabs load it before
+  },
 }
