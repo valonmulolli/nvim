@@ -108,35 +108,12 @@ return {
     },
     event = "BufEnter",
     config = function()
-      vim.keymap.set("i", "<M-d>", function()
+      vim.keymap.set("i", "<C-e>", function()
         return vim.fn["codeium#Accept"]()
       end, { expr = true, silent = true })
-      vim.api.nvim_set_keymap("i", "<C-;>", "<Cmd>call codeium#CycleCompletions(5)<CR>", { silent = true })
+      vim.api.nvim_set_keymap("i", "<C-g>", "<Cmd>call codeium#CycleCompletions(5)<CR>", { silent = true })
       vim.api.nvim_set_keymap("i", "<C-,>", "<Cmd>call codeium#CycleCompletions(3)<CR>", { silent = true })
       vim.api.nvim_set_keymap("i", "<C-x>", "<Cmd>call codeium#Clear()<CR>", { silent = true })
-
-      -- vim.g.codeium_disable_bindings = 5
-      -- vim.keymap.set("i", "<Tab>", function()
-      --   return vim.fn["codeium#Accept"]()
-      -- end, { expr = true })
-      -- vim.keymap.set("i", "<A-f>", function()
-      --   return vim.fn["codeium#CycleCompletions"](5)
-      -- end, { expr = true })
-      -- vim.keymap.set("i", "<A-b>", function()
-      --   return vim.fn["codeium#CycleCompletions"](3)
-      -- end, { expr = true })
-      -- vim.keymap.set("i", "<A-x>", function()
-      --   return vim.fn["codeium#Clear"]()
-      -- end, { expr = true })
-      -- vim.keymap.set("i", "<A-s>", function()
-      --   return vim.fn["codeium#Complete"]()
-      -- end, { expr = true })
-      -- vim.keymap.set('i', "<c-g>", function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-      -- vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](5) end,
-      --   { expr = true, silent = true })
-      -- vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](3) end,
-      --   { expr = true, silent = true })
-      -- vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
     end,
   },
 
@@ -190,14 +167,14 @@ return {
     "abecodes/tabout.nvim",
     config = function()
       require("tabout").setup({
-        tabkey = "<Tab>",             -- key to trigger tabout, set to an empty string to disable
+        tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
         backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
-        act_as_tab = true,            -- shift content if tab out is not possible
-        act_as_shift_tab = false,     -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-        default_tab = "<C-t>",        -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-        default_shift_tab = "<C-d>",  -- reverse shift default action,
-        enable_backwards = true,      -- well ...
-        completion = true,            -- if the tabkey is used in a completion pum
+        act_as_tab = true, -- shift content if tab out is not possible
+        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+        default_tab = "<C-t>", -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+        default_shift_tab = "<C-d>", -- reverse shift default action,
+        enable_backwards = true, -- well ...
+        completion = true, -- if the tabkey is used in a completion pum
         tabouts = {
           { open = "'", close = "'" },
           { open = '"', close = '"' },
@@ -211,6 +188,6 @@ return {
       })
     end,
     wants = { "nvim-treesitter" }, -- or require if not used so far
-    after = { "nvim-cmp" },        -- if a completion plugin is using tabs load it before
+    after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
   },
 }

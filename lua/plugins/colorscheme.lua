@@ -134,7 +134,7 @@ return {
     branch = "main",
     priority = 1000,
     config = function()
-      vim.cmd("colorscheme rio")
+      -- vim.cmd("colorscheme rio")
     end,
   },
   {
@@ -152,6 +152,58 @@ return {
       -- vim.cmd("colorscheme cyberdream") -- set the colorscheme
     end,
   },
+  {
+    "blackbirdtheme/vim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      opts = {
+        minimal_transparent_background = false,
+        styles = {
+          transparent = true,
+          italic_comments = true,
+          hide_fillchars = true,
+          borderless_telescope = true,
+        },
+      }
+      -- vim.cmd("colorscheme blackbird")
+    end,
+  },
+
+  {
+    "cseelus/vim-colors-lucid",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      opts = {
+        minimal_transparent_background = false,
+        styles = {
+          transparent = true,
+          italic_comments = true,
+          hide_fillchars = true,
+          borderless_telescope = true,
+        },
+      }
+      -- vim.cmd("colorscheme lucid")
+    end,
+  },
+  {
+    "srcery-colors/srcery-vim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      opts = {
+        styles = {
+          transparent = true,
+          italic_comments = true,
+          hide_fillchars = true,
+          borderless_telescope = true,
+        },
+      }
+      vim.cmd("colorscheme srcery")
+    end,
+  },
+
   {
     "rockyzhang24/arctic.nvim",
     dependencies = { "rktjmp/lush.nvim" },

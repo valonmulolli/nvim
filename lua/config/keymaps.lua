@@ -34,6 +34,8 @@ keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 keymap.set("n", "te", ":tabedit")
 keymap.set("n", "<tab>", ":tabnext<Return>", opts)
 keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
+
+
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
@@ -59,7 +61,7 @@ keymap.set("n", "<leader>crf", ":CRFiletype<CR>", opts)
 keymap.set("n", "<leader>crp", ":CRProjects<CR>", opts)
 
 -- Simulator
-vim.api.nvim_set_keymap('n', '<leader>em', ':Telescope simulators run<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>em", ":Telescope simulators run<CR>", { noremap = true, silent = true })
 
 --copy and paste
 vim.g.neovide_input_use_logo = 1

@@ -62,8 +62,7 @@ return {
             additional_args = { "--hidden" },
           })
         end,
-        desc =
-        "Search for a string in your current working directory and get results live as you type, respects .gitignore",
+        desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
       },
       {
         "\\\\",
@@ -220,8 +219,14 @@ return {
       end,
     },
   },
+  -- {
+  --   "tribela/vim-transparent",
+  -- },
   {
-    "tribela/vim-transparent",
+    "stevearc/dressing.nvim",
+    config = function()
+      require("dressing").setup()
+    end,
   },
   {
     "echasnovski/mini.hipatterns",
