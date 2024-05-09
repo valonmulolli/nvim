@@ -28,13 +28,12 @@ keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
 keymap.set("n", "<C-m>", "<C-i>", opts)
 
 --exit from insert mode
-keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
+-- keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
 -- New tab
 keymap.set("n", "te", ":tabedit")
 keymap.set("n", "<tab>", ":tabnext<Return>", opts)
 keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
-
 
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)
@@ -74,8 +73,12 @@ vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true 
 vim.keymap.set({ "n", "v" }, "<leader>]", ":Gen<CR>")
 
 -- Diagnostics
-keymap.set("n", "<C-j>", function()
-  vim.diagnostic.goto_next()
+keymap.set("n", "<]d>", function()
+	vim.diagnostic.goto_next()
+end, opts)
+
+keymap.set("n", "<]d>", function()
+	vim.diagnostic.goto_prev()
 end, opts)
 
 -- TmuxNaviagor

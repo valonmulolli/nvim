@@ -63,7 +63,6 @@ return {
         background_colour = "FloatShadow",
         timeout = 3000,
         render = "compact",
-        stages = "fade",
         top_down = false,
       })
       vim.notify = require("notify")
@@ -99,18 +98,17 @@ return {
   },
 
   -- statusline
-  {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "raphamorim/vim-rio" },
-    event = "VeryLazy",
-    opts = {
-      options = {
-        -- globalstatus = false,
-        theme = "auto",
-        -- theme = require('vim-rio.statuslines.lualine').theme,
-      },
-    },
-  },
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   dependencies = { "raphamorim/vim-rio" },
+  --   event = "VeryLazy",
+  --   opts = {
+  --     options = {
+  --       -- globalstatus = false,
+  --       theme = "auto",
+  --     },
+  --   },
+  -- },
 
   -- filename
   {

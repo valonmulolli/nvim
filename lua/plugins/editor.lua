@@ -62,7 +62,8 @@ return {
             additional_args = { "--hidden" },
           })
         end,
-        desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
+        desc =
+        "Search for a string in your current working directory and get results live as you type, respects .gitignore",
       },
       {
         "\\\\",
@@ -186,7 +187,22 @@ return {
       require("telescope").load_extension("file_browser")
     end,
   },
-
+  {
+    "MunifTanjim/nougat.nvim",
+  },
+  -- {
+  --   'nathanaelkane/vim-indent-guides'
+  -- },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      filesystem = {
+        filtered_items = {
+          visible = true,
+        },
+      },
+    },
+  },
   {
     "numToStr/Comment.nvim",
     dependencies = "JoosepAlviste/nvim-ts-context-commentstring",

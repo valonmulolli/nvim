@@ -4,8 +4,6 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   command = "set nopaste",
 })
 
-vim.cmd [[highlight CursorLine cterm=NONE ctermbg=NONE guibg=NONE]]
-
 
 -- Disable the concealing in some file formats
 -- The default conceallevel is 3 in LazyVim
