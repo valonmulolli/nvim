@@ -31,9 +31,38 @@ return {
 				LspFloatWinNormal = { link = "NormalFloat" },
 				LspInfoBorder = { link = "FloatBorder" },
 			},
-			-- vim.cmd("colorscheme vscode"),
+			vim.cmd("colorscheme vscode"),
 		}
 	end,
+	{
+		"ellisonleao/gruvbox.nvim",
+		event = { "ColorSchemePre" },
+		opts = {
+			contrast = "hard", -- can be "hard", "soft" or empty string
+			inverse = false, -- invert background for search, diffs, statusline and errors
+			transparent_mode = true,
+			bold = false,
+			italic = {
+				comments = false,
+				folds = false,
+				operators = false,
+				strings = false,
+			},
+			palette_overrides = {},
+			overrides = {
+				-- General
+				CursorLineNr = { bg = "none" },
+				ErrorMsg = { link = "Error" },
+				FloatBorder = { bg = "none", fg = "#756a60" },
+				MsgSeparator = { link = "VertSplit" },
+
+				-- Telescope
+				TelescopeBorder = { link = "FloatBorder" },
+				TelescopePromptBorder = { link = "FloatBorder" },
+				TelescopePreviewBorder = { link = "FloatBorder" },
+			},
+		},
+	},
 	{
 		"metalelf0/jellybeans-nvim",
 		dependencies = { "rktjmp/lush.nvim" },
@@ -65,35 +94,6 @@ return {
 		end,
 	},
 	{
-		"Yazeed1s/minimal.nvim",
-		lazy = false,
-		colorscheme = "minimal",
-		-- opts = {
-		--   minimal_transparent_background = false,
-		--   styles = {
-		--     sidebars = "transparent",
-		--     floats = "transparent",
-		--   },
-		-- },
-		branch = "main",
-		priority = 1000,
-		config = function()
-			-- vim.cmd("colorscheme colorscheme minimal")
-		end,
-	},
-	{
-		"lighthaus-theme/vim-lighthaus",
-		lazy = false,
-		opts = {
-			transparent = true,
-			italic = true,
-		},
-		priority = 1000,
-		config = function()
-			-- vim.cmd("colorscheme lighthaus")
-		end,
-	},
-	{
 		"dgox16/oldworld.nvim",
 		lazy = false,
 		priority = 1000,
@@ -107,7 +107,7 @@ return {
 					borderless_telescope = true,
 				},
 			}
-			vim.cmd("colorscheme oldworld")
+			-- vim.cmd("colorscheme oldworld")
 		end,
 	},
 	{
@@ -120,6 +120,18 @@ return {
 		priority = 1000,
 		config = function()
 			-- vim.cmd.colorscheme("dark_flat")
+		end,
+	},
+	{
+		"kepano/flexoki-neovim",
+		lazy = false,
+		opts = {
+			transparent = true,
+			italic = true,
+		},
+		priority = 1000,
+		config = function()
+			-- vim.cmd.colorscheme("flexoki-dark")
 		end,
 	},
 	{
@@ -146,24 +158,6 @@ return {
 		priority = 1000,
 		config = function()
 			-- vim.cmd("colorscheme komau")
-		end,
-	},
-	{
-		"srcery-colors/srcery-vim",
-		colorscheme = "srcery",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			-- vim.cmd("colorscheme srcery")
-		end,
-	},
-	{
-		"m15a/nvim-srcerite",
-		colorscheme = "srcerite",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			-- vim.cmd("colorscheme srcerite")
 		end,
 	},
 	{
@@ -202,7 +196,7 @@ return {
 			-- vim.cmd("colorscheme plain")
 		end,
 	},
-	{
+ {
 		"nikolvs/vim-sunbather",
 		colorscheme = "sunbather",
 		lazy = false,
@@ -277,19 +271,14 @@ return {
 		end,
 	},
 	{
-		"datsfilipe/min-theme.nvim",
+		"slugbyte/lackluster.nvim",
 		lazy = false,
 		priority = 1000,
-		config = function()
-			opts = {
-				styles = {
-					transparent = true,
-					italic_comments = true,
-					hide_fillchars = true,
-					borderless_telescope = true,
-				},
-			}
-			-- vim.cmd("colorscheme min-themey")
+		init = function()
+			-- vim.cmd.colorscheme("lackluster")
+			-- vim.cmd.colorscheme("lackluster-night")
+			vim.cmd.colorscheme("lackluster-mint")
+			-- vim.cmd.colorscheme("lackluster-dark")
 		end,
 	},
 	{

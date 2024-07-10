@@ -1,7 +1,3 @@
-local discipline = require("valon.discipline")
-
-discipline.bablok()
-
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
@@ -26,6 +22,8 @@ keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
 
 -- Jumplist
 keymap.set("n", "<C-m>", "<C-i>", opts)
+
+-- keymap.set('n', '<e>', ':NvimTreeToggle<CR>', {silent = true})
 
 --exit from insert mode
 -- keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
@@ -86,10 +84,3 @@ end, opts)
 -- keymap.set("n", "<C-l>", ":TmuxNavigateRight<CR>", { noremap = true, silent = true, description = 'window right' })
 -- keymap.set("n", "<C-j>", ":TmuxNavigateDown<CR>", { noremap = true, silent = true, description = 'window down' })
 -- keymap.set("n", "<C-k>", ":TmuxNavigateUp<CR>", { noremap = true, silent = true, description = 'window up' })
-
--- vim.api.nvim_set_keymap(
---   "i",
---   "<S-Tab>",
---   'pumvisible() ? "<C-p>" : "<C-h>"',
---   { expr = true, noremap = true, silent = true }
--- )

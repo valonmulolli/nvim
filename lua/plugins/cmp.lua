@@ -12,6 +12,12 @@ return {
 			"onsails/lspkind.nvim",
 			"windwp/nvim-ts-autotag",
 			"windwp/nvim-autopairs",
+			{
+				"Exafunction/codeium.nvim",
+				cmd = "Codeium",
+				build = ":Codeium Auth",
+				opts = {},
+			},
 		},
 		config = function()
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")

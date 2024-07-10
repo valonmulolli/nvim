@@ -15,11 +15,11 @@ return {
   },
 
   -- Incremental rename
-  {
-    "smjonas/inc-rename.nvim",
-    cmd = "IncRename",
-    config = true,
-  },
+  -- {
+  --   "smjonas/inc-rename.nvim",
+  --   cmd = "IncRename",
+  --   config = true,
+  -- },
   {
     { "barrett-ruth/live-server.nvim", config = true },
   },
@@ -41,7 +41,21 @@ return {
     },
     opts = {},
   },
-
+  {
+    "jose-elias-alvarez/typescript.nvim",
+    ft = { "typescript", "typescriptreact", "typescript.tsx" },
+    keys = {
+      { "<leader>lR", vim.cmd.TypescriptRenameFile,        desc = "" },
+      { "<leader>oi", vim.cmd.TypescriptOrganizeImports,   desc = "" },
+      { "<leader>ai", vim.cmd.TypescriptAddMissingImports, desc = "" },
+      { "<leader>ru", vim.cmd.TypescriptRemoveUnused,      desc = "" },
+    },
+    opts = {
+      server = {
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      },
+    },
+  },
   -- Go forward/backward with square brackets
   {
     "echasnovski/mini.bracketed",
@@ -96,6 +110,9 @@ return {
     end
   },
   {
+    "szw/vim-maximizer",
+  },
+  {
     "simrat39/symbols-outline.nvim",
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
     cmd = "SymbolsOutline",
@@ -127,8 +144,10 @@ return {
       vim.keymap.set("i", '<C-e>', function()
         return vim.fn["codeium#Accept"]()
       end, { expr = true, silent = true })
-      vim.api.nvim_set_keymap("i", "<C-g>", "<Cmd>call codeium#CycleCompletions(5)<CR>", { silent = true })
-      vim.api.nvim_set_keymap("i", "<C-,>", "<Cmd>call codeium#CycleCompletions(3)<CR>", { silent = true })
+      vim.api.nvim_set_keymap("i", "<C-g>", "<Cmd>call codeium#CycleCompletions(5)<CR>",
+        { silent = true })
+      vim.api.nvim_set_keymap("i", "<C-,>", "<Cmd>call codeium#CycleCompletions(3)<CR>",
+        { silent = true })
       vim.api.nvim_set_keymap("i", "<C-x>", "<Cmd>call codeium#Clear()<CR>", { silent = true })
     end,
   },
@@ -146,38 +165,6 @@ return {
     config = function()
       require("gitignore")
     end,
-  },
-  {
-    "nomnivore/ollama.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-
-    -- All the user commands added by the plugin
-    cmd = { "Ollama", "OllamaModel", "OllamaServe", "OllamaServeStop" },
-
-    keys = {
-      -- Sample keybind for prompt menu. Note that the <c-u> is important for selections to work properly.
-      {
-        "<leader>oo",
-        ":<c-u>lua require('ollama').prompt()<cr>",
-        desc = "ollama prompt",
-        mode = { "n", "v" },
-      },
-
-      -- Sample keybind for direct prompting. Note that the <c-u> is important for selections to work properly.
-      {
-        "<leader>oG",
-        ":<c-u>lua require('ollama').prompt('Generate_Code')<cr>",
-        desc = "ollama Generate Code",
-        mode = { "n", "v" },
-      },
-    },
-
-    ---@type Ollama.Config
-    opts = {
-      -- your configuration overrides
-    },
   },
   -- {
   --   "abecodes/tabout.nvim",
