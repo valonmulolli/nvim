@@ -1,0 +1,7 @@
+{
+  "return": {
+    "prefix": "ret",
+    "body": ["return $0"],
+    "description": "return value"
+  }
+}

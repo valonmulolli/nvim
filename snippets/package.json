@@ -1,0 +1,91 @@
+{
+  "name": "nvim-snippets",
+  "author": "valonmulolli",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "all",
+          "global",
+          "html",
+          "markdown",
+          "plaintext",
+          "tex"
+        ],
+        "path": "./global.json"
+      },
+      {
+        "language": [
+          "ahk",
+          "autohotkey"
+        ],
+        "path": "./autohotkey.json"
+      },
+      {
+        "language": "c",
+        "path": "./c.json"
+      },
+      {
+        "language": "cpp",
+        "path": "./cpp.json"
+      },
+      {
+        "language": [
+          "cs",
+          "csharp"
+        ],
+        "path": "./csharp.json"
+      },
+      {
+        "language": "go",
+        "path": "./go.json"
+      },
+      {
+        "language": "java",
+        "path": "./java.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./javascript.json"
+      },
+      {
+        "language": "lua",
+        "path": "./lua.json"
+      },
+      {
+        "language": [
+          "markdown",
+          "rmd"
+        ],
+        "path": "./markdown.json"
+      },
+      {
+        "language": [
+          "powershell",
+          "ps1"
+        ],
+        "path": "./powershell.json"
+      },
+      {
+        "language": "python",
+        "path": "./python.json"
+      },
+      {
+        "language": [
+          "shellscript",
+          "shell",
+          "sh",
+          "zsh"
+        ],
+        "path": "./shell.json"
+      },
+      {
+        "language": "vim",
+        "path": "./vim.json"
+      }
+    ]
+  }
+}

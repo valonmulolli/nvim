@@ -1,0 +1,16 @@
+{
+  "Starter Template": {
+    "prefix": ["skeleton", "st", "starter"],
+    "body": [
+      "package main\n",
+      "import (\n\t\"fmt\"\n)\n",
+      "func main() {\n\tfmt.Println(\"Hello, World!\")\n}"
+    ],
+    "description": "Standard starter template for a tiny Go program"
+  },
+  "fmt.Println": {
+    "prefix": ["fp", "println"],
+    "body": "fmt.Println(\"$1\")",
+    "description": "Snippet for fmt.Println()"
+  }
+}

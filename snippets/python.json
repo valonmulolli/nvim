@@ -1,0 +1,32 @@
+{
+  "Starter Template": {
+    "prefix": ["skeleton", "st", "starter"],
+    "body": [
+      "def main():\n\t${0:pass}\n\n",
+      "if __name__ == \"__main__\":\n\tmain()"
+    ],
+    "description": "Standard starter template for a tiny Python program"
+  },
+  "main": {
+    "prefix": "main",
+    "body": ["def main():\n\t${0:pass}\n\n"],
+    "description": "main function"
+  },
+  "decorator-function": {
+    "prefix": "decorator",
+    "body": [
+      "def ${1:my_decorator}(func):",
+      "\t\"\"\"${4:docstring}\"\"\"",
+      "\tdef wrapper(*args, **kwargs):",
+      "\t\t${0:pass}",
+      "\t\treturn func(*args, **kwargs)",
+      "\treturn wrapper"
+    ],
+    "description": "Insert function wrapper"
+  },
+  "print": {
+    "prefix": "print",
+    "body": ["print(${0})"],
+    "description": "Print string to console"
+  }
+}
