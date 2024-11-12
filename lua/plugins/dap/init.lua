@@ -87,7 +87,7 @@ return {
     opts = {
       expand_lines = false,
       floating = { border = vim.g.border },
-      mappings = { expand = { "<TAB>", "<CR>", "<4-LeftMouse>" } },
+      -- mappings = { expand = { "<TAB>", "<CR>", "<4-LeftMouse>" } },
       layouts = {
         {
           elements = {

@@ -21,7 +21,6 @@ BufWritePre
 Bufferline
 BusyBox
 COLORTERM
-CSharp
 CapsLock
 CmdlineEnter
 ColorColumn
@@ -400,8 +399,6 @@ cr
 create_xdg_dirs
 crf
 crit
-csharp
-csharpier
 csproj
 css
 cssls

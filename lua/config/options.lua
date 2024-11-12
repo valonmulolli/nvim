@@ -1,13 +1,13 @@
 -- Neovim general editor options/settings
 
-vim.g.border = "single"        -- Default border for floating windows
-vim.g.localleader = "\\"       -- Default localleader for keymaps
-vim.g.mapleader = " "          -- Default leader for keymaps
+vim.g.border = "single"  -- Default border for floating windows
+vim.g.localleader = "\\" -- Default localleader for keymaps
+vim.g.mapleader = " "    -- Default leader for keymaps
 
 -- vim.opt.background = "dark"    -- Adjusts the default color groups for background type
 vim.opt.termguicolors = true   -- Enable true color support
 
-vim.opt.textwidth = 40         -- Limit length of characters per line
+vim.opt.textwidth = 80         -- Limit length of characters per line
 vim.opt.tabstop = 4            -- Number of spaces to represent tab characters
 vim.opt.softtabstop = 4        -- Number of spaces for tabs during edit operations
 vim.opt.shiftwidth = 4         -- Number of spaces for expandtab indent
@@ -22,15 +22,18 @@ vim.opt.colorcolumn = "+1"     -- Visually display character line limit
 vim.opt.signcolumn = "no"      -- Sign gutter options: yes|no : int = size
 vim.opt.scrolloff = 8          -- Keep cursor closer to center vertically
 vim.opt.sidescrolloff = 8      -- Keep cursor closer to center horizontally
-vim.opt.numberwidth = 2
+-- vim.opt.numberwidth = 2
 vim.opt.laststatus = 3         -- Apply statusline options
-vim.opt.showtabline = 4        -- Always show tabline
+vim.opt.showtabline = 2        -- Always show tabline
+-- vim.opt.shortmess =
+vim.opt.cmdheight = 1          -- Set height of command line
 vim.opt.cmdwinheight = 5       -- Set size of command history buffer
 vim.opt.winminwidth = 5        -- The minimal width for windows
 
 vim.opt.mouse = "a"            -- Enable mouse support
 vim.opt.wrap = true            -- Wrap text when line is too long
 vim.opt.breakindent = true     -- Indent the start of wrapped lines
+vim.opt.smartindent = true
 vim.opt.linebreak = true       -- Split on line break
 vim.opt.ignorecase = true      -- Case insensitive search
 vim.opt.smartcase = true       -- Override search if pattern contains uppercase
@@ -41,7 +44,7 @@ vim.opt.splitbelow = true      -- Open new windows below current
 vim.opt.splitright = true      -- Open new windows right of current
 vim.opt.splitkeep = "screen"   -- Determines the scroll behavior for horizontal splits
 
-vim.opt.timeoutlen = 450       -- Timeout for mapped sequence
+vim.opt.timeoutlen = 250       -- Timeout for mapped sequence
 vim.opt.ttimeoutlen = 0        -- Timeout for key code sequence
 vim.opt.updatetime = 1000      -- Timeout idle before CursorHold or updating swapfile
 vim.opt.swapfile = false       -- Use a swapfile for the current buffer
@@ -50,7 +53,7 @@ vim.opt.undolevels = 10000     -- Maximum number of changes that can be undone
 
 -- Popup menu options
 vim.opt.pumblend = 0   -- Pop-up menu transparency
-vim.opt.pumheight = 14 -- Pop-up menu height
+vim.opt.pumheight = 12 -- Pop-up menu height
 vim.opt.pumwidth = 16  -- Pop-up menu thickness
 
 -- Control vim Spell checking
@@ -69,7 +72,7 @@ vim.opt.guicursor:append("n-v-c:blinkon500-blinkoff500")
 
 -- Define preferred font family for GUI clients
 vim.opt.guifont = {
-  "JetBrains Mono NFM:h14",
+  "JetBrains Mono NFM:h12",
 }
 
 -- Allows navigation wrapping to previous/next lines
@@ -157,7 +160,7 @@ vim.opt.wildignore = {
 }
 
 -- Virtual strings to use in 'list' mode
-vim.opt.list = true -- Enable listchars
+vim.opt.list = false -- Enable listchars
 vim.opt.showbreak = "↳" -- Display line wrap indicator
 vim.opt.listchars = {
   eol = " ", -- End of line ↴

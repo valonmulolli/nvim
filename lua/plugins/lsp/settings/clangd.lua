@@ -11,7 +11,7 @@ return {
     "--completion-style=detailed",
     "--cross-file-rename",
     "--enable-config",
-    "--fallback-style=microsoft",
+    "--fallback-style=Microsoft",
     "--header-insertion-decorators",
     "--header-insertion=iwyu",
     "--offset-encoding=utf-16",

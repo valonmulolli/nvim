@@ -1,5 +1,3 @@
--- lua/plugins/markdown.lua
-
 ---@type LazyPluginSpec[]
 return {
   { -- Nice extra's for markdown documents
@@ -10,7 +8,9 @@ return {
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
     build = function()
-      vim.fn["mkdp#util#install"]()
+      -- Ensure the plugin is loaded before executing the install function
+      vim.cmd([[packadd markdown-preview.nvim]])  -- This forces LazyVim to load the plugin
+      vim.fn["mkdp#util#install"]()  -- Run the plugin's install function
     end,
     config = function()
       vim.g.mkdp_auto_start = 0

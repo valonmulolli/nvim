@@ -40,6 +40,8 @@ return {
       "gitignore",
       "json",
       "jsonc",
+      "hcl",
+      "terraform",
       "lua",
       "luadoc",
       "markdown",

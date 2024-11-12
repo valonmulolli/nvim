@@ -66,13 +66,11 @@ return {
     formatting.gofmt,
     formatting.goimports,
 
-    -- CSharp
-    formatting.csharpier,
-
     -- Clang
     formatting.clang_format.with({
+      extra_args = { "--style={BasedOnStyle: Microsoft, IndentWidth: 4, ColumnLimit: 120}" },
       condition = function(utils)
-        return utils.root_has_file({ ".clang-format" })
+        return true -- Always use this formatter
       end,
     }),
 

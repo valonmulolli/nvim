@@ -20,6 +20,10 @@ return {
         red = "#FF204E",
 
       },
+    --   tweak_ui = {
+    --     disable_undercurl = false, -- set to true if you want underline instead of undercurl
+    --     enable_end_of_buffer = false, -- set to true to show the end_of_buffer ~ symbols in the gutter
+    -- },
       tweak_syntax = {
         string = "#DCFFB7",
         string_escape = "#06D001",
@@ -31,10 +35,10 @@ return {
         keyword_exception = "#40A2E3",
       },
       tweak_background = {
-        normal = "default",
-        telescope = 'default',
-        menu = '#C7FFD8',
-        popup = "default",
+        normal = "none",
+        telescope = 'none',
+        menu = 'none',
+        popup = "none",
       },
     })
   end,

@@ -33,13 +33,6 @@
         "path": "./cpp.json"
       },
       {
-        "language": [
-          "cs",
-          "csharp"
-        ],
-        "path": "./csharp.json"
-      },
-      {
         "language": "go",
         "path": "./go.json"
       },

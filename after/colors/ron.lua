@@ -27,7 +27,7 @@ M.colors = {
   TelescopeSelection = { bg = "Gray43" },
 
   -- Indent Blankline
-  IndentBlanklineChar = { link = "LineNr" },
+  -- IndentBlanklineChar = { link = "LineNr" },
 
   -- Whichkey
   WhichKey = { link = "Define" },

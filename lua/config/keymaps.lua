@@ -3,12 +3,6 @@ local util = require("config.util")
 
 local defaults = { remap = false, silent = true }
 util.register_keymaps(defaults, {
-  -- Visually move lines <Up/Down>
-  { "v",          "<A-k>",       ":m '<-4<CR>gv=gv" },
-  { "v",          "<A-j>",       ":m '>+1<CR>gv=gv" },
-  { "v",          "<A-Up>",      ":m '<-4<CR>gv=gv" },
-  { "v",          "<A-Down>",    ":m '>+1<CR>gv=gv" },
-
   -- Make Y act like other capitals
   { "n",          "Y",           "y$" },
 
@@ -41,8 +35,6 @@ util.register_keymaps(defaults, {
   -- Visual indentation
   { "v",          "<",           "<gv" },
   { "v",          ">",           ">gv" },
-  { "v",          "<S-Tab>",     "<gv" },
-  { "v",          "<Tab>",       ">gv" },
 
   -- Navigate buffer
   { "n",          "[b",          ":bprevious<CR>",      { desc = "Previous buffer" } },
@@ -60,7 +52,7 @@ util.register_keymaps(defaults, {
 
   -- Code Runner
   { "n",          '<leader>r',   ':RunFile<CR>',        { desc = 'Run file' } },
-  { "n",          '<leader>q',   ':RunClose<CR>',       { desc = 'Close runner' } },
+  { "n",          '<leader>rq',  ':RunClose<CR>',       { desc = 'Close runner' } },
   { "n",          '<leader>rft', ':RunFile tab<CR>',    { desc = 'Run file in new tab' } },
   { "n",          '<leader>rp',  ':RunProject<CR>',     { desc = 'Run project' } },
 
@@ -70,5 +62,11 @@ util.register_keymaps(defaults, {
 
 
 
+  -- Quit current window
+  { "n",          "<leader>wq",  ":wq<CR>",             { desc = "Quit window" } },
+
+  { 'n',          '<Leader>q',   ':q<CR>',              { desc = 'Quit window' } },
+
+  { "n", "<leader>y", ":<C-u>s/<[^>]*>/\r&\r/g<CR>:<C-u>g/^$/d<CR>gg=G", { desc = "Prettify HTML and format" } }
 
 })

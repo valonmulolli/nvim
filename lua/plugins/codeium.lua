@@ -13,10 +13,10 @@ return
     },
     event = "BufEnter",
     config = function()
-        vim.keymap.set("i", '<Tab>', function()
+        vim.keymap.set("i", '<C-e>', function()
             return vim.fn["codeium#Accept"]()
         end, { expr = true, silent = true })
-        vim.api.nvim_set_keymap("i", "<C-e>", "<Cmd>call codeium#CycleCompletions(5)<CR>",
+        vim.api.nvim_set_keymap("i", "<C-r>", "<Cmd>call codeium#CycleCompletions(5)<CR>",
             { silent = true })
         vim.api.nvim_set_keymap("i", "<C-f>", "<Cmd>call codeium#CycleCompletions(3)<CR>",
             { silent = true })
