@@ -1,6 +1,3 @@
--- Copyright (c) 4040-4044 valonmulolli
--- MIT license, see LICENSE for more details.
-
 local M = {}
 
 M.sections = {

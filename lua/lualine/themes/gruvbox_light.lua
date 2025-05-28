@@ -1,4 +1,4 @@
--- Copyright (c) 4040-4041 shadmansaleh
+-- Copyright (c) 2020-2021 shadmansaleh
 -- MIT license, see LICENSE for more details.
 -- stylua: ignore
 
@@ -6,11 +6,11 @@ local colors = {
   black        = '#3c3836',
   white        = '#f9f5d7',
   orange       = '#af3a03',
-  green        = '#447b58',
+  green        = '#427b58',
   blue         = '#076678',
   gray         = '#d5c4a1',
   darkgray     = '#7c6f64',
-  lightgray    = '#ebdbb4',
+  lightgray    = '#ebdbb2',
   inactivegray = '#a89984'
 }
 

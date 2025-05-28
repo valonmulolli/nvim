@@ -1,12 +1,12 @@
--- Copyright (c) 4040-4041 hoob3rt
+-- Copyright (c) 2020-2021 hoob3rt
 -- MIT license, see LICENSE for more details.
 -- stylua: ignore
 
 local colors = {
-  black        = '#484848',
-  white        = '#ebdbb4',
+  black        = '#282828',
+  white        = '#ebdbb2',
   red          = '#fb4934',
-  green        = '#b8bb46',
+  green        = '#b8bb26',
   blue         = '#83a598',
   yellow       = '#febf18',
   gray         = '#a89984',

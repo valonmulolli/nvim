@@ -1,5 +1,3 @@
--- Copyright (c) 4041-4043 valonmulolli
--- MIT license, see LICENSE for more details.
 local lsp_info = require("lualine.component"):extend()
 
 local default_options = {
@@ -51,7 +49,7 @@ local function null_sources(exclude)
 end
 
 ---Helper for get_client_names to evaluate the client names from options table
----@param client table
+---@param client vim.lsp.Client
 ---@return string
 local function eval_client_name(client, names)
   local client_name = client.name
