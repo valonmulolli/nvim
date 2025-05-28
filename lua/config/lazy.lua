@@ -17,28 +17,28 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Initialize plugin list
 require("lazy").setup({
-  spec = {
-    { import = "plugins" },
-    { import = "plugins.colors" },
-  },
+  { import = "plugins" },
+  { import = "plugins.colors" },
+}, {
   change_detection = { notify = false },
   defaults = { lazy = true },
-  install = { colorscheme = { "vscode", "default" } },
+  install = { colorscheme = { "lackluster", "default" } },
   ui = { border = vim.g.border },
   dev = {
-    path = "~/Projects",
-    patterns = { "valonmulolli" },
+    path = "~/Dev",
+    patterns = { "v470n" },
   },
   performance = {
     rtp = {
       paths = { vim.fn.stdpath("data") .. "/site" },
       disabled_plugins = {
         "gzip",
-        -- "matchit",
+        "matchit",
         -- "matchparen",
         "netrwPlugin",
         "rplugin",
         "tarPlugin",
+        "tohtml",
         "tutor",
         "zipPlugin",
       },

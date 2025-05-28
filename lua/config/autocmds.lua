@@ -19,14 +19,20 @@ autocmd({ "FocusLost" }, {
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   desc = "Check if any buffers were changed outside of Vim on focus changed",
   group = augroup("UpdateBuffers", {}),
-  command = "checktime",
+  callback = function()
+    if vim.o.buftype ~= "nofile" then
+      vim.cmd.checktime()
+    end
+  end,
 })
 
 autocmd({ "VimResized" }, {
-  desc = "Resize splits if vim window is resized",
+  desc = "Resize splits when vim window is resized",
   group = augroup("ResizeSplits", {}),
   callback = function()
+    local current_tab = vim.fn.tabpagenr()
     vim.cmd("tabdo wincmd =")
+    vim.cmd.tabnext(current_tab)
   end,
 })
 
@@ -86,7 +92,7 @@ autocmd({ "FileType" }, {
   desc = "Open vim help pages relative to editor instead of window",
   group = augroup("HelpPageSplit", {}),
   pattern = { "help", "man" },
-  command = "wincmd K | resize 40",
+  command = "wincmd K | resize 20",
 })
 
 autocmd({ "BufEnter" }, {
@@ -103,7 +109,7 @@ autocmd({ "BufEnter" }, {
   end,
 })
 
-autocmd({ "FileType" }, {
+autocmd({ "BufWinEnter" }, {
   desc = "Apply 'q' keymap to close local buffers that match criteria",
   group = augroup("QuickClose", {}),
   callback = function(ev)
@@ -124,5 +130,27 @@ autocmd({ "BufNewFile" }, {
     local path = vim.fn.stdpath("config")
     local fname = vim.fn.expand("<afile>:e") .. ".skel"
     vim.cmd(("silent! execute '0r %s/templates/skel/%s'"):format(path, fname))
+  end,
+})
+
+autocmd({ "BufWritePre" }, {
+  desc = "Create intermediate directories as needed, when saving a file",
+  group = augroup("auto_create_dir", { clear = true }),
+  pattern = "*",
+  callback = function(ev)
+    if ev.match:match("^%w%w+://") then
+      return
+    end
+    local path = vim.uv.fs_realpath(ev.match) or ev.match
+    local dir = vim.fs.dirname(path)
+    if vim.fn.isdirectory(dir) == 0 then
+      vim.ui.input({
+        prompt = ("Directory doesn't exist: %s\nDo you want to create it? [y/N]: "):format(dir),
+      }, function(choice)
+        if choice == "y" then
+          vim.uv.fs_mkdir(dir, tonumber("0755", 8))
+        end
+      end)
+    end
   end,
 })
