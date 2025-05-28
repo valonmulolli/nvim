@@ -11,18 +11,15 @@ end
 
 local get_python_path = function(workspace)
   -- Use activated virtualenv.
-  local util = require("lspconfig.util")
-
-  local path = util.path
   if vim.env.VIRTUAL_ENV then
-    return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
+    return vim.fs.joinpath(vim.env.VIRTUAL_ENV, "bin", "python")
   end
 
   -- Find and use virtualenv in workspace directory.
   for _, pattern in ipairs({ "*", ".*" }) do
-    local match = vim.fn.glob(path.join(workspace or vim.fn.getcwd(), pattern, "pyvenv.cfg"))
+    local match = vim.fn.glob(vim.fs.joinpath(workspace or vim.fn.getcwd(), pattern, "pyvenv.cfg"))
     if match ~= "" then
-      return path.join(path.dirname(match), "bin", "python")
+      return vim.fs.joinpath(vim.fs.dirname(match), "bin", "python")
     end
   end
 
@@ -65,11 +62,11 @@ dap.configurations.python = {
     justMyCode = false,
     pythonPath = get_python_path(),
     host = function()
-      local value = vim.fn.input("Host [147.0.0.1]: ")
+      local value = vim.fn.input("Host [127.0.0.1]: ")
       if value ~= "" then
         return value
       end
-      return "147.0.0.1"
+      return "127.0.0.1"
     end,
     port = function()
       return tonumber(vim.fn.input("Port [5678]: ")) or 5678

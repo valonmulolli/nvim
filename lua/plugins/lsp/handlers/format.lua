@@ -8,9 +8,9 @@ local notify = function(msg)
 end
 
 -- Toggle document formatting on save
-M.toggle = function()
+M.format_toggle = function()
   if vim.b.autoformat == false then
-    vim.b.autoformat = nil ---@type boolean|nil
+    vim.b.autoformat = nil
     M.autoformat = true
   else
     M.autoformat = not M.autoformat
@@ -23,18 +23,20 @@ M.toggle = function()
 end
 
 -- Activate document formatting filter to select a preferred formatter
-M.format = function()
-  local bufnr = vim.api.nvim_get_current_buf() ---@type integer
+M.format_document = function()
+  local bufnr = vim.api.nvim_get_current_buf()
   if vim.b.autoformat == false then
     return
   end
-  local ft = vim.bo[bufnr].filetype ---@type string
-  local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+  local ft = vim.bo[bufnr].filetype
+  local has_nls = pcall(function()
+    return #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+  end)
 
   vim.lsp.buf.format({
     bufnr = bufnr,
     filter = function(client)
-      if have_nls then
+      if has_nls then
         return client.name == "null-ls"
       end
       return client.name ~= "null-ls"
@@ -43,35 +45,24 @@ M.format = function()
 end
 
 -- Enable document formatting autocmd to trigger on BufWritePre
----@param client table
+---@param client vim.lsp.Client
 ---@param bufnr integer
-M.enable_auto_formatting = function(client, bufnr)
-  -- Prevent formatting if client disabled it
-  local disabled = (
-    client.config
-    and client.config.capabilities
-    and client.config.capabilities.documentFormattingProvider == false
-  )
-  -- Apply autocmd if client supports formatting
-  if not disabled or client.supports_method("textDocument/formatting") then
+M.enable_auto_format = function(client, bufnr)
+  if
+    client.server_capabilities.documentFormattingProvider
+    or client.supports_method("textDocument/formatting")
+  then
+    -- Add formatting user commands
+    vim.api.nvim_create_user_command("Format", M.format_document, {})
+    vim.api.nvim_create_user_command("FormatToggle", M.format_toggle, {})
+
+    -- Add autocmd to handle format on save
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
       desc = "Apply Auto-formatting for to document on save",
       group = vim.api.nvim_create_augroup("LspFormat." .. bufnr, {}),
-      callback = function()
-        M.format()
-      end,
+      callback = M.format_document,
     })
-
-    -- Add formatting user command
-    vim.api.nvim_create_user_command("Format", function()
-      M.format()
-    end, {})
-
-    -- Add toggle formatting user command
-    vim.api.nvim_create_user_command("FormatToggle", function()
-      M.toggle()
-    end, {})
   end
 end
 

@@ -1,14 +1,17 @@
+-- delve | DAP configuration for go
+-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#go
 local dap = require("dap")
+local utils = require("dap.utils")
 
-dap.adapters.go = {
+dap.adapters.delve = {
   type = "server",
   port = "${port}",
   executable = {
     command = "dlv",
-    args = { "dap", "-l", "147.0.0.1:${port}" },
+    args = { "dap", "-l", "127.0.0.1:${port}" },
   },
   options = {
-    initialize_timeout_sec = 40,
+    initialize_timeout_sec = 20,
   },
 }
 
@@ -31,7 +34,6 @@ local function get_arguments()
   end
 end
 
--- -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
 dap.configurations.go = {
   {
     type = "go",
@@ -60,7 +62,7 @@ dap.configurations.go = {
     name = "Attach",
     mode = "local",
     request = "attach",
-    processId = require("dap.utils").pick_process,
+    processId = utils.pick_process,
   },
   {
     type = "go",

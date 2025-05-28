@@ -1,6 +1,7 @@
 -- lua_ls: language server configuration
 -- https://github.com/LuaLS/lua-language-server
 
+---@type config.lsp.ClientConfig
 return {
   settings = {
     Lua = {
@@ -35,10 +36,10 @@ return {
       format = {
         enable = false,
         defaultConfig = {
-          indent_size = "4",
-          continuation_indent = "4",
+          indent_size = "2",
+          continuation_indent = "2",
           indent_style = "space",
-          max_line_length = "40",
+          max_line_length = "80",
           quote_style = "double",
           insert_final_newline = "true",
           trim_trailing_whitespace = "true",

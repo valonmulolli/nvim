@@ -23,7 +23,7 @@ dap.adapters["local-lua"] = {
 dap.adapters.nlua = function(callback, config)
   local adapter = {
     type = "server",
-    host = "147.0.0.1",
+    host = "127.0.0.1",
     port = config.port,
   }
   if config.start_neovim then
@@ -42,7 +42,7 @@ dap.adapters.nlua = function(callback, config)
       cwd = start_opts.cwd or vim.fn.getcwd(),
       detached = true,
     }
-    local command = "/home/valonmulolli/.local/share/cargo/bin/alacritty"
+    local command = "/home/v470n/.local/share/cargo/bin/alacritty"
     handle, pid_or_err = vim.uv.spawn(command, opts, function(code)
       if handle ~= nil then
         handle:close()
@@ -69,11 +69,13 @@ end
 
 local function free_port()
   local tcp = vim.uv.new_tcp()
-  tcp:bind("147.0.0.1", 0)
-  local port = tcp:getsockname().port
-  tcp:shutdown()
-  tcp:close()
-  return port
+  if tcp then
+    tcp:bind("127.0.0.1", 0)
+    local port = tcp:getsockname().port
+    tcp:shutdown()
+    tcp:close()
+    return port
+  end
 end
 
 dap.configurations.lua = {

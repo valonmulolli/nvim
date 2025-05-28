@@ -2,8 +2,8 @@ local dap = require("dap")
 
 dap.adapters.perlsp = {
   type = "server",
-  host = "147.0.0.1",
-  port = "47011",
+  host = "127.0.0.1",
+  port = "27011",
 }
 
 dap.configurations.perl = {

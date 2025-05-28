@@ -12,23 +12,21 @@ local env = {
   JDTLS_JVM_ARGS = os.getenv("JDTLS_JVM_ARGS"),
 }
 
-local path = require("lspconfig.util").path
-
 local function get_cache_dir()
-  return env.XDG_CACHE_HOME and env.XDG_CACHE_HOME or path.join(env.HOME, ".cache")
+  return env.XDG_CACHE_HOME and env.XDG_CACHE_HOME or vim.fs.joinpath(env.HOME, ".cache")
 end
 
 local function get_jdtls_cache_dir()
-  return path.join(get_cache_dir(), "jdtls")
+  return vim.fs.joinpath(get_cache_dir(), "jdtls")
 end
 
 local function get_jdtls_config_dir()
-  return path.join(get_jdtls_cache_dir(), "config")
+  return vim.fs.joinpath(get_jdtls_cache_dir(), "config")
 end
 
 local function get_jdtls_workspace_dir()
   local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-  return path.join(get_jdtls_cache_dir(), "workspaces", project_name)
+  return vim.fs.joinpath(get_jdtls_cache_dir(), "workspaces", project_name)
 end
 
 local function get_jdtls_jvm_args()
@@ -48,9 +46,8 @@ local default_attach = require("plugins.lsp.attach")
 local default_config = require("lspconfig").jdtls.document_config.default_config
 
 local function on_attach(client, bufnr)
-  require("jdtls.setup").add_commands()
   default_attach(client, bufnr)
-  jdtls.setup_dap({ hotcodereplace = "auto" })
+  jdtls.setup_dap({ hotcodereplace = "auto", config_overrides = {} })
   local map = vim.keymap.set
   map({ "n" }, "<A-o>", "<Cmd>lua require('jdtls').organize_imports()<CR>", { remap = false })
   map({ "n", "v" }, "crv", "<Esc><Cmd>lua require('jdtls').extract_variable()<CR>", { remap = false })
@@ -63,6 +60,7 @@ local function on_attach(client, bufnr)
   map({ "n" }, "<leader>dn", "<Cmd>lua require('jdtls').test_nearest_method()<CR>", { remap = false })
 end
 
+---@type config.lsp.ClientConfig
 local config = {
   capabilities = capabilities,
   on_attach = on_attach,

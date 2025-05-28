@@ -1,7 +1,7 @@
 -- nvim-dap | Debug Adapter Protocol client implementation for neovim
 -- https://github.com/mfussenegger/nvim-dap
 
----@type LazyPluginSpec[]
+---@type LazySpec
 return {
   { -- Debug adapter protocol client
     "mfussenegger/nvim-dap",
@@ -17,41 +17,34 @@ return {
     },
     -- stylua: ignore
     keys = {
-      { "<F3>",       function() require("dap").repl.toggle({ height = 40 }) end,                           desc = "Toggle REPL" },
-      { "<F4>",       function() require("dap").terminate() end,                                            desc = "Terminate" },
-      { "<F5>",       function() require("dap").continue() end,                                             desc = "Continue" },
-      { "<F6>",       function() require("dap").pause() end,                                                desc = "Pause" },
-      { "<F9>",       function() require("dap").toggle_breakpoint() end,                                    desc = "Set breakpoint" },
-      { "<F10>",      function() require("dap").step_over() end,                                            desc = "Step over" },
-      { "<F11>",      function() require("dap").step_into() end,                                            desc = "Step into" },
-      { "<F14>",      function() require("dap").step_out() end,                                             desc = "Step out" },
-      { "<leader>vB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint condition" },
-      { "<leader>vb", function() require("dap").toggle_breakpoint() end,                                    desc = "Set breakpoint" },
-      { "<leader>vc", function() require("dap").continue() end,                                             desc = "Continue" },
-      { "<leader>vC", function() require("dap").run_to_cursor() end,                                        desc = "Run to cursor" },
-      { "<leader>ve", function() require("dap").set_exception_breakpoints() end,                            desc = "Exception breakpoint" },
-      { "<leader>vg", function() require("dap").goto_() end,                                                desc = "Go to line (no execute)" },
-      { "<leader>vh", function() require("dap").run_to_cursor() end,                                        desc = "Run to Cursor" },
-      { "<leader>vi", function() require("dap").step_into() end,                                            desc = "Step into" },
-      { "<leader>vj", function() require("dap").down() end,                                                 desc = "Down" },
-      { "<leader>vk", function() require("dap").up() end,                                                   desc = "Up" },
-      { "<leader>vl", function() require("dap").run_last() end,                                             desc = "Run last" },
-      {
-        "<leader>vL",
-        function()
-          require("dap").toggle_breakpoint(nil, nil,
-            vim.fn.input("Log point message: "), true)
-        end,
-        desc = "Set log breakpoint"
-      },
-      { "<leader>vN", function() require("dap").step_back() end,                  desc = "Step back" },
-      { "<leader>vO", function() require("dap").step_out() end,                   desc = "Step out" },
-      { "<leader>vo", function() require("dap").step_over() end,                  desc = "Step over" },
-      { "<leader>vp", function() require("dap").pause() end,                      desc = "Pause" },
-      { "<leader>vr", function() require("dap").repl.toggle({ height = 40 }) end, desc = "Toggle REPL" },
-      { "<leader>vs", function() require("dap").session() end,                    desc = "Session" },
-      { "<leader>vt", function() require("dap").terminate() end,                  desc = "Terminate" },
-      { "<leader>vw", function() require("dap.ui.widgets").hover() end,           desc = "Widgets" },
+      { "<F3>", function() require("lua.plugins.dap.init").repl.toggle({ height = 20 }) end, desc = "Toggle REPL" },
+      { "<F4>", function() require("lua.plugins.dap.init").terminate() end, desc = "Terminate" },
+      { "<F5>", function() require("lua.plugins.dap.init").continue() end, desc = "Continue" },
+      { "<F6>", function() require("lua.plugins.dap.init").pause() end, desc = "Pause" },
+      { "<F9>", function() require("lua.plugins.dap.init").toggle_breakpoint() end, desc = "Set breakpoint" },
+      { "<F10>", function() require("lua.plugins.dap.init").step_over() end, desc = "Step over" },
+      { "<F11>", function() require("lua.plugins.dap.init").step_into() end, desc = "Step into" },
+      { "<F12>", function() require("lua.plugins.dap.init").step_out() end, desc = "Step out" },
+      { "<leader>dB", function() require("lua.plugins.dap.init").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint condition" },
+      { "<leader>db", function() require("lua.plugins.dap.init").toggle_breakpoint() end, desc = "Set breakpoint" },
+      { "<leader>dc", function() require("lua.plugins.dap.init").continue() end, desc = "Continue" },
+      { "<leader>dC", function() require("lua.plugins.dap.init").run_to_cursor() end, desc = "Run to cursor" },
+      { "<leader>de", function() require("lua.plugins.dap.init").set_exception_breakpoints() end, desc = "Exception breakpoint" },
+      { "<leader>dg", function() require("lua.plugins.dap.init").goto_() end, desc = "Go to line (no execute)" },
+      { "<leader>dh", function() require("lua.plugins.dap.init").run_to_cursor() end, desc = "Run to Cursor" },
+      { "<leader>di", function() require("lua.plugins.dap.init").step_into() end, desc = "Step into" },
+      { "<leader>dj", function() require("lua.plugins.dap.init").down() end, desc = "Down" },
+      { "<leader>dk", function() require("lua.plugins.dap.init").up() end, desc = "Up" },
+      { "<leader>dl", function() require("lua.plugins.dap.init").run_last() end, desc = "Run last" },
+      { "<leader>dL", function() require("lua.plugins.dap.init").toggle_breakpoint(nil, nil, vim.fn.input("Log point message: "), true) end, desc = "Set log breakpoint" },
+      { "<leader>dN", function() require("lua.plugins.dap.init").step_back() end, desc = "Step back" },
+      { "<leader>dO", function() require("lua.plugins.dap.init").step_out() end, desc = "Step out" },
+      { "<leader>do", function() require("lua.plugins.dap.init").step_over() end, desc = "Step over" },
+      { "<leader>dp", function() require("lua.plugins.dap.init").pause() end, desc = "Pause" },
+      { "<leader>dr", function() require("lua.plugins.dap.init").repl.toggle({ height = 20 }) end, desc = "Toggle REPL" },
+      { "<leader>ds", function() require("lua.plugins.dap.init").session() end, desc = "Session" },
+      { "<leader>dt", function() require("lua.plugins.dap.init").terminate() end, desc = "Terminate" },
+      { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
     },
     config = function()
       -- Set default highlights
@@ -64,13 +57,9 @@ return {
         sign = type(sign) == "table" and sign or { sign }
         name = "Dap" .. name
         local text = sign[1] .. " "
-        local texthl = sign[4] or name
+        local texthl = sign[2] or name
         vim.fn.sign_define(name, { text = text, texthl = texthl, linehl = sign[3], numhl = sign[3] })
       end
-
-      -- Load adapters/config from settings directory
-      vim.cmd("runtime! lua/plugins/dap/adapters/*.lua")
-      require("dap.ext.vscode").load_launchjs()
     end,
   },
   { -- Fancy UI for the debugger
@@ -80,32 +69,32 @@ return {
     dependencies = { "mfussenegger/nvim-dap" },
     -- stylua: ignore
     keys = {
-      { "<leader>ve", function() require("dapui").eval() end,                             desc = "Eval",           mode = { "n", "v" } },
-      { "<leader>vE", function() require("dapui").eval(vim.fn.input("expression: ")) end, desc = "Eval Expression" },
-      { "<leader>vu", function() require("dapui").toggle({ reset = true }) end,           desc = "Dap UI" },
+      { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" } },
+      { "<leader>dE", function() require("dapui").eval(vim.fn.input("expression: ")) end, desc = "Eval Expression" },
+      { "<leader>du", function() require("dapui").toggle({ reset = true }) end, desc = "Dap UI" },
     },
     opts = {
       expand_lines = false,
       floating = { border = vim.g.border },
-      -- mappings = { expand = { "<TAB>", "<CR>", "<4-LeftMouse>" } },
+      mappings = { expand = { "<TAB>", "<CR>", "<2-LeftMouse>" } },
       layouts = {
         {
           elements = {
-            { id = "scopes",      size = 0.45 },
-            { id = "breakpoints", size = 0.45 },
-            { id = "stacks",      size = 0.45 },
-            { id = "watches",     size = 0.45 },
+            { id = "scopes", size = 0.25 },
+            { id = "breakpoints", size = 0.25 },
+            { id = "stacks", size = 0.25 },
+            { id = "watches", size = 0.25 },
           },
           position = "right",
           size = 40,
         },
         {
           elements = {
-            { id = "repl",    size = 0.5 },
+            { id = "repl", size = 0.5 },
             { id = "console", size = 0.5 },
           },
           position = "bottom",
-          size = 0.45,
+          size = 0.25,
         },
       },
     },
@@ -134,10 +123,10 @@ return {
     },
     -- stylua: ignore
     keys = {
-      { "<F5>",       function() require("dap").continue() end, desc = "Continue" },
-      { "<leader>vc", function() require("dap").continue() end, desc = "Continue" },
-      { "<leader>vd", "<cmd>Telescope dap commands<CR>",        desc = "Commands" },
-      { "<leader>vv", "<cmd>Telescope dap variables<CR>",       desc = "Variables" },
+      { "<F5>", function() require("lua.plugins.dap.init").continue() end, desc = "Continue" },
+      { "<leader>dc", function() require("lua.plugins.dap.init").continue() end, desc = "Continue" },
+      { "<leader>dd", "<cmd>Telescope dap commands<CR>", desc = "Commands" },
+      { "<leader>dv", "<cmd>Telescope dap variables<CR>", desc = "Variables" },
     },
     config = function()
       require("telescope").load_extension("dap")

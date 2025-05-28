@@ -3,7 +3,7 @@ local icons = require("config.icons")
 
 -- Map new names for lsp diagnostic messages
 local client_map = {
-  { "Lua Diagnostics.",  "LuaLS" },
+  { "Lua Diagnostics.", "LuaLS" },
   { "Lua Syntax Check.", "LuaLS" },
 }
 
@@ -13,7 +13,7 @@ local client_map = {
 local rename_diagnostic_source = function(diagnostic)
   for _, item in pairs(client_map) do
     if diagnostic.source == item[1] then
-      return item[4]
+      return item[2]
     end
   end
   return diagnostic.source
@@ -68,7 +68,6 @@ vim.diagnostic.config({
     show_header = true,
     source = false,
   },
-  -- virtual_text = false,
   virtual_text = {
     prefix = "■",
     spacing = 1,
