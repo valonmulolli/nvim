@@ -10,7 +10,7 @@ trim_trailing_whitespace = true
 max_line_length = 102
 indent_size = 2
 tab_width = 2
-# indent_style = space
+indent_style = space
 
 [*.{bash,sh}]
 max_line_length = 80
