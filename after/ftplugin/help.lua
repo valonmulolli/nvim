@@ -15,6 +15,6 @@ vim.opt_local.iskeyword:append({ ":", "#", "-" })
 
 local opts = { buffer = true, remap = false, silent = true }
 
--- -- Jump to specific subjects by using tags
+-- Jump to specific subjects by using tags
 vim.keymap.set("n", "<CR>", "<c-]>", opts)
 vim.keymap.set("n", "<BS>", "<c-T>", opts)
