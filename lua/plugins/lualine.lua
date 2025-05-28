@@ -3,7 +3,7 @@
 
 ---Wrapper function for printing string as lualine component
 ---@param str string
----@return function
+---@return fun(): string
 local function insert_string(str)
   return function()
     return str
@@ -43,8 +43,11 @@ local function client_format(client_name, spinner, series_messages)
 end
 
 -- Components
--- Define custom lualine component options
+-- Define custom lualine options for various statusline elements.
+-- Each table represents the configuration for a specific type of information
+-- displayed in the statusline, organized for clarity and modularity.
 
+-- Displays the current editor mode.
 local mode = {
   "mode",
   fmt = function(str)
@@ -52,6 +55,7 @@ local mode = {
   end,
 }
 
+-- Shows the current file type.
 local filetype = {
   "filetype",
   icon_only = true,
@@ -60,6 +64,7 @@ local filetype = {
   padding = { left = 1, right = 0 },
 }
 
+-- Displays file encoding.
 local encoding = {
   "encoding",
   fmt = function(str)
@@ -67,6 +72,7 @@ local encoding = {
   end,
 }
 
+-- Indicates the file's line-ending format.
 local fileformat = {
   "fileformat",
   symbols = {
@@ -76,22 +82,28 @@ local fileformat = {
   },
 }
 
+-- Shows the current file name.
 local filename = {
   "filename",
   path = 1,
-  padding = 0,
   separator = "",
   component_separator = "",
+  padding = {
+    left = 0,
+    right = 1,
+  },
 }
 
+-- Displays the current Git branch.
 local branch = {
   "branch",
   icon = "",
 }
 
+-- Shows Git diff stats.
 local diff = {
   "diff",
-  ---Version control diff values
+  ---Provides version control diff values from gitsigns for the statusline.
   ---@return table|nil
   source = function()
     local gitsigns = vim.b["gitsigns_status_dict"]
@@ -105,6 +117,7 @@ local diff = {
   end,
 }
 
+-- Displays LSP or diagnostic counts.
 local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
@@ -118,6 +131,7 @@ local diagnostics = {
   end)(),
 }
 
+-- Shows attached LSP client info.
 local lsp_info = {
   "lsp_info",
   icon = { "", align = "right" },
@@ -129,34 +143,38 @@ local lsp_info = {
   },
 }
 
+-- Manages and displays tab info.
 local tabs = {
   "tabs",
   mode = 1,
   use_mode_colors = true,
-  -- Display tab label as name if set else use tabnr
+  ---Format the tabpage to display the tab name if available, otherwise use the tab number.
+  ---@param _name string: The default name of the tab (unused in this function).
+  ---@param ctx table: The context table containing tab information.
+  ---@return string: The formatted tab name or tab number.
   fmt = function(_name, ctx)
-    local ok, tabname = pcall(vim.api.nvim_tabpage_get_var, ctx.tabId, "tabname")
-    if ok and tabname ~= "" then
+    local tabname_ok, tabname = pcall(vim.api.nvim_tabpage_get_var, ctx.tabId, "tabname")
+    if tabname_ok and tabname ~= "" then
       return tabname
     end
     return ctx.tabnr
   end,
 }
 
+-- Manages and displays window info.
 local windows = {
   "windows",
   use_mode_colors = true,
   filetype_names = {
-    NvimTree = "NvimTree",
     checkhealth = "checkhealth",
     fugitive = "Fugitive",
     lazy = "Lazy",
     mason = "Mason",
-    tsplayground = "TSPlayground",
+    snacks = "Snacks",
   },
 }
 
----@type LazyPluginSpec[]
+---@type LazySpec
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -193,9 +211,11 @@ return {
         lualine_c = { filetype, filename },
       },
       extensions = {
-        "dashboard",
+        "snacks",
         "fugitive",
         "lazy",
+        "man",
+        "mason",
         "quickfix",
         "terminal",
         "trouble",
@@ -207,13 +227,16 @@ return {
     event = { "LspAttach" },
     dependencies = { "nvim-lualine/lualine.nvim" },
     opts = { client_format = client_format },
-    config = function(_, opts)
-      require("lsp-progress").setup(opts)
+    init = function()
       vim.api.nvim_create_autocmd("User", {
         desc = "listen for lsp-progress event and refresh lualine",
-        group = vim.api.nvim_create_augroup("Lualine_LspProgressUpdate", {}),
+        group = vim.api.nvim_create_augroup("Lualine#LspProgressUpdate", { clear = true }),
         pattern = "LspProgressStatusUpdated",
-        callback = require("lualine").refresh,
+        callback = function()
+          if package.loaded["lualine"] then
+            require("lualine").refresh()
+          end
+        end,
       })
     end,
   },

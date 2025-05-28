@@ -30,9 +30,13 @@ return
         },
         python = "python -u '$dir/$fileName'",
         sh = "bash",
-        typescript = "ts-node",
+        typescript = "bun",
         typescriptreact = "yarn dev$end",
-        rust = "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+        rust = {
+          "cd $dir &&",
+          "rustc $fileName &&",
+          "./$fileNameWithoutExt"
+        },
       },
     }
   end,

@@ -1,13 +1,19 @@
 -- mason.nvim | Portable package manager for Neovim
 -- https://github.com/williamboman/mason.nvim
 
----@type LazyPluginSpec[]
+---@type LazySpec
 return {
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
-    cmd = { "Mason", "MasonLog", "MasonUninstall", "MasonUninstallAll", "MasonUpdate" },
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "VeryLazy" },
+    cmd = {
+      "Mason",
+      "MasonLog",
+      "MasonUninstall",
+      "MasonUninstallAll",
+      "MasonUpdate",
+    },
     keys = {
       { "<leader>pm", "<cmd>Mason<CR>", desc = "Show mason" },
     },
@@ -27,38 +33,57 @@ return {
       ensure_installed = {
         "bashls",
         "clangd",
-        "gopls",
         "cssls",
         "dockerls",
+        "emmet_ls",
+        "eslint",
+        "gopls",
         "html",
         "jsonls",
-        "ruff",
+        "lua_ls",
         "pyright",
+        "ruff",
         "taplo",
-        "emmet_ls",
-        "tailwindcss",
-        "jsonls",
+        "yamlls",
+      },
+      handlers = {
+        -- The first entry (without a key) will be the default handler
+        -- and will be called for each installed server that doesn't have
+        -- a dedicated handler.
+        ---@param server_name string
+        function(server_name)
+          -- Define default variables
+          local server_mpath = "plugins/lsp/servers"
+          local default_options = {
+            capabilities = require("plugins.lsp.capabilities"),
+            on_attach = require("plugins.lsp.attach"),
+          }
+          local namespace = table.concat({ server_mpath, server_name }, "/")
+          local _, module = pcall(require, namespace)
+          module = type(module) == "table" and module or {}
+          local config = vim.tbl_deep_extend("force", default_options, module or {})
+          require("lspconfig")[server_name].setup(config)
+        end,
+
+        ["rust_analyzer"] = function()
+          require("plugins/lsp/servers/rust_analyzer")
+        end,
+
+        ["jdtls"] = function()
+          require("plugins/lsp/servers/jdtls")
+        end,
       },
     },
   },
   {
-    "jay-babu/mason-null-ls.nvim",
+    "jayp0521/mason-null-ls.nvim",
     cmd = { "NullLsInstall", "NullLsUninstall" },
     dependencies = { "williamboman/mason.nvim" },
     opts = {
       automatic_installation = false,
       ensure_installed = {
-        "typescript-language-server",
-        "tailwindcss-language-server",
         "black",
         "isort",
-        "clang-format",
-        'debugpy',
-        'flake8',
-        'mypy',
-        'pylint',
-        "gofumpt",
-        "goimports",
         "markdownlint",
         "prettier",
         "selene",
@@ -75,6 +100,16 @@ return {
       automatic_installation = false,
       automatic_setup = true,
       ensure_installed = {},
+      handlers = {
+        function(config)
+          local adapters_path = "plugins/dap/adapters"
+          local namespace = table.concat({ adapters_path, config.name }, "/")
+          local _, module = pcall(require, namespace)
+          module = type(module) == "table" and module or {}
+          config = vim.tbl_deep_extend("force", config, module or {})
+          require("mason-nvim-dap").default_setup(config)
+        end,
+      },
     },
   },
 }

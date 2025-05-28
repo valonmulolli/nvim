@@ -1,25 +1,34 @@
 -- Which-key | Configurations for plugin WhichKey.nvim
 -- https://github.com/folke/which-key.nvim
+---@module "which-key"
 
----@type LazyPluginSpec
+---@type LazySpec
 return {
   "folke/which-key.nvim",
   event = { "VeryLazy" },
+  init = function()
+    local colors = require("config.colors")
+    colors.set_hl_autocmd(nil, {
+      WhichKeyNormal = { link = "Normal", default = true },
+      WhichKeySeparator = { link = "WinSeparator", default = true },
+      WhichKeyTitle = { link = "Title", default = true },
+    })
+  end,
   ---@class wk.Opts
   opts = {
     preset = "classic",
-    icons = { mappings = false },
+    icons = { mappings = true },
     win = {
       row = math.huge,
       border = { "─", "─", "─", " ", "─", "", "", " " },
     },
     replace = {
       key = {
-        { "<BS>",    "BS" },
-        { "<CR>",    "RET" },
-        { "<Esc>",   "ESC" },
+        { "<BS>", "BS" },
+        { "<CR>", "RET" },
+        { "<Esc>", "ESC" },
         { "<Space>", "SPC" },
-        { "<Tab>",   "TAB" },
+        { "<Tab>", "TAB" },
       },
     },
   },
@@ -27,21 +36,18 @@ return {
     local wk = require("which-key")
     wk.setup(opts)
     wk.add({
-      { "[",         group = "Prev" },
-      { "]",         group = "Next" },
-      { "g",         group = "Goto" },
+      { "[", group = "Prev" },
+      { "]", group = "Next" },
+      { "g", group = "Goto" },
       { "<leader>P", group = "Projects" },
       { "<leader>b", group = "Buffer" },
       { "<leader>d", group = "Debug" },
       { "<leader>f", group = "Find" },
-      { "<leader>k", group = "Multi-Cursor" },
-      { "<leader>r", group = "Code-Runner" },
       { "<leader>g", group = "Git" },
-      { "<leader>n", group = "Tabs" },
-      { "<leader>m", group = "Format" },
       { "<leader>p", group = "Plugins" },
       { "<leader>s", group = "Sessions" },
       { "<leader>t", group = "Terminal" },
+      { "<leader>x", group = "Diagnostics" },
       { "<leader>z", group = "Notes" },
     })
   end,

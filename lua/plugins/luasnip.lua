@@ -1,7 +1,7 @@
 -- LuaSnip | Snippet Engine for Neovim written in Lua.
 -- https://github.com/L3MON4D3/LuaSnip
 
----@type LazyPluginSpec
+---@type LazySpec
 return {
   "L3MON4D3/LuaSnip",
   event = "InsertCharPre",
@@ -38,6 +38,9 @@ return {
     ls.filetype_extend("glsl", { "c" })
     ls.filetype_extend("javascript", { "javascriptreact" })
     ls.filetype_extend("typescript", { "typescriptreact" })
+    ls.filetype_extend("html", { "loremipsum" })
+    ls.filetype_extend("markdown", { "loremipsum" })
+    ls.filetype_extend("plain", { "loremipsum" })
 
     -- Load primary LSP snippets from friendly-snippets
     require("luasnip.loaders.from_vscode").lazy_load()
