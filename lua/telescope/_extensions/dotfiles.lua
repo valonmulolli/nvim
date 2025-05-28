@@ -16,7 +16,7 @@ local dotfiles_list = function(opts)
     end
   end
 
-  local dotfiles_path = os.getenv("DOTFILES") or "~/.dotfiles"
+  local dotfiles_path = os.getenv("DOTFILES") or "~/dotfiles"
   local dotfiles = io.popen("rg --files " .. dotfiles_path)
   if dotfiles then
     for file in dotfiles:lines() do
