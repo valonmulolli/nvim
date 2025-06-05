@@ -103,10 +103,6 @@ return {
   config = function()
     local cmp = require("cmp")
 
-    -- HACK: Disable default completion mapping
-    -- When the cmp window isn't visible this will open the default completion menu
-    vim.keymap.set("i", "<C-n>", "<nop>")
-    vim.keymap.set("i", "<C-p>", "<nop>")
 
     cmp.setup({
       enable = true,
@@ -188,18 +184,16 @@ return {
         cmp.config.compare.order,
       },
       sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "path",    option = { trailing_slash = true } },
+        { name = "nvim_lsp", priority = 90 },
+        { name = "luasnip", priority = 80 },
+        { name = "path", option = { trailing_slash = true }, priority = 70 },
       }, {
-        { name = "buffer", option = search_tabpage },
-        { name = "spell" },
+        { name = "buffer", option = search_tabpage, priority = 50 },
+        { name = "spell", priority = 40 },
       }),
       experimental = {
         native_menu = false,
-        ghost_text = {
-          hl_group = "LspCodeLens",
-        },
+        ghost_text = false,  -- Disable ghost text completely
       },
       completion = {
         get_trigger_characters = function(chars)
