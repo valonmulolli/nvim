@@ -3,6 +3,23 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
+-- Custom highlights after colorscheme is loaded
+autocmd('ColorScheme', {
+  group = augroup('CustomHighlights', { clear = true }),
+  pattern = '*',
+  callback = function()
+    -- Customize Copilot suggestion color
+    vim.api.nvim_set_hl(0, 'CopilotSuggestion', {
+      fg = '#555555',  -- Medium gray
+      ctermfg = 8,     -- Dark gray in terminal
+      italic = true,   -- Make it italic
+      -- bold = true,
+      -- underline = true,
+      -- blend = 30,  -- 0-100 transparency
+    })
+  end,
+})
+
 autocmd({ "BufEnter", "WinLeave", "FocusLost", "VimSuspend" }, {
   desc = "Leave insert or replace mode on focus loss",
   group = augroup("FocusLostStopInsert", {}),
