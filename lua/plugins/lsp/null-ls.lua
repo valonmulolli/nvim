@@ -60,12 +60,19 @@ M.sources = {
     end,
   }),
 
-  -- JavaScript, etc.
+  -- JavaScript/TypeScript
   formatting.prettier.with({
     prefer_local = "node_modules/.bin",
     extra_filetypes = { "solidity", "svelte", "yaml" },
-  }),
-}
+    condition = function(utils)
+      return utils.root_has_file({ 
+        ".prettierrc", 
+        ".prettierrc.json", 
+        ".prettierrc.js",
+        "package.json" 
+      })
+    end,
+  })}
 
 -- NOTE: Additional sources are typically provided by external plugins, not by null-ls built-ins.
 -- Examples include `none-ls.extras`, `none-ls.luacheck`, and other sources no longer maintained.

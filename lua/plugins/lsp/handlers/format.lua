@@ -49,8 +49,8 @@ end
 ---@param bufnr integer
 M.enable_auto_format = function(client, bufnr)
   if
-    client.server_capabilities.documentFormattingProvider
-    or client.supports_method("textDocument/formatting")
+      client.server_capabilities.documentFormattingProvider
+      or client.supports_method("textDocument/formatting")
   then
     -- Add formatting user commands
     vim.api.nvim_create_user_command("Format", M.format_document, {})
