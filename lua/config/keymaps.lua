@@ -4,26 +4,24 @@ local util = require("config.util")
 local defaults = { remap = false, silent = true }
 util.register_keymaps(defaults, {
   -- Visually move lines <Up/Down>
-  { "v", "<A-k>",      ":m '<-2<CR>gv=gv" },
-  { "v", "<A-j>",      ":m '>+1<CR>gv=gv" },
-  { "v", "<A-Up>",     ":m '<-2<CR>gv=gv" },
-  { "v", "<A-Down>",   ":m '>+1<CR>gv=gv" },
+  { "v", "<A-k>",    ":m '<-2<CR>gv=gv" },
+  { "v", "<A-j>",    ":m '>+1<CR>gv=gv" },
+  { "v", "<A-Up>",   ":m '<-2<CR>gv=gv" },
+  { "v", "<A-Down>", ":m '>+1<CR>gv=gv" },
 
   -- Duplicate line
-  { "n", "<C-d>",      "Yp" },
+  { "n", "<C-d>",    "Yp" },
 
   -- Search and replace
   { "n", "<leader>h", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   },
 
+  -- delete selected text to black hole register and paste previous content
+  { "x",          "<leader>p",  [["_dP"]] },
+
   -- Make Y act like other capitals
   { "n",          "Y",          "y$" },
 
-  -- Prevent <Delete> from yanking
-  { "v",          "<del>",      '"_d' },
-
-  -- Banish Q to the shadow realm
-  -- { "n",          "Q",          "<nop>" },
 
   -- Ctrl-Z undo in insert
   { "i",          "<c-z>",      "<c-o>:u<CR>" },

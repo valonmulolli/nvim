@@ -171,3 +171,13 @@ autocmd({ "BufWritePre" }, {
     end
   end,
 })
+
+-- Autoformat TypeScript/JavaScript files on save
+autocmd({ "BufWritePre" }, {
+  desc = "Autoformat TypeScript/JavaScript files on save",
+  group = augroup("typescript_formatting", { clear = true }),
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})
