@@ -15,4 +15,4 @@ require("config.icons")
 require("config.lazy")
 
 -- Apply colorscheme
-vim.cmd.colorscheme("lackluster")
+-- vim.cmd.colorscheme("lackluster")

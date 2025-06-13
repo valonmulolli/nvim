@@ -1,93 +1,142 @@
-# v470n's Neovim Configuration
 
 <div align="center">
+
+# Neovim Configuration
 
 ![Neovim](https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)
 ![Lua](https://img.shields.io/badge/lua-%232C2D72.svg?style=for-the-badge&logo=lua&logoColor=white)
 ![GitHub last commit](https://img.shields.io/github/last-commit/valonmulolli/nvim?style=for-the-badge)
 ![License](https://img.shields.io/github/license/valonmulolli/nvim?style=for-the-badge)
 
-A minimalist yet powerful Neovim configuration focused on providing a blazing-fast development environment with LSP integration, intelligent code completion, and extensive language support.
+A minimalist yet powerful Neovim configuration with LSP integration, intelligent code completion, and extensive language support.
 
+[Quick Start](#quick-start) •
 [Features](#features) •
-[Prerequisites](#prerequisites) •
-[Installation](#installation) •
 [Keybindings](#key-bindings) •
 [Configuration](#configuration) •
-[Themes](#themes) •
-[Troubleshooting](#troubleshooting)
+[Themes](#themes)
 
 </div>
 
+## Quick Start
+
+1. **Install Prerequisites**:
+
+   ```bash
+   # Required
+   sudo pacman -S neovim git nodejs ripgrep
+
+   # Optional but recommended
+   sudo pacman -S lazygit gcc make unzip
+   ```
+
+2. **Install Configuration**:
+
+   ```bash
+   # Backup existing config
+   mv ~/.config/nvim ~/.config/nvim.bak
+   mv ~/.local/share/nvim ~/.local/share/nvim.bak
+
+   # Clone and install
+   git clone https://github.com/valonmulolli/nvim ~/.config/nvim
+   nvim  # First launch will install plugins automatically
+   ```
+
+## Key Bindings
+
+### Navigation
+
+| Key          | Description                        |
+| ------------ | ---------------------------------- |
+| `Tab`        | Next buffer                        |
+| `S-Tab`      | Previous buffer                    |
+| `C-o`        | Previous jump position (centered)  |
+| `C-i`        | Next jump position (centered)      |
+| `n`          | Next search result (centered)      |
+| `N`          | Previous search result (centered)  |
+| `*`          | Search word under cursor (no jump) |
+| `v*`         | Search visually selected text      |
+| `<leader>nt` | New tab                            |
+| `<leader>nf` | New file                           |
+
+### Editing
+
+| Key                   | Description                            |
+| --------------------- | -------------------------------------- |
+| `v + A-j` or `A-Down` | Move line down                         |
+| `v + A-k` or `A-Up`   | Move line up                           |
+| `C-d`                 | Duplicate current line                 |
+| `Y`                   | Yank to end of line                    |
+| `v + <`               | Decrease indent                        |
+| `v + >`               | Increase indent                        |
+| `<leader>p`           | Replace selection with paste (no yank) |
+| `<leader>h`           | Search and replace current word        |
+| `i + C-z`             | Undo in insert mode                    |
+| `C-s`                 | Save file                              |
+
+### LSP (Language Server Protocol)
+
+| Key          | Description            |
+| ------------ | ---------------------- |
+| `gD`         | Go to declaration      |
+| `gd`         | Go to definition       |
+| `gi`         | Go to implementation   |
+| `gr`         | Go to references       |
+| `gy`         | Show type definition   |
+| `K`          | Show hover information |
+| `gK`         | Signature help         |
+| `[d`         | Previous diagnostic    |
+| `]d`         | Next diagnostic        |
+| `<leader>cl` | Open LSP info          |
+| `<leader>cc` | Run code lens          |
+| `<leader>ca` | Code action            |
+| `<leader>cr` | Rename symbol          |
+| `<leader>cf` | Format document        |
+| `<leader>cF` | Toggle auto-formatting |
+| `<leader>cC` | Refresh code lens      |
+
+### Code Runner
+
+| Key          | Description         |
+| ------------ | ------------------- |
+| `<leader>r`  | Run current file    |
+| `<leader>rq` | Close runner        |
+| `<leader>rt` | Run file in new tab |
+| `<leader>rp` | Run project         |
+
+### Window Management
+
+| Key          | Description           |
+| ------------ | --------------------- |
+| `<C-w>d`     | Delete current buffer |
+| `<leader>wq` | Save and quit window  |
+| `<leader>q`  | Quit window           |
+
 ## Features
 
-### Core Features
+### Core Functionality
 
-- Clean, minimal UI with full transparency support
-- Blazing fast startup with lazy loading
-- Smart plugin management with lazy.nvim
-- Well-organized modular configuration
-- Extensive filetype support with custom settings
-- Format on save with LSP and null-ls
-- Smart workspace detection and project management
-- Enhanced terminal integration with toggleterm
-- Consistent coding style with EditorConfig support
-- Advanced window and buffer management
-- Custom commands and keymaps for improved workflow
-- Automatic session management
+- **Performance**: Optimized for speed with lazy loading
+- **Language Support**: LSP, DAP, and Treesitter integration
+- **UI**: Clean interface with multiple themes and statusline
+- **Git**: Built-in git integration with gitsigns and diffview
+- **Navigation**: Telescope-powered fuzzy finding and file navigation
+- **Terminal**: Integrated terminal with smart window management
+- **Sessions**: Automatic session management
+- **Formatting**: Format on save with LSP and null-ls
 
-### Development Features
+### Theme Collection
 
-- Full LSP integration with Mason for easy server management
-- Intelligent code completion with nvim-cmp and LuaSnip
-- GitHub Copilot integration
-- Advanced syntax highlighting with Treesitter
-- Git integration (gitsigns, diffview, git-conflict)
-- DAP (Debug Adapter Protocol) support for multiple languages
-- Telescope fuzzy finder with smart workspace search
-- Auto pairs and smart indentation
-- Todo comments with workspace searching
-- Project management with sessions
-- Code runner for multiple languages
-- Neorg for note-taking and organization
-- Hex editor support
-- Built-in terminal with smart window management
-
-### UI Elements
-
-- Modern minimalist look with optional transparency
-- Extensive theme collection:
-  - Lackluster (default)
-  - Gruvbox
-  - Tokyo Night
-  - VSCode
-  - Rose Pine
-  - Kanagawa
-  - Material
-  - Ayu
-  - Moonify
-  - Rusty
-- Smart statusline with context awareness
-- Which-key for keybinding discoverability
-- Snacks - minimal notifications
-- Rainbow delimiters and indent guides
-- Satellite scrollbar
-- Barbecue context bar
-- Color preview for CSS/SCSS/LESS
-
-### Language Support
-
-Comprehensive support for:
-
-- Go
-- Rust
-- Python
-- Lua
-- JavaScript/TypeScript
-- C/C++
-- HTML/CSS
-- Markdown
-- And many more...
+- Lackluster (default)
+- Gruvbox
+- Tokyo Night
+- VSCode
+- Rose Pine
+- Kanagawa
+- Material
+- Ayu
+- Moonify
+- Rusty
 
 ## Prerequisites
 
@@ -95,10 +144,9 @@ Comprehensive support for:
 
 - Neovim >= 0.9.0
 - Git
-- A [Nerd Font](https://www.nerdfonts.com/) (JetBrainsMono Nerd Font recommended)
+- Nerd Font recommended
 - Node.js >= 16.x
 - ripgrep (for telescope search)
-- make, gcc (for treesitter)
 
 ### Optional
 
@@ -136,298 +184,115 @@ The configuration will automatically:
 
 If you need to manually install LSP servers:
 
-1. Open Neovim
-2. Run `:Mason`
-3. Press `i` to install desired servers
-
-## Key Bindings
-
-### General Operations
-
-| Keybind      | Description               |
-| ------------ | ------------------------- |
-| `<Space>`    | Leader key                |
-| `<C-s>`      | Save file                 |
-| `<C-d>`      | Duplicate line            |
-| `<C-z>`      | Undo (insert mode)        |
-| `<leader>q`  | Quit file                 |
-| `<leader>wq` | Save and quit             |
-| `<leader>nf` | New file                  |
-| `<leader>nt` | New tab                   |
-| `<ESC>`      | Clear search highlighting |
-| `Y`          | Yank until end of line    |
-
-### Navigation
-
-| Keybind         | Description                  |
-| --------------- | ---------------------------- |
-| `<Tab>/<S-Tab>` | Next/previous buffer         |
-| `<C-o>`         | Jump back in history (zz)    |
-| `<C-i>`         | Jump forward in history (zz) |
-| `n/N`           | Next/prev search result (zz) |
-| `*`             | Search word under cursor     |
-| `<c-w>d`        | Delete buffer                |
-| `[d/]d`         | Previous/next diagnostic     |
-
-### Window Management
-
-| Keybind         | Description             |
-| --------------- | ----------------------- |
-| `<leader>pv`    | Split vertically        |
-| `<leader>ph`    | Split horizontally      |
-| `<leader>pe`    | Equal split size        |
-| `<leader>px`    | Close split             |
-| `<leader>po`    | Keep only current split |
-| `<C-S-H/J/K/L>` | Resize splits           |
-
-### LSP Features
-
-| Keybind      | Description           |
-| ------------ | --------------------- |
-| `gD`         | Go to declaration     |
-| `gd`         | Go to definition      |
-| `gr`         | Go to references      |
-| `gi`         | Go to implementation  |
-| `gy`         | Go to type definition |
-| `K`          | Show hover info       |
-| `gK`         | Show signature help   |
-| `<C-k>`      | Signature help        |
-| `<leader>cr` | Rename symbol         |
-| `<leader>ca` | Code action           |
-| `<leader>cc` | Run codelens          |
-| `<leader>cC` | Refresh codelens      |
-| `<leader>cf` | Format document       |
-| `<leader>cF` | Toggle format on save |
-| `<leader>cl` | Open LSP info         |
-
-### Search & Telescope
-
-| Keybind      | Description           |
-| ------------ | --------------------- |
-| `<leader>fg` | Live grep             |
-| `<leader>fB` | Search in buffer      |
-| `<leader>fd` | Document diagnostics  |
-| `<leader>fD` | Workspace diagnostics |
-| `<leader>fH` | Help pages            |
-| `<leader>fj` | Jump list             |
-| `<leader>fm` | Man pages             |
-| `<leader>fo` | Vim options           |
-| `<leader>fr` | Recent files          |
-| `<leader>fR` | Resume last picker    |
-| `<leader>fs` | Find LSP symbols      |
-| `<leader>fS` | Workspace symbols     |
-| `<leader>fv` | Neovim config files   |
-
-### Git & Find Operations
-
-| Keybind      | Description        |
-| ------------ | ------------------ |
-| `<leader>gs` | Stage hunk         |
-| `<leader>gr` | Reset hunk         |
-| `[h/]h`      | Previous/next hunk |
-| `<leader>gc` | Git commits        |
-| `<leader>gb` | Git branches       |
-| `<leader>gf` | Git files          |
-| `<leader>,`  | Switch buffer      |
-| `<leader>/`  | Live grep          |
-| `<leader>f.` | Find dotfiles      |
-| `<leader>fb` | Find buffers       |
-| `<leader>fc` | Find colorscheme   |
-| `<leader>ff` | Find files         |
-| `<leader>fg` | Find git files     |
-| `<leader>fh` | Find highlights    |
-| `<leader>fk` | Find keymaps       |
-
-### Terminal
-
-| Keybind      | Description              |
-| ------------ | ------------------------ |
-| `<C-t>`      | Toggle floating terminal |
-| `<leader>t`  | Open split terminal      |
-| `<Esc><Esc>` | Exit terminal mode       |
-
 ### Session Management
 
-| Keybind      | Description              |
-| ------------ | ------------------------ |
-| `<leader>ss` | Save session             |
-| `<leader>sl` | List available sessions  |
-| `<leader>sd` | Delete session           |
-| `<leader>sr` | Restore session          |
-| `<leader>sa` | Toggle autosave session  |
-| `<leader>sD` | Disable autosave session |
-| `<leader>sp` | Purge orphaned sessions  |
-
-### Code Operations
-
-| Keybind      | Description        |
-| ------------ | ------------------ |
-| `<leader>r`  | Run file           |
-| `<leader>rq` | Close runner       |
-| `<leader>rt` | Run in new tab     |
-| `<leader>rp` | Run project        |
-| `<A-j>`      | Move line down     |
-| `<A-k>`      | Move line up       |
-| `<A-Up>`     | Move line up       |
-| `<A-Down>`   | Move line down     |
-| `<`          | Unindent selection |
-| `>`          | Indent selection   |
-
-### Debug Operations (DAP)
-
-| Keybind      | Description        |
-| ------------ | ------------------ |
-| `<F5>`       | Continue           |
-| `<leader>dc` | Continue           |
-| `<leader>dd` | DAP commands       |
-| `<leader>dv` | Variables          |
-| `<leader>df` | Test class (Java)  |
-| `<leader>dn` | Test method (Java) |
-
-### Window & Session Management
-
-| Keybind      | Description        |
-| ------------ | ------------------ |
-| `<C-t>`      | Toggle terminal    |
-| `<leader>t`  | Open terminal      |
-| `<Esc><Esc>` | Exit terminal mode |
-| `<leader>ss` | Save session       |
-| `<leader>sl` | List sessions      |
-| `<leader>sr` | Restore session    |
-| `<leader>sd` | Delete session     |
-
-### Plugins & Package Management
-
-| Keybind      | Description         |
-| ------------ | ------------------- |
-| `<leader>pb` | Build plugins       |
-| `<leader>pc` | Clean plugins       |
-| `<leader>ph` | Health check        |
-| `<leader>pl` | Show plugins (Lazy) |
-| `<leader>pp` | Profile plugins     |
-| `<leader>pm` | Show Mason          |
-| `<leader>fp` | Show projects       |
-
-### Comments & IDE Features
-
-| Keybind     | Description             |
-| ----------- | ----------------------- |
-| `<C-_>`     | Toggle line comment     |
-| `<C-/>`     | Toggle line comment     |
-| `<A-A>`     | Toggle block comment    |
-| `<leader>h` | Search and replace word |
-| `<C-e>`     | Accept Copilot          |
-| `<M-[>`     | Previous suggestion     |
-| `<M-]>`     | Next suggestion         |
-| `<C-]>`     | Dismiss suggestion      |
-
-## Project Structure
-
-```
-.
-├── init.lua                 # Entry point
-├── lazy-lock.json          # Plugin version lock file
-├── LICENSE                 # License file
-├── README.md              # Documentation
-├── after/                 # Post-load configurations
-│   ├── ftplugin/         # Filetype-specific settings
-│   ├── plugin/           # Plugin-specific settings
-│   └── queries/          # Custom tree-sitter queries
-├── lua/                   # Main configuration directory
-│   ├── config/           # Core configuration modules
-│   │   ├── autocmds.lua  # Autocommands
-│   │   ├── colors.lua    # Color and theme settings
-│   │   ├── commands.lua  # Custom commands
-│   │   ├── filetypes.lua # Filetype associations
-│   │   ├── icons.lua     # Icon definitions
-│   │   ├── keymaps.lua   # Key mappings
-│   │   ├── lazy.lua      # Plugin manager setup
-│   │   ├── options.lua   # Neovim options
-│   │   ├── terminal.lua  # Terminal settings
-│   │   └── util.lua      # Utility functions
-│   ├── lualine/          # Statusline configurations
-│   │   ├── components/   # Custom statusline components
-│   │   ├── extensions/   # Statusline extensions
-│   │   └── themes/       # Statusline themes
-│   ├── plugins/          # Plugin configurations
-│   │   ├── colors/       # Colorscheme configurations
-│   │   ├── dap/         # Debug adapter configurations
-│   │   ├── lsp/         # LSP configurations
-│   │   └── *.lua        # Individual plugin setups
-│   └── telescope/        # Telescope extensions
-│       └── _extensions/  # Custom telescope extensions
-```
-
-## Configuration
+| Keybind      | Description             | Mode |
+| ------------ | ----------------------- | ---- |
+| `<leader>ss` | Save session            | n    |
+| `<leader>sl` | List sessions           | n    |
+| `<leader>sr` | Restore session         | n    |
+| `<leader>sd` | Delete session          | n    |
+| `<leader>sa` | Toggle autosave         | n    |
+| `<leader>sD` | Disable autosave        | n    |
+| `<leader>sp` | Purge orphaned sessions | n    |
 
 ### Plugin Management
 
-The configuration uses [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management.
+This configuration uses [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management with these features:
 
-1. **Core Plugin Features**:
+- **Lazy Loading**: Plugins load only when needed
+- **Automatic Management**: Install/update with a single command
+- **Health Checks**: Built-in plugin health verification
+- **Reproducible**: Version locking for stability
 
-   - Lazy loading for improved startup time
-   - Automatic plugin installation and updates
-   - Plugin health checking and profiling
-   - Lockfile for reproducible plugin versions
+#### Adding New Plugins
 
-2. **Plugin Commands**:
+1. Create a new file in `lua/plugins/` (e.g., `lua/plugins/myplugin.lua`)
+2. Follow this template:
 
-   - `<leader>pb` - Build plugins
-   - `<leader>pc` - Clean plugins
-   - `<leader>ph` - Health check plugins
-   - `<leader>pl` - Show plugins
-   - `<leader>pp` - Profile plugins
-   - `<leader>ps` - Sync plugins
-   - `<leader>pu` - Update plugins
+```lua
+return {
+  "username/plugin-name",
+  event = "VeryLazy",  -- Optional: lazy-load on event
+  config = function()
+    require("plugin-name").setup({
+      -- plugin configuration
+    })
+  end
+}
+```
 
-3. **Adding New Plugins**:
+#### Plugin Categories
 
-   Add new plugins in `lua/plugins/`:
+- **Core**: Essential plugins for basic functionality
+- **LSP**: Language Server Protocol support
+- **UI**: Interface enhancements and themes
+- **Tools**: Development utilities
+- **Git**: Version control integration
 
-   ```lua
-   return {
-     "username/plugin-name",
-     event = "VeryLazy",  -- Optional: lazy-load on event
-     config = function()
-       require("plugin-name").setup({
-         -- options
-       })
-     end
-   }
-   ```
+## Project Structure
 
-4. **Key Plugin Categories**:
+```text
+~/.config/nvim/
+├── after/                 # Filetype-specific overrides
+├── lua/                   # Lua configuration files
+│   ├── config/           # Core configuration
+│   │   ├── autocmds.lua  # Autocommands
+│   │   ├── colors.lua    # Color scheme settings
+│   │   ├── commands.lua  # Custom commands
+│   │   ├── filetypes.lua # Filetype-specific settings
+│   │   ├── icons.lua     # Icon definitions
+│   │   ├── keymaps.lua   # Key mappings
+│   │   ├── lazy.lua      # Plugin manager setup
+│   │   ├── options.lua   # Editor options
+│   │   ├── terminal.lua  # Terminal configuration
+│   │   └── util.lua     # Utility functions
+│   │
+│   ├── plugins/         # Plugin configurations
+│   │   ├── autopairs.lua  # Auto-pairing
+│   │   ├── barbecue.lua   # Winbar
+│   │   ├── cmp.lua        # Completion
+│   │   ├── colors/        # Color schemes
+│   │   ├── dap/           # Debug Adapter Protocol
+│   │   ├── git/           # Git integration
+│   │   ├── lsp/           # Language Server Protocol
+│   │   ├── telescope.lua  # Fuzzy finder
+│   │   └── ...            # Other plugin configs
+│   │
+│   ├── lualine/        # Status line config
+│   └── telescope/        # Telescope extensions
+│
+├── init.lua            # Entry point
+└── lazy-lock.json       # Plugin versions
+```
 
-   - LSP and Completion:
+## Core Features
 
-     - nvim-lspconfig - Language server configuration
-     - mason.nvim - Package manager for LSP servers
-     - nvim-cmp - Completion engine
-     - none-ls.nvim - Additional formatting and diagnostics
+### LSP Configuration
 
-   - Editor Features:
+Language servers are managed via `mason.nvim`. To install a new LSP server:
 
-     - nvim-treesitter - Better syntax highlighting
-     - telescope.nvim - Fuzzy finder
-     - gitsigns.nvim - Git integration
-     - toggleterm.nvim - Terminal integration
+1. Run `:Mason`
+2. Navigate to the desired language server
+3. Press `i` to install
 
-   - UI Enhancements:
+Custom LSP settings can be added in `lua/plugins/lsp/settings/`. - gitsigns.nvim - Git integration - toggleterm.nvim - Terminal integration
 
-     - lualine.nvim - Status line
-     - nvim-web-devicons - File icons
-     - barbecue.nvim - VS Code-like winbar
-     - indent-blankline.nvim - Indentation guides
+- UI Enhancements:
 
-   - Debugging:
+  - lualine.nvim - Status line
+  - nvim-web-devicons - File icons
+  - barbecue.nvim - VS Code-like winbar
+  - indent-blankline.nvim - Indentation guides
 
-     - nvim-dap - Debug adapter protocol
-     - nvim-dap-ui - UI for debugging
+- Debugging:
 
-   - Language Specific:
-     - rustaceanvim - Enhanced Rust support
-     - nvim-jdtls - Java development
+  - nvim-dap - Debug adapter protocol
+  - nvim-dap-ui - UI for debugging
+
+- Language Specific:
+  - rustaceanvim - Enhanced Rust support
+  - nvim-jdtls - Java development
 
 ### Language Server Protocol (LSP)
 
@@ -451,6 +316,10 @@ The LSP configuration is managed through multiple components:
    - html - HTML
    - jsonls - JSON
    - lua_ls - Lua
+   - tsserver - TypeScript/JavaScript
+     - Inlay hints for types and parameters
+     - Project-aware with `tsconfig.json`/`jsconfig.json`
+     - Smart import resolution
    - pyright - Python
    - ruff - Python
    - taplo - TOML
@@ -469,7 +338,12 @@ The LSP configuration is managed through multiple components:
    - Formatters:
      - `black` - Python
      - `gofmt` - Go
-     - `prettier` - JavaScript/TypeScript/Web
+     - `prettier` - JavaScript/TypeScript/Web (with project-specific config support)
+     - Auto-formats on save
+     - Respects local `.prettierrc` and `package.json` configs
+   - `eslint_d` - Fast ESLint integration for JavaScript/TypeScript
+     - Auto-fix available via code actions
+     - Supports project-specific ESLint configs
      - `stylua` - Lua
      - `shfmt` - Shell scripts
    - Linters:

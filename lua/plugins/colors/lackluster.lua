@@ -39,7 +39,7 @@ return {
 				normal = "none",
 				telescope = "none",
 				menu = "none",
-				popup = "default",
+				popup = "none",
 			},
 
 			tweak_ui = {
