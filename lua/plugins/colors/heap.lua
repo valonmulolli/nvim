@@ -1,0 +1,61 @@
+return {
+  -- 'heap-nvim',
+  -- dir = '~/Dev/themes/heap-nvim',
+  -- lazy = false,
+  -- priority = 1000,
+  -- config = function()
+  --   require('heap').setup({
+  --     -- Enable transparent background (default: false)
+  --     transparent = false,
+  --     -- Set theme variant (default: 'heap')
+  --     -- Available variants: 'heap', 'minima', 'maxima'
+  --     variant = 'heap',
+  --     -- Override specific colors
+  --     colors = {
+  --       -- Example:
+  --       background = '#09090b',
+  --       -- foreground = '#fafafa',
+  --       -- comment = '#8DECB4',
+  --     },
+  --     -- UI tweaks
+  --     ui = {
+  --       -- Add UI tweaks here
+  --       cursorline = true, -- Highlight current line
+  --       sign_column = 'none', -- 'default' or 'none'
+  --       statusline = {
+  --         theme = 'default', -- 'default' or 'minimal'
+  --         overriden_modules = nil,
+  --       },
+  --       tabline = {
+  --         theme = 'default', -- 'default' or 'minimal'
+  --         overriden_modules = nil,
+  --       },
+  --     },
+  --     -- Tweak syntax highlighting
+  --     tweak_syntax = {
+  --       -- Example:
+  --       -- ['@function'] = { fg = '#ff0000' }
+  --     },
+  --     -- Logging configuration
+  --     log = {
+  --       level = 'warn', -- Log level: 'trace', 'debug', 'info', 'warn', 'error', 'off'
+  --       file = nil -- Optional: log file path (e.g., 'heap.log')
+  --     },
+  --     -- Language specific configurations
+  --     languages = {
+  --       -- Enable additional syntax highlighting for specific languages
+  --       -- Example:
+  --       -- lua = true,
+  --       -- javascript = true,
+  --       -- typescript = true,
+  --     }
+  --   })
+  --   -- Set the colorscheme after setup
+  --   vim.cmd('colorscheme heap')
+  --   -- Additional highlight overrides can be added here
+  --   -- Example:
+  --   -- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+  --   -- vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none' })
+  --   -- vim.api.nvim_set_hl(0, 'LineNr', { fg = '#666666' })
+  -- end
+}
