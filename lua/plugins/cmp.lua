@@ -185,15 +185,15 @@ return {
       },
       sources = cmp.config.sources({
         { name = "nvim_lsp", priority = 90 },
-        { name = "luasnip", priority = 80 },
-        { name = "path", option = { trailing_slash = true }, priority = 70 },
+        { name = "luasnip",  priority = 80 },
+        { name = "path",     option = { trailing_slash = true }, priority = 70 },
       }, {
         { name = "buffer", option = search_tabpage, priority = 50 },
-        { name = "spell", priority = 40 },
+        { name = "spell",  priority = 40 },
       }),
       experimental = {
         native_menu = false,
-        ghost_text = false,  -- Disable ghost text completely
+        ghost_text = false, -- Disable ghost text completely
       },
       completion = {
         get_trigger_characters = function(chars)

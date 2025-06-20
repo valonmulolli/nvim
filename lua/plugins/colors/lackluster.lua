@@ -15,8 +15,8 @@ return {
 
 		lackluster.setup({
 			tweak_color = {
-				lack = "default",
-				luster = "default",
+				lack = 'default',
+				luster = 'default',
 				orange = "#ff8c00",
 				yellow = "#DFFF00",
 				green = "#31ffb6",
@@ -43,9 +43,10 @@ return {
 			},
 
 			tweak_ui = {
-				disable_undercurl = true,
-				enable_end_of_buffer = true,
+				disable_undercurl = false,
+				enable_end_of_buffer = false,
 			},
+
 		})
 	end,
 }

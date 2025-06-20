@@ -36,7 +36,7 @@ return {
     exclude = {
       filetypes = {
         "Neogit*",
-        "dashboard",
+        "snacks",
         "dbui",
         "floaterm",
         "fugitive",

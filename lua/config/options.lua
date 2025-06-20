@@ -50,12 +50,10 @@ vim.opt.undofile = true        -- Cache persistent undo
 vim.opt.undolevels = 10000     -- Maximum number of changes that can be undone
 
 -- Popup menu options
-vim.opt.pumblend = 15  -- Value between 0-100
 vim.opt.pumheight = 12 -- Pop-up menu height
 vim.opt.pumwidth = 16  -- Pop-up menu width
 
 -- Set popup menu transparency and highlights
-vim.opt.pumblend = 15
 -- Control vim Spell checking
 vim.opt.spell = true
 vim.opt.spelllang = { "en" }
@@ -187,18 +185,12 @@ vim.opt.fillchars = {
 }
 
 
--- Set transparency
-vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", ctermbg = "NONE" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE", ctermbg = "NONE" })
-vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", ctermbg = "NONE" })
-
-
 -- Netrw specific options
 vim.g.netrw_banner = 0
 vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro"
 vim.g.netrw_liststyle = 3 -- Default to tree view
 vim.g.netrw_localrmdir = "rm -r"
+
 
 -- Options that only apply to neovide GUI
 if vim.g.is_neovide == 1 then
