@@ -20,8 +20,7 @@ return {
     attach_navic = false,
     create_autocmd = false,
     exclude_filetypes = {
-      "",
-      "dashboard",
+      "snacks",
       "git",
       "gitcommit",
       "terminal",

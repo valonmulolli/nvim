@@ -5,6 +5,13 @@
 return {
   settings = {
     Lua = {
+      workspace = {
+        checkThirdParty = false,
+        telemetry = { enable = false },
+        library = {
+          "${3rd}/love2d/library"
+        }
+      },
       diagnostics = {
         enable = true,
         groupSeverity = {
@@ -34,20 +41,18 @@ return {
         unusedLocalExclude = { "_*" },
       },
       format = {
-        enable = false,
+        enable = true,
         defaultConfig = {
-          indent_size = "2",
-          continuation_indent = "2",
-          indent_style = "space",
+          indent_size = "4",
+          continuation_indent = "4",
+          indent_style = "tabs",
           max_line_length = "80",
           quote_style = "double",
           insert_final_newline = "true",
           trim_trailing_whitespace = "true",
         },
       },
-      workspace = {
-        checkThirdParty = false,
-      },
+
     },
   },
 }

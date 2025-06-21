@@ -74,6 +74,14 @@ return {
         ["jdtls"] = function()
           require("plugins/lsp/servers/jdtls")
         end,
+
+        ["gopls"] = function()
+          require("plugins/lsp/servers/gopls")
+        end,
+
+        ["ts_ls"] = function()
+          require("plugins/lsp/servers/ts_ls")
+        end,
       },
     },
   },

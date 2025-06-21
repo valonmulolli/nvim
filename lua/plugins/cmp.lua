@@ -126,7 +126,7 @@ return {
         end,
       },
       mapping = cmp.mapping.preset.insert({
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<CR>"] = cmp.mapping.confirm({ select = true}),
         ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         ["<C-PageUp>"] = cmp.mapping.scroll_docs(-4),
         ["<C-PageDown>"] = cmp.mapping.scroll_docs(4),

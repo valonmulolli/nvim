@@ -23,3 +23,5 @@ return {
     { "F", search_buffer, desc = "Hop buffer" },
   },
 }
+
+-- return {}

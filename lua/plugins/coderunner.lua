@@ -1,42 +1,39 @@
-return
-{
+return {
   "CRAG666/code_runner.nvim",
   event = "VeryLazy",
   config = function()
     require("code_runner").setup {
       filetype = {
-        java = {
-          "cd $dir &&",
-          "javac $fileName &&",
-          "java $fileNameWithoutExt",
-        },
-        javascript = "node",
         c = {
           "cd $dir &&",
-          "gcc $fileName -o",
-          "/tmp/$fileNameWithoutExt &&",
+          "gcc $fileName -o /tmp/$fileNameWithoutExt &&",
           "/tmp/$fileNameWithoutExt &&",
           "rm /tmp/$fileNameWithoutExt",
         },
         cpp = {
           "cd $dir &&",
-          "g++ $fileName",
-          "-o /tmp/$fileNameWithoutExt &&",
+          "g++ $fileName -o /tmp/$fileNameWithoutExt &&",
           "/tmp/$fileNameWithoutExt",
+        },
+        java = {
+          "cd $dir &&",
+          "javac $fileName &&",
+          "java $fileNameWithoutExt",
+        },
+        rust = {
+          "cd $dir &&",
+          "rustc $fileName &&",
+          "./$fileNameWithoutExt"
         },
         go = {
           "cd $dir &&",
           "go run $fileName",
         },
         python = "python -u '$dir/$fileName'",
-        sh = "bash",
-        typescript = "bun",
+        javascript = "node $fileName",
+        typescript = "bun $fileName",
         typescriptreact = "yarn dev$end",
-        rust = {
-          "cd $dir &&",
-          "rustc $fileName &&",
-          "./$fileNameWithoutExt"
-        },
+        lua = "lua $fileName",
       },
     }
   end,

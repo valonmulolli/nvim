@@ -1,6 +1,6 @@
--- Copyright (c) 2023 v470n
--- MIT license, see LICENSE for more details.
--- Lackluster theme for lualine
+-- -- Copyright (c) 2023 v470n
+-- -- MIT license, see LICENSE for more details.
+-- -- Lackluster theme for lualine
 
 local colors = {
     lack    = '#98E4FF',   -- main accent color
