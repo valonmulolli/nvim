@@ -1,5 +1,3 @@
----@type vim.lsp.Config
----@type vim.lsp.Config
 return {
   cmd = {
     "clangd",
@@ -8,6 +6,7 @@ return {
     "--clang-tidy",
     "--completion-style=detailed",
     "--pch-storage=memory",
+    "--query-driver=/usr/bin/gcc,/usr/bin/g++,/usr/bin/clang,/usr/bin/clang++",
   },
 
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },

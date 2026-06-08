@@ -68,7 +68,7 @@ function M.setup()
 
     term = {
       position = "bot",
-      size = 5,
+      size = 50,
       focus = true,
       startinsert = true,
     },

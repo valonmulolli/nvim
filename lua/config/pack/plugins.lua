@@ -1,3 +1,5 @@
+local paths = require("config.paths")
+
 local function gh(repo, opts)
   opts = opts or {}
   opts.src = "https://github.com/" .. repo
@@ -49,9 +51,12 @@ return {
     gh("jake-stewart/multicursor.nvim", { name = "multicursor.nvim", version = "1.0" }),
     gh("folke/which-key.nvim"),
     gh("valonmulolli/heap.nvim", { name = "heap-nvim" }),
-    gh("valonmulolli/retroline.nvim", { name = "retroline.nvim" }),
     gh("valonmulolli/zignite.nvim", { name = "zignite.nvim" }),
     gh("mbbill/undotree", { name = "undotree" }),
+  },
+
+  local_plugins = {
+    { name = "retroline.nvim", path = paths.plugins.retroline },
   },
 
   modules = {
