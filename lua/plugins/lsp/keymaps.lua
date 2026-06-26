@@ -73,10 +73,12 @@ M.initialize_keymaps = function(client, bufnr)
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     { "n",          "gD",         vim.lsp.buf.declaration,     { desc = "Goto declaration" } },
-    { "n",          "gd",         vim.lsp.buf.definition,      { desc = "Goto definition" } },
-    { "n",          "gi",         vim.lsp.buf.implementation,  { desc = "Goto implementation" } },
-    { "n",          "gr",         vim.lsp.buf.references,      { desc = "Goto references" } },
-    { "n",          "gy",         vim.lsp.buf.type_definition, { desc = "Show type definitions" } },
+    { "n",          "gd",         function() Snacks.picker.lsp_definitions() end,      { desc = "Goto definition" } },
+    { "n",          "gi",         function() Snacks.picker.lsp_implementations() end,  { desc = "Goto implementation" } },
+    { "n",          "gr",         function() Snacks.picker.lsp_references() end,       { desc = "Goto references" } },
+    { "n",          "gy",         function() Snacks.picker.lsp_type_definitions() end, { desc = "Show type definitions" } },
+    { "n",          "<leader>ss", function() Snacks.picker.lsp_symbols() end,          { desc = "Buffer outline" } },
+    { "n",          "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Workspace outline" } },
 
     { "i",          "<C-y>",      signature_help_with_border,  { desc = "Signature Help" } },
     { "n",          "K",          hover_with_border,           { desc = "Show hover" } },

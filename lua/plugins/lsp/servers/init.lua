@@ -48,7 +48,6 @@ M.enable = {
   "hyprls",
   "wgsl_analyzer",
   "ols",
-  "eslint",
 }
 
 ---@type table<string, string>
@@ -80,7 +79,6 @@ M.executables = {
   hyprls = "hyprls",
   wgsl_analyzer = "wgsl-analyzer",
   ols = "ols",
-  eslint = "vscode-eslint-language-server",
 }
 
 ---@return plugins.lsp.servers.Module

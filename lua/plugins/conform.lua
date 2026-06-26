@@ -1,6 +1,6 @@
 ---@return nil
 local function conform_format()
-  require("conform").format({ async = true, lsp_fallback = false })
+  require("conform").format({ async = true, lsp_fallback = true })
 end
 
 ---@class plugins.ConformOpts
@@ -59,7 +59,7 @@ local opts = {
     end
     return {
       timeout_ms = 500,
-      lsp_fallback = false,
+      lsp_fallback = true,
     }
   end,
   notify_on_error = true,
