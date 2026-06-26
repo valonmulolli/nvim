@@ -227,14 +227,14 @@ local opts = {
     zen = { enabled = false },
     input = { enabled = true },
     quickfile = { enabled = false },
-    scroll = { enabled = false },
-    statuscolumn = { enabled = false }, -- Disabled: use native line numbers
+    scroll = { enabled = true },
+    statuscolumn = { enabled = true },
     words = { enabled = false },
     layout = { enabled = true },
     debug = { enabled = false },
     indent = { enabled = false },
     toggle = { enabled = true },
-    winbar = { enabled = false },
+    winbar = { enabled = true },
 
     image = {
       enabled = true,

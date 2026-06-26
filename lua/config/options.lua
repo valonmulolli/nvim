@@ -1,5 +1,6 @@
 -- UI
 vim.g.border = "rounded"
+vim.g.c_syntax_for_h = 1
 vim.opt.winborder = "rounded"
 
 vim.opt.termguicolors = true

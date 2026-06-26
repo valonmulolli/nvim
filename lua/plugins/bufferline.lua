@@ -33,7 +33,7 @@ local opts = {
             ---@return string
             diagnostics_indicator = function(count, level)
                 ---@type string
-                local icon = level:match("error") and " " or " "
+                local icon = level:match("error") and "" or ""
                 return " " .. icon .. count
             end,
             offsets = {

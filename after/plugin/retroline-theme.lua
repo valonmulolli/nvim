@@ -112,7 +112,6 @@ local function apply_retroline_theme()
 end
 
 apply_retroline_theme()
-vim.schedule(apply_retroline_theme)
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()

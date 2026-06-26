@@ -93,3 +93,19 @@ util.register_keymaps(defaults, {
   { "t", "<Esc>",      "<C-\\><C-n>",        { desc = "Exit terminal mode" } },
 
 })
+
+-- Tabout: Press Tab to jump out of brackets/braces/quotes in Insert mode
+vim.keymap.set("i", "<Tab>", function()
+  local line = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  local next_char = line:sub(col + 1, col + 1)
+  local closers = { ")", "]", "}", ">", "'", '"', "`", ";" }
+
+  for _, char in ipairs(closers) do
+    if next_char == char then
+      return "<Right>"
+    end
+  end
+  return "<Tab>"
+end, { expr = true, replace_keycodes = true, silent = true, desc = "Tabout" })
+
