@@ -1,6 +1,17 @@
-# Neovim Configuration
+<p align="center">
+  <h1 align="center">Neovim Configuration</h1>
+</p>
 
-A standalone Neovim configuration built with `vim.pack`, focused on modern development workflows and productivity.
+<p align="center">
+  <img src="https://img.shields.io/badge/Neovim-0.12%2B-green?style=flat&logo=neovim" alt="Neovim 0.12+">
+  <img src="https://img.shields.io/github/license/valonmulolli/nvim?style=flat" alt="MIT License">
+  <img src="https://img.shields.io/github/last-commit/valonmulolli/nvim?style=flat" alt="Last commit">
+  <img src="https://img.shields.io/github/repo-size/valonmulolli/nvim?style=flat" alt="Repo size">
+</p>
+
+<p align="center">
+  A standalone Neovim configuration built with <code>vim.pack</code>, focused on modern development workflows and productivity.
+</p>
 
 ## Structure
 
@@ -265,7 +276,6 @@ Leader key: `<Space>`
 | `<Leader>rf` | n    | Run file               |
 | `<Leader>rb` | n    | Select build command   |
 | `<Leader>rl` | n    | Run live/watch command |
-| `<Leader>rp` | n    | Run project            |
 | `<Leader>rt` | n    | Run file in tab        |
 | `<Leader>rv` | n    | Run file in vsplit     |
 | `<Leader>rh` | n    | Run file in split      |
@@ -276,7 +286,6 @@ Leader key: `<Space>`
 
 | Key          | Mode | Description |
 | ------------ | ---- | ----------- |
-| `<Leader>li` | n    | LÖVE menu   |
 | `<Leader>ll` | n    | Run LÖVE    |
 | `<Leader>ls` | n    | Stop LÖVE   |
 
@@ -359,7 +368,7 @@ Powered by [retroline.nvim](https://github.com/valonmulolli/retroline.nvim). Con
 - Diagnostics shown inline and in lists; detailed float on demand with `<Leader>xd`
 - Completion uses `blink.cmp` with LSP + buffer sources and filetype-specific tuning
 - Keyword items boosted in code-heavy filetypes
-- Formatting handled by Conform with `lsp_fallback = false`
+- Formatting handled by Conform with `lsp_fallback = true`
 
 ## Languages Supported
 
@@ -367,7 +376,7 @@ Powered by [retroline.nvim](https://github.com/valonmulolli/retroline.nvim). Con
 Astro, Bash, C, CSS, Dockerfile, Go, HTML, JavaScript/JSX, JSON/JSONC, Just, Lua, Markdown, Odin, Python, Regex, Rust, TOML, TypeScript/TSX, Vim, YAML, Zig
 
 **LSP servers:**
-C/C++ (clangd), Go (gopls), Java (jdtls), Lua (lua_ls), Odin (ols), Python (pyright), QML (qmlls), Rust (rust-analyzer), Zig (zls), Astro, Bash, CSS/HTML, Emmet, Fortran, Hyprlang, JSON, LaTeX (texlab), Marksman, Prisma, SQL, Tailwind, Templ, Tinymist/Typst, WGSL, YAML, ESLint
+C/C++ (clangd), Go (gopls), Java (jdtls), Lua (lua_ls), Odin (ols), Python (pyright), QML (qmlls), Rust (rust-analyzer), Zig (zls), Astro, Bash, CSS/HTML, Emmet, Fortran, Hyprlang, JSON, LaTeX (texlab), Marksman, Prisma, SQL, Tailwind, Templ, Tinymist/Typst, WGSL, YAML
 
 **Code runners (Zignite):**
 C, C++, Rust, Go, Zig, Java, Python, JavaScript/TypeScript, Lua, Haskell, Odin, Fortran, Shell
@@ -406,9 +415,20 @@ git clone https://github.com/valonmulolli/nvim ~/.config/nvim
 # (Optional) Create lua/config/local.lua for local overrides
 # See lua/config/paths.lua for fallback defaults
 
-# Start Neovim (plugins will auto-install)
+# Start Neovim
 nvim
 ```
+
+## First Run
+
+On first launch, `vim.pack` automatically:
+
+1. Installs all remote plugins from GitHub
+2. Runs post-install builds (Mason update, Treesitter parsers, Markdown preview deps)
+3. Initializes LSP servers via Mason (installs any missing servers on next startup)
+4. Applies the heap.nvim colorscheme
+
+Plugins are locked via `nvim-pack-lock.json` for reproducible installs. Run `:PackUpdate` to update all plugins, or `:PackStatus` to check current versions.
 
 ## Requirements
 
