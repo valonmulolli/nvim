@@ -63,6 +63,23 @@ function M.add_local_paths(entries)
       if vim.fn.isdirectory(after) == 1 then
         vim.opt.rtp:append(after)
       end
+
+      if entry.build then
+        if type(entry.build) == "function" then
+          pcall(entry.build, entry.path)
+        else
+          vim.system({ vim.o.shell, vim.o.shellcmdflag, entry.build }, { cwd = entry.path }, function(obj)
+            if obj.code ~= 0 then
+              vim.schedule(function()
+                vim.notify(
+                  string.format("Build failed for %s:\n%s", entry.name, (obj.stderr ~= "" and obj.stderr or obj.stdout)),
+                  vim.log.levels.ERROR
+                )
+              end)
+            end
+          end)
+        end
+      end
     end
   end
 end

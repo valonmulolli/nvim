@@ -34,7 +34,6 @@ return {
     gh("folke/snacks.nvim"),
     gh("L3MON4D3/LuaSnip", { name = "LuaSnip" }),
     gh("folke/todo-comments.nvim"),
-    gh("tribela/transparent.nvim"),
     gh("nvim-treesitter/nvim-treesitter"),
     gh("windwp/nvim-ts-autotag"),
     gh("JoosepAlviste/nvim-ts-context-commentstring"),
@@ -52,12 +51,11 @@ return {
     gh("folke/which-key.nvim"),
     gh("valonmulolli/heap.nvim", { name = "heap-nvim" }),
     gh("valonmulolli/zignite.nvim", { name = "zignite.nvim" }),
+    gh("valonmulolli/retroline.nvim"),
     gh("mbbill/undotree", { name = "undotree" }),
   },
 
-  local_plugins = {
-    { name = "retroline.nvim", path = paths.plugins.retroline },
-  },
+  local_plugins = {},
 
   modules = {
     "plugins.heap",
@@ -73,7 +71,6 @@ return {
     "plugins.bufferline",
     "plugins.session",
     "plugins.todo-comments",
-    "plugins.transparent",
     "plugins.conform",
     "plugins.database",
     "plugins.markdown",

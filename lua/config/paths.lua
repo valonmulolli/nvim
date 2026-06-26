@@ -4,8 +4,10 @@ if ok then
 end
 
 local home = vim.env.HOME or vim.fn.expand("~")
+local dev_root = vim.fs.joinpath(home, "Dev")
 return {
   home = home,
-  dev_root = vim.fs.joinpath(home, "Dev"),
+  dev_root = dev_root,
   sql_root = vim.fs.joinpath(home, "Sql"),
+  plugins = {},
 }
