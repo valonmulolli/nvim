@@ -12,7 +12,7 @@ local M = {}
 local opts = {
   keymap = {
     preset = "none",
-    ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+    -- ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
     ["<C-f>"] = { "hide" },
     ["<CR>"] = { "accept", "fallback" },
     ["<Tab>"] = {
@@ -80,7 +80,6 @@ local opts = {
         end
       end
 
-
       return items
     end,
     providers = {
@@ -134,7 +133,7 @@ local opts = {
     },
     accept = {
       auto_brackets = {
-        enabled = true,
+        enabled = false,
       },
     },
     ghost_text = {

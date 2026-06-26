@@ -3,7 +3,7 @@ local M = {}
 ---@return string|nil
 local function sidekick_nes_jump_or_apply()
   if not require("sidekick").nes_jump_or_apply() then
-    return "<Tab>"
+    return ""
   end
   return nil
 end
