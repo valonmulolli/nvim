@@ -106,7 +106,7 @@ function M.setup()
     command = "codelldb",
     name = "codelldb",
     executable = {
-      command = "$HOME/.local/share/nvim/mason/bin/codelldb",
+      command = vim.env.HOME .. "/.local/share/nvim/mason/bin/codelldb",
       args = { "--port", "${port}" },
     },
   }
@@ -123,6 +123,7 @@ function M.setup()
   }
 
   dap.configurations.cpp = dap.configurations.c
+  dap.configurations.zig = dap.configurations.c
 
   dap.listeners.before.attach.dapui_config = function()
     dapui.open()
