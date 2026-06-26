@@ -2,7 +2,6 @@ local M = {}
 
 ---@return nil
 local function toggle_undotree()
-  vim.cmd.packadd("undotree")
   vim.cmd.Undotree()
 end
 

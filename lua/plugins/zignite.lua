@@ -27,7 +27,6 @@ function M.setup()
       odin = true,
       c_cpp_make = true,
       js_package_scripts = true,
-      java_kotlin_project = true,
       bazel_project = true,
     },
 

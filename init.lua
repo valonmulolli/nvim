@@ -9,25 +9,6 @@ if vim.fn.isdirectory(mason_bin) == 1 and not vim.env.PATH:find(mason_bin, 1, tr
   vim.env.PATH = mason_bin .. ":" .. vim.env.PATH
 end
 
--- Keep LSP log from growing unbounded between sessions.
-do
-  ---@type string
-  local log_path = vim.fn.stdpath("state") .. "/lsp.log"
-  ---@type integer
-  local max_bytes = 20 * 1024 * 1024 -- 20 MB
-  ---@type table<string, any>|nil
-  local uv = vim.uv or vim.loop
-  ---@type table<string, any>|nil
-  local stat = uv and uv.fs_stat(log_path) or nil
-  if stat and stat.size and stat.size > max_bytes then
-    ---@type boolean, userdata|nil
-    local ok, fh = pcall(io.open, log_path, "w")
-    if ok and fh then
-      fh:close()
-    end
-  end
-end
-
 -- Load options FIRST (termguicolors, etc.)
 require("config.options")
 
@@ -47,3 +28,5 @@ util.setup_tmux_mode()
 
 -- Apply colorscheme
 vim.cmd.colorscheme("heap")
+
+

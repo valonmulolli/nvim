@@ -1,15 +1,3 @@
--- local cmd_wrapper = function(cmd)
---   return function()
---     local action = (cmd):gsub("Session", "")
---     local cwd = vim.fn.getcwd()
---     vim.notify(("%s session: %s"):format(action, cwd), 2, {})
---     vim.cmd(cmd)
---   end
--- end
-
--- local delete_session = cmd_wrapper("SessionDelete")
--- local save_session = cmd_wrapper("SessionSave")
-
 local M = {}
 local paths = require("config.paths")
 
