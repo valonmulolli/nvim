@@ -161,6 +161,38 @@ end
 local term_buf = nil
 ---@type integer|nil
 local term_win = nil
+---@type string
+local term_direction = "botright vsplit"
+
+---@param direction string|nil
+---@return nil
+local function open_terminal(direction)
+  direction = direction or term_direction
+  term_direction = direction
+
+  -- Create terminal buffer if it doesn't exist or is invalid
+  if not term_buf or not vim.api.nvim_buf_is_valid(term_buf) then
+    term_buf = vim.api.nvim_create_buf(false, true)
+  end
+
+  -- Open the terminal window
+  vim.cmd(direction)
+  term_win = vim.api.nvim_get_current_win()
+  vim.api.nvim_win_set_buf(term_win, term_buf)
+
+  -- Optimize terminal window appearance
+  vim.wo[term_win].number = false
+  vim.wo[term_win].relativenumber = false
+  vim.wo[term_win].signcolumn = "no"
+  vim.wo[term_win].winblend = 0
+
+  -- Start terminal if buffer is empty
+  if vim.bo[term_buf].buftype ~= "terminal" then
+    vim.fn.jobstart(vim.o.shell, { term = true })
+  end
+
+  vim.cmd("startinsert")
+end
 
 ---@return nil
 function M.toggle_terminal()
@@ -168,29 +200,18 @@ function M.toggle_terminal()
     vim.api.nvim_win_hide(term_win)
     term_win = nil
   else
-    -- Create terminal buffer if it doesn't exist or is invalid
-    if not term_buf or not vim.api.nvim_buf_is_valid(term_buf) then
-      term_buf = vim.api.nvim_create_buf(false, true)
-    end
-
-    -- Open the terminal window (split at bottom)
-    vim.cmd("botright split")
-    term_win = vim.api.nvim_get_current_win()
-    vim.api.nvim_win_set_buf(term_win, term_buf)
-
-    -- Optimize terminal window appearance
-    vim.wo[term_win].number = false
-    vim.wo[term_win].relativenumber = false
-    vim.wo[term_win].signcolumn = "no"
-    vim.wo[term_win].winblend = 0
-
-    -- Start terminal if buffer is empty
-    if vim.bo[term_buf].buftype ~= "terminal" then
-      vim.fn.jobstart(vim.o.shell, { term = true })
-    end
-
-    vim.cmd("startinsert")
+    open_terminal()
   end
+end
+
+---@return nil
+function M.toggle_terminal_vertical()
+  open_terminal("botright vsplit")
+end
+
+---@return nil
+function M.toggle_terminal_horizontal()
+  open_terminal("botright split")
 end
 
 ---@return config.UtilModule

@@ -217,12 +217,13 @@ Leader key: `<Space>`
 
 ### Terminal
 
-| Key          | Mode | Description        |
-| ------------ | ---- | ------------------ |
-| `<Leader>tt` | n    | Toggle terminal    |
-| `<C-/>`      | n, t | Toggle terminal    |
-| `<C-_>`      | n, t | Toggle terminal    |
-| `<Esc>`      | t    | Exit terminal mode |
+| Key          | Mode | Description         |
+| ------------ | ---- | ------------------- |
+| `<Leader>tv` | n    | Terminal vertical   |
+| `<Leader>th` | n    | Terminal horizontal |
+| `<C-/>`      | n, t | Toggle terminal     |
+| `<C-_>`      | n, t | Toggle terminal     |
+| `<Esc>`      | t    | Exit terminal mode  |
 
 ### Database (Dadbod UI)
 

@@ -84,7 +84,8 @@ util.register_keymaps(defaults, {
   { "v", "<leader>/",  "gc",                 { remap = true, desc = "Toggle Comment" } },
 
   -- Native terminal toggle
-  { "n", "<leader>tt",  util.toggle_terminal, { desc = "Toggle Terminal" } },
+  { "n", "<leader>tv",  util.toggle_terminal_vertical,   { desc = "Terminal Vertical" } },
+  { "n", "<leader>th",  util.toggle_terminal_horizontal, { desc = "Terminal Horizontal" } },
   { "n", "<C-/>",      util.toggle_terminal, { desc = "Toggle Terminal" } },
   { "n", "<C-_>",      util.toggle_terminal, { desc = "Toggle Terminal" } },
   { "t", "<C-/>",      util.toggle_terminal, { desc = "Toggle Terminal" } },
