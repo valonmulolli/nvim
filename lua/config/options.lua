@@ -1,7 +1,6 @@
 -- UI
 vim.g.border = "rounded"
 vim.g.c_syntax_for_h = 1
-vim.opt.winborder = "rounded"
 
 vim.opt.termguicolors = true
 vim.opt.number = true
@@ -29,7 +28,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.shiftround = true
 vim.opt.autoindent = true
-vim.opt.smartindent = true
+vim.opt.smartindent = false
 vim.opt.cindent = false
 
 -- Files, search, and windows
@@ -52,9 +51,7 @@ vim.opt.updatetime = 250
 
 -- Completion and clipboard
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
-vim.opt.pumborder = "rounded"
 vim.opt.pumheight = 12
-vim.opt.pummaxwidth = 60
 vim.opt.pumwidth = 16
 vim.opt.clipboard = { "unnamed", "unnamedplus" }
 

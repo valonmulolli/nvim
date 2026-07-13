@@ -188,7 +188,7 @@ local function open_terminal(direction)
 
   -- Start terminal if buffer is empty
   if vim.bo[term_buf].buftype ~= "terminal" then
-    vim.fn.jobstart(vim.o.shell, { term = true })
+    vim.fn.termopen(vim.o.shell)
   end
 
   vim.cmd("startinsert")

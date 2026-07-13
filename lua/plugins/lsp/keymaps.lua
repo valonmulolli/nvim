@@ -77,8 +77,8 @@ M.initialize_keymaps = function(client, bufnr)
     { "n",          "gi",         function() Snacks.picker.lsp_implementations() end,  { desc = "Goto implementation" } },
     { "n",          "gr",         function() Snacks.picker.lsp_references() end,       { desc = "Goto references" } },
     { "n",          "gy",         function() Snacks.picker.lsp_type_definitions() end, { desc = "Show type definitions" } },
-    { "n",          "<leader>ss", function() Snacks.picker.lsp_symbols() end,          { desc = "Buffer outline" } },
-    { "n",          "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Workspace outline" } },
+    { "n",          "<leader>cs", function() Snacks.picker.lsp_symbols() end,          { desc = "Buffer outline" } },
+    { "n",          "<leader>cS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Workspace outline" } },
 
     { "i",          "<C-y>",      signature_help_with_border,  { desc = "Signature Help" } },
     { "n",          "K",          hover_with_border,           { desc = "Show hover" } },

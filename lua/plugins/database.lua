@@ -9,6 +9,9 @@ M.keys = {
 }
 
 function M.init()
+  if vim.fn.isdirectory(paths.sql_root) == 0 then
+    vim.fn.mkdir(paths.sql_root, "p")
+  end
   vim.g.db_ui_save_location = paths.sql_root
   vim.g.db_ui_show_database_icon = true
   vim.g.db_ui_tmp_query_location = paths.sql_root

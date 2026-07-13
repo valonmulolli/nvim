@@ -19,9 +19,6 @@ util.register_keymaps(defaults, {
   -- Duplicate line
   { "n", "<C-S-d>",   "Yp" }, -- Alt shifted to Control+Shift-D for consistency
 
-  -- Join lines while keeping cursor position
-  { "n", "J",         "mzJ`z" },
-
   -- Search and replace
   { "n", "<leader>h", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]] },
 

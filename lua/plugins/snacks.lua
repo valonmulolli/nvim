@@ -228,7 +228,7 @@ local opts = {
     input = { enabled = true },
     quickfile = { enabled = false },
     scroll = { enabled = true },
-    statuscolumn = { enabled = true },
+    statuscolumn = { enabled = false },
     words = { enabled = false },
     layout = { enabled = true },
     debug = { enabled = false },

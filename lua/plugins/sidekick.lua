@@ -55,7 +55,7 @@ end
 
 ---@return nil
 local function sidekick_toggle_claude()
-  require("sidekick.cli").toggle({ name = "claude", focus = true })
+  require("sidekick.cli").toggle({ name = "cf", focus = true })
 end
 
 ---@return nil
@@ -100,7 +100,7 @@ local opts = {
         env = { OPENCODE_THEME = "system" },
       },
       kilo = { cmd = { "kilo" } },
-      claude = { cmd = { "claude" } },
+      claude = { cmd = { "cf" } },
       gemini = { cmd = { "gemini" } },
       codex = { cmd = { "codex", "--enable", "web_search_request" } },
     },
@@ -138,7 +138,7 @@ local opts = {
 M.keys = {
   -- Tab: Navigate/apply next edit suggestions
   {
-    "<tab>",
+    "<leader>an",
     sidekick_nes_jump_or_apply,
     expr = true,
     mode = { "n" },
@@ -209,7 +209,7 @@ M.keys = {
 
   -- NES controls
   {
-    "<leader>an",
+    "<leader>aN",
     sidekick_request_suggestions,
     desc = "Sidekick: Request New Suggestions",
   },

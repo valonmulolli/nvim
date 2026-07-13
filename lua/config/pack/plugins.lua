@@ -50,12 +50,13 @@ return {
     gh("jake-stewart/multicursor.nvim", { name = "multicursor.nvim", version = "1.0" }),
     gh("folke/which-key.nvim"),
     gh("valonmulolli/heap.nvim", { name = "heap-nvim" }),
-    gh("valonmulolli/zignite.nvim", { name = "zignite.nvim" }),
     gh("valonmulolli/retroline.nvim"),
     gh("mbbill/undotree", { name = "undotree" }),
   },
 
-  local_plugins = {},
+  local_plugins = {
+    { name = "zignite.nvim", path = paths.plugins.zignite, build = "cd zig && zig build -Doptimize=ReleaseFast" },
+  },
 
   modules = {
     "plugins.heap",
@@ -89,6 +90,5 @@ return {
     ["markdown-preview.nvim"] = "cd app && bun install",
     ["mason.nvim"] = ":MasonUpdate",
     ["nvim-treesitter"] = ":TSUpdate",
-    ["zignite.nvim"] = "cd zig && zig build -Doptimize=ReleaseFast",
   },
 }

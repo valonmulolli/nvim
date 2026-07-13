@@ -22,8 +22,8 @@ local M = {}
 M.keys = {
   { "[t", todo_jump_prev, desc = "Previous todo comment" },
   { "]t", todo_jump_next, desc = "Next todo comment" },
-  { "<leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
-  { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+  { "<leader>fT", function() Snacks.picker.todo({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
+  { "<leader>ft", function() Snacks.picker.todo() end, desc = "Todo" },
   { "<leader>xT", "<cmd>TodoQuickFix keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Quickfix)" },
   { "<leader>xt", "<cmd>TodoQuickFix<cr>", desc = "Todo (Quickfix)" },
 }

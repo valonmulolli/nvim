@@ -22,8 +22,8 @@ M.keys = {
 ---@type plugins.ConformOpts
 local opts = {
   formatters_by_ft = {
-    c = { "clang_format" },
-    cpp = { "clang_format" },
+    c = { "clang-format" },
+    cpp = { "clang-format" },
     rust = { "rustfmt" },
     zig = { "zigfmt" },
     go = { "goimports", "gofmt" },

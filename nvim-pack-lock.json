@@ -141,6 +141,10 @@
       "rev": "e2ba5ee1ca9b74208709fe9d7314b8aa753b26a7",
       "src": "https://github.com/razak17/tailwind-fold.nvim"
     },
+    "telescope.nvim": {
+      "rev": "427b576c16792edad01a92b89721d923c19ad60f",
+      "src": "https://github.com/nvim-telescope/telescope.nvim"
+    },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
       "src": "https://github.com/folke/todo-comments.nvim"

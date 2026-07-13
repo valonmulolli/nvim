@@ -9,5 +9,7 @@ return {
   home = home,
   dev_root = dev_root,
   sql_root = vim.fs.joinpath(home, "Sql"),
-  plugins = {},
+  plugins = {
+    zignite = vim.fs.joinpath(dev_root, "work", "zignite.nvim"),
+  },
 }

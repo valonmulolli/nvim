@@ -92,7 +92,7 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.HINT] = "DiagnosticLineNrHint",
     },
   },
-  underline = { severity = vim.diagnostic.severity.ERROR },
+  underline = { severity = { min = vim.diagnostic.severity.WARN } },
   update_in_insert = false,
   severity_sort = true,
   jump = {
@@ -115,14 +115,20 @@ vim.diagnostic.config({
     header = { "󰠭 Diagnostics:", "Label" },
     prefix = float_prefix,
     scope = "cursor",
-    source = "if_many",
+    source = "always",
   },
-  virtual_text = false,
-  virtual_lines = {
-    current_line = true,
-    severity = { min = vim.diagnostic.severity.ERROR },
+  virtual_text = {
+    severity = { min = vim.diagnostic.severity.WARN },
+    spacing = 4,
+    prefix = function(diagnostic)
+      local severity_name = diagnostic.severity
+        and (vim.diagnostic.severity[diagnostic.severity] or ""):lower():gsub("^%l", string.upper)
+        or "Error"
+      return icons.diagnostics[severity_name] or "●"
+    end,
     format = virtual_text_format,
   },
+  virtual_lines = false,
 })
 
 -- Custom highlights for line numbers

@@ -37,7 +37,7 @@ local function toggle_search_register(ev)
     vim.fn.setreg("/", "")
     return
   end
-  vim.fn.setreg("/", vim.b[last_search_key])
+  vim.fn.setreg("/", vim.b[last_search_key] or "")
 end
 
 ---@param _ev vim.api.keyset.create_autocmd.callback_args
@@ -78,7 +78,7 @@ local function setup_quick_close(ev)
   end
 end
 
-autocmd({ "BufEnter", "WinLeave", "FocusLost", "VimSuspend" }, {
+autocmd({ "FocusLost", "VimSuspend" }, {
   desc = "Leave insert or replace mode on focus loss",
   group = group("FocusLostStopInsert"),
   pattern = "*",
@@ -122,12 +122,6 @@ autocmd({ "BufEnter", "FileType" }, {
   callback = disable_auto_comment,
 })
 
-autocmd("FileType", {
-  desc = "Open help and man pages in a dedicated top split",
-  group = group("HelpPageSplit"),
-  pattern = { "help", "man" },
-  command = "wincmd K | resize 20",
-})
 
 autocmd("BufEnter", {
   desc = "Enable lazyredraw for buffers with lots of lines",

@@ -101,10 +101,8 @@ function M.setup()
   end
 
   dap.adapters.codelldb = {
-    type = "executable",
+    type = "server",
     port = "${port}",
-    command = "codelldb",
-    name = "codelldb",
     executable = {
       command = vim.env.HOME .. "/.local/share/nvim/mason/bin/codelldb",
       args = { "--port", "${port}" },

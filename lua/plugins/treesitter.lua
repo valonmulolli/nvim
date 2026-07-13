@@ -21,18 +21,6 @@ local M = {}
 
 ---@type plugins.TreesitterOpts
 local opts = {
-  ---@param _lang string
-  ---@param buf integer
-  ---@return boolean|nil
-  disable = function(_lang, buf)
-    ---@type integer
-    local max_filesize = 100 * 1024 -- 100 KB
-    ---@type boolean, table<string, any>|nil
-    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-    if ok and stats and stats.size > max_filesize then
-      return true
-    end
-  end,
   ensure_installed = {
     "astro",
     "bash",
@@ -71,7 +59,16 @@ local opts = {
   ignore_install = {},
   auto_install = true,
   autotag = { enable = true },
-  highlight = { enable = true },
+  highlight = {
+    enable = true,
+    disable = function(_lang, buf)
+      local max_filesize = 100 * 1024 -- 100 KB
+      local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
+      if ok and stats and stats.size > max_filesize then
+        return true
+      end
+    end,
+  },
   indent = {
     enable = true,
     disable = { "yaml", "odin" },
