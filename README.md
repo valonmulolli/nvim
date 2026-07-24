@@ -125,7 +125,6 @@ Leader key: `<Space>`
 | `<Leader>fb` | n    | Find buffers              |
 | `<Leader>fp` | n    | Projects                  |
 | `<Leader>e`  | n    | File explorer             |
-| `<Leader>.`  | n    | Toggle scratchpad         |
 | `<Leader>cn` | n    | Notification history      |
 | `<Leader>xx` | n    | Diagnostics picker        |
 | `<Leader>xX` | n    | Buffer diagnostics picker |

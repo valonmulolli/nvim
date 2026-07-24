@@ -31,11 +31,6 @@ local function snacks_picker_diagnostics_buffer()
 end
 
 ---@return nil
-local function snacks_toggle_scratch()
-  Snacks.scratch()
-end
-
----@return nil
 local function snacks_picker_projects()
   Snacks.picker.projects({
     dev = { paths.dev_root }, -- Your main dev folder
@@ -103,6 +98,8 @@ local opts = {
     explorer = {
       trash = false,
     },
+
+    scratch = { enabled = false },
 
     -- ====================
     -- Dashboard setup
@@ -284,11 +281,7 @@ M.keys = {
       snacks_picker_diagnostics_buffer,
       desc = "Buffer Diagnostics",
     },
-    {
-      "<leader>ns",
-      snacks_toggle_scratch,
-      desc = "New Scratch",
-    },
+
     {
       "<leader>fp",
       snacks_picker_projects,
