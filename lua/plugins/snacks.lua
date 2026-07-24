@@ -285,9 +285,9 @@ M.keys = {
       desc = "Buffer Diagnostics",
     },
     {
-      "<leader>.",
+      "<leader>ns",
       snacks_toggle_scratch,
-      desc = "Toggle Scratchpad",
+      desc = "New Scratch",
     },
     {
       "<leader>fp",
