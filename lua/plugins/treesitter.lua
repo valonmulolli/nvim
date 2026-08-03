@@ -58,7 +58,6 @@ local opts = {
   },
   ignore_install = {},
   auto_install = true,
-  autotag = { enable = true },
   highlight = {
     enable = true,
     disable = function(_lang, buf)
@@ -116,6 +115,37 @@ local opts = {
   },
 }
 
+local function apply_capture_fallbacks()
+  local fallbacks = {
+    ["@keyword.modifier"] = "@keyword",
+    ["@keyword.directive"] = "@keyword",
+    ["@keyword.import"] = "@keyword",
+    ["@number.float"] = "@number",
+  }
+
+  for capture, fallback in pairs(fallbacks) do
+    if vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = capture, link = true })) then
+      vim.api.nvim_set_hl(0, capture, { link = fallback })
+    end
+  end
+end
+
+local function apply_rainbow_highlights()
+  local links = {
+    RainbowDelimiterRed = "DiagnosticError",
+    RainbowDelimiterOrange = "Function",
+    RainbowDelimiterYellow = "Number",
+    RainbowDelimiterGreen = "String",
+    RainbowDelimiterCyan = "Type",
+    RainbowDelimiterBlue = "Special",
+    RainbowDelimiterViolet = "Statement",
+  }
+
+  for group, link in pairs(links) do
+    vim.api.nvim_set_hl(0, group, { link = link })
+  end
+end
+
 function M.init()
   vim.api.nvim_set_hl(0, "TreesitterContext", { link = "Normal", default = true })
   vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { link = "CursorLineNr", default = true })
@@ -129,6 +159,33 @@ function M.init()
 end
 
 function M.setup()
+  require("nvim-ts-autotag").setup()
+  apply_capture_fallbacks()
+  apply_rainbow_highlights()
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    group = vim.api.nvim_create_augroup("TreesitterCaptureFallbacks", { clear = true }),
+    callback = function()
+      apply_capture_fallbacks()
+      apply_rainbow_highlights()
+    end,
+  })
+
+  -- nvim-ts-autotag assumes a parser always exists; keep typing safe during installs.
+  local autotag_internal = require("nvim-ts-autotag.internal")
+  if not autotag_internal._parser_guarded then
+    for _, name in ipairs({ "close_tag", "close_slash_tag" }) do
+      local close = autotag_internal[name]
+      autotag_internal[name] = function(...)
+        local ok, parser = pcall(vim.treesitter.get_parser)
+        if not ok or not parser then
+          return
+        end
+        return close(...)
+      end
+    end
+    autotag_internal._parser_guarded = true
+  end
+
   require("ts_context_commentstring").setup({
     enable_autocmd = false,
     languages = {},
@@ -146,6 +203,28 @@ function M.setup()
     if ts_ok and ts then
       ts.setup(opts)
     end
+  end
+
+  vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("TreesitterHighlight", { clear = true }),
+    callback = function(args)
+      local filetype = vim.bo[args.buf].filetype
+      if vim.treesitter.language.get_lang(filetype) then
+        pcall(vim.treesitter.start, args.buf)
+      end
+    end,
+  })
+
+  local missing = {}
+  for _, language in ipairs({ "astro", "html" }) do
+    if #vim.api.nvim_get_runtime_file("parser/" .. language .. ".so", true) == 0 then
+      missing[#missing + 1] = language
+    end
+  end
+  if #missing > 0 then
+    vim.schedule(function()
+      require("nvim-treesitter").install(missing)
+    end)
   end
 end
 
