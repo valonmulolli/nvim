@@ -1,10 +1,12 @@
+local paths = require("config.paths")
+
 local function gh(repo, opts)
   opts = opts or {}
   opts.src = "https://github.com/" .. repo
   return opts
 end
 
-return {
+local registry = {
   remote = {
     gh("saghen/blink.cmp", { name = "blink.cmp" }),
     gh("rafamadriz/friendly-snippets"),
@@ -88,3 +90,33 @@ return {
     ["zignite.nvim"] = "cd zig && zig build -Doptimize=ReleaseFast",
   },
 }
+
+local local_plugins = {}
+
+local function prefer_local(name, path, build)
+  if not path or vim.fn.isdirectory(path) ~= 1 then
+    return
+  end
+
+  for index, spec in ipairs(registry.remote) do
+    if spec.name == name then
+      table.remove(registry.remote, index)
+      break
+    end
+  end
+
+  local_plugins[#local_plugins + 1] = {
+    name = name,
+    path = path,
+    build = build,
+  }
+end
+
+prefer_local("zignite.nvim", paths.plugins.zignite, "cd zig && zig build -Doptimize=ReleaseFast")
+prefer_local("heap-nvim", paths.plugins.heap)
+
+if #local_plugins > 0 then
+  registry.local_plugins = local_plugins
+end
+
+return registry

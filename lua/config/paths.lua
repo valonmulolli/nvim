@@ -11,5 +11,6 @@ return {
   sql_root = vim.fs.joinpath(home, "Sql"),
   plugins = {
     zignite = vim.fs.joinpath(dev_root, "work", "zignite.nvim"),
+    heap = vim.fs.joinpath(dev_root, "heap-themes", "heap-nvim"),
   },
 }
