@@ -23,7 +23,6 @@ function M.setup()
       "templ",
       "html",
       "cssls",
-      "emmet_ls",
       "fortls",
       "hyprls",
       "tailwindcss",

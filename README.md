@@ -376,7 +376,7 @@ Powered by [retroline.nvim](https://github.com/valonmulolli/retroline.nvim). Con
 Astro, Bash, C, CSS, Dockerfile, Go, HTML, JavaScript/JSX, JSON/JSONC, Just, Lua, Markdown, Odin, Python, Regex, Rust, TOML, TypeScript/TSX, Vim, YAML, Zig
 
 **LSP servers:**
-C/C++ (clangd), Go (gopls), Java (jdtls), Lua (lua_ls), Odin (ols), Python (pyright), QML (qmlls), Rust (rust-analyzer), Zig (zls), Astro, Bash, CSS/HTML, Emmet, Fortran, Hyprlang, JSON, LaTeX (texlab), Marksman, Prisma, SQL, Tailwind, Templ, Tinymist/Typst, WGSL, YAML
+C/C++ (clangd), Go (gopls), Java (jdtls), Lua (lua_ls), Odin (ols), Python (pyright), QML (qmlls), Rust (rust-analyzer), Zig (zls), Astro, Bash, CSS/HTML, Fortran, Hyprlang, JSON, LaTeX (texlab), Marksman, Prisma, SQL, Tailwind, Templ, Tinymist/Typst, WGSL, YAML
 
 **Code runners (Zignite):**
 C, C++, Rust, Go, Zig, Java, Python, JavaScript/TypeScript, Lua, Haskell, Odin, Fortran, Shell
