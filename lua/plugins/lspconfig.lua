@@ -16,6 +16,9 @@ function M.setup()
   })
 
   require("mason-lspconfig").setup({
+    automatic_enable = {
+      exclude = { "biome" },
+    },
     ensure_installed = {
       "bashls",
       "gopls",
