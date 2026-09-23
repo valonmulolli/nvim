@@ -1,8 +1,8 @@
 ---@class config.PackRuntimeModule
 ---@field load_modules fun(module_names: string[]): table[], string[]
----@field run_inits fun(modules: table[]): nil
+---@field run_inits fun(modules: table[], failures: string[]): nil
 ---@field run_setups fun(modules: table[], failures: string[]): nil
----@field add_local_paths fun(entries: table[]): nil
+---@field add_local_paths fun(entries: table[], failures: string[]): nil
 ---@field register_keymaps fun(modules: table[]): nil
 ---@field register_build_hooks fun(builds: table<string, string|function>): nil
 ---@field register_commands fun(failures: string[]): nil
@@ -33,10 +33,13 @@ function M.load_modules(module_names)
   return modules, failures
 end
 
-function M.run_inits(modules)
+function M.run_inits(modules, failures)
   for _, module in ipairs(modules) do
     if type(module.init) == "function" then
-      pcall(module.init)
+      local ok, err = pcall(module.init)
+      if not ok then
+        failures[#failures + 1] = "module init failed: " .. tostring(err)
+      end
     end
   end
 end
@@ -53,7 +56,7 @@ function M.run_setups(modules, failures)
   end
 end
 
-function M.add_local_paths(entries)
+function M.add_local_paths(entries, failures)
   for _, entry in ipairs(entries) do
     if vim.fn.isdirectory(entry.path) == 1 then
       vim.opt.rtp:prepend(entry.path)
@@ -66,7 +69,10 @@ function M.add_local_paths(entries)
 
       if entry.build then
         if type(entry.build) == "function" then
-          pcall(entry.build, entry.path)
+          local ok, err = pcall(entry.build, entry.path)
+          if not ok then
+            failures[#failures + 1] = string.format("local plugin build failed for %s: %s", entry.name, tostring(err))
+          end
         else
           vim.system({ vim.o.shell, vim.o.shellcmdflag, entry.build }, { cwd = entry.path }, function(obj)
             if obj.code ~= 0 then
@@ -152,15 +158,40 @@ function M.register_build_hooks(builds)
       end
 
       if type(build) == "function" then
-        pcall(build, ev.data.path)
+        local ok, err = pcall(build, ev.data.path)
+        if not ok then
+          vim.schedule(function()
+            vim.notify(
+              string.format("Build failed for %s:\n%s", ev.data.spec.name, tostring(err)),
+              vim.log.levels.ERROR
+            )
+          end)
+        end
         return
       end
 
       if build:sub(1, 1) == ":" then
         if not ev.data.active then
-          pcall(vim.cmd.packadd, ev.data.spec.name)
+          local ok, err = pcall(vim.cmd.packadd, ev.data.spec.name)
+          if not ok then
+            vim.schedule(function()
+              vim.notify(
+                string.format("Could not load %s for build:\n%s", ev.data.spec.name, tostring(err)),
+                vim.log.levels.ERROR
+              )
+            end)
+            return
+          end
         end
-        pcall(vim.cmd, build:sub(2))
+        local ok, err = pcall(vim.cmd, build:sub(2))
+        if not ok then
+          vim.schedule(function()
+            vim.notify(
+              string.format("Build failed for %s:\n%s", ev.data.spec.name, tostring(err)),
+              vim.log.levels.ERROR
+            )
+          end)
+        end
         return
       end
 

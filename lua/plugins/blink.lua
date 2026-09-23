@@ -1,5 +1,20 @@
 local M = {}
 
+---@param cmp blink.cmp
+---@return boolean|string|nil
+local function tab_keymap(cmp)
+  if cmp.is_visible() then
+    return cmp.select_and_accept()
+  end
+
+  local line = vim.api.nvim_get_current_line()
+  local column = vim.api.nvim_win_get_cursor(0)[2]
+  local next_char = line:sub(column + 1, column + 1)
+  if vim.tbl_contains({ ")", "]", "}", ">", "'", '"', "`", ";" }, next_char) then
+    return "<Right>"
+  end
+end
+
 ---@class plugins.BlinkOpts
 ---@field keymap table<string, any>
 ---@field appearance table<string, any>
@@ -16,12 +31,7 @@ local opts = {
     ["<C-f>"] = { "hide" },
     ["<CR>"] = { "accept", "fallback" },
     ["<Tab>"] = {
-      function(cmp)
-        if cmp.snippet_active() then
-          return cmp.accept()
-        end
-        return cmp.select_and_accept()
-      end,
+      tab_keymap,
       "snippet_forward",
       "fallback",
     },

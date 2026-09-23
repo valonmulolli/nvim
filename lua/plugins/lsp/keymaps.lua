@@ -69,7 +69,7 @@ M.initialize_keymaps = function(client, bufnr)
 
   -- stylua: ignore
   util.register_keymaps(opts, {
-    { "n",          "<leader>cl", "<cmd>LspInfo<cr>",          desc = "Open LspInfo" },
+    { "n",          "<leader>cl", "<cmd>checkhealth vim.lsp<cr>", desc = "LSP health" },
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     { "n",          "gD",         vim.lsp.buf.declaration,     { desc = "Goto declaration" } },

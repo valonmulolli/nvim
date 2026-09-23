@@ -21,6 +21,11 @@ local function snacks_picker_buffers()
 end
 
 ---@return nil
+local function snacks_picker_config()
+  Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+end
+
+---@return nil
 local function snacks_picker_diagnostics()
   Snacks.picker.diagnostics()
 end
@@ -96,7 +101,7 @@ local M = {}
 ---@type plugins.SnacksOpts
 local opts = {
     explorer = {
-      trash = false,
+      trash = true,
     },
 
     scratch = { enabled = false },
@@ -119,16 +124,16 @@ local opts = {
  '--------------------------------------------'
         ]],
         keys = {
-          { key = "SPC o", desc = "Options" },
-          { key = "SPC f", desc = "Fuzzy Find" },
-          { key = "SPC s", desc = "Session" },
-          { key = "SPC b", desc = "Buffers" },
-          { key = "SPC e", desc = "Filetree" },
-          { key = "SPC l", desc = "LSP" },
-          { key = "SPC p", desc = "Window" },
-          { key = "SPC g", desc = "Gitsigns" },
-          { key = "SPC c", desc = "Snacks" },
-          { key = "SPC n", desc = "Notifications" },
+          { key = "f", desc = "Find Files", action = snacks_picker_files },
+          { key = "g", desc = "Find Text", action = snacks_picker_grep },
+          { key = "r", desc = "Recent Files", action = snacks_picker_recent },
+          { key = "b", desc = "Buffers", action = snacks_picker_buffers },
+          { key = "e", desc = "File Explorer", action = snacks_open_explorer },
+          { key = "p", desc = "Projects", action = snacks_picker_projects },
+          { key = "s", desc = "Restore Session", action = ":SessionRestore" },
+          { key = "c", desc = "Config", action = snacks_picker_config },
+          { key = "l", desc = "LSP Health", action = ":checkhealth vim.lsp" },
+          { key = "n", desc = "Notifications", action = snacks_show_notifications },
         },
       },
       sections = {
@@ -235,13 +240,6 @@ local opts = {
 
     image = {
       enabled = true,
-      backend = { "ueberzug" },
-      integrations = {
-        markdown = {
-          enabled = true,
-          download = true,
-        },
-      },
     },
 }
 

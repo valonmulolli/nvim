@@ -191,8 +191,8 @@ Leader key: `<Space>`
 | ------------ | ---- | ------------------------ |
 | `[t`         | n    | Previous TODO            |
 | `]t`         | n    | Next TODO                |
-| `<Leader>ft` | n    | TODO telescope           |
-| `<Leader>fT` | n    | TODO/FIX/FIXME telescope |
+| `<Leader>ft` | n    | TODO picker              |
+| `<Leader>fT` | n    | TODO/FIX/FIXME picker    |
 | `<Leader>xt` | n    | TODO quickfix            |
 | `<Leader>xT` | n    | TODO/FIX/FIXME quickfix  |
 
@@ -347,10 +347,9 @@ Leader key: `<Space>`
 
 | Key   | Mode | Description     |
 | ----- | ---- | --------------- |
-| `gnn` | n    | Init selection  |
-| `grn` | n    | Increment node  |
-| `grc` | n    | Increment scope |
-| `grm` | n    | Decrement node  |
+| `gnn` | n | Start selection |
+| `grn` | x | Expand selection |
+| `grm` | x | Shrink selection |
 
 ## Statusline
 
@@ -369,10 +368,11 @@ Powered by [retroline.nvim](https://github.com/valonmulolli/retroline.nvim). Con
 - Completion uses `blink.cmp` with LSP + buffer sources and filetype-specific tuning
 - Keyword items boosted in code-heavy filetypes
 - Formatting handled by Conform with `lsp_fallback = true`
+- LSP logging defaults to `WARN`; set `NVIM_LSP_LOG_LEVEL=DEBUG` when troubleshooting
 
 ## Languages Supported
 
-**Syntax highlighting (Treesitter):**
+**Syntax highlighting (Tree-sitter; configured parsers install automatically):**
 Astro, Bash, C, CSS, Dockerfile, Go, HTML, JavaScript/JSX, JSON/JSONC, Just, Lua, Markdown, Odin, Python, Regex, Rust, TOML, TypeScript/TSX, Vim, YAML, Zig
 
 **LSP servers:**
@@ -424,7 +424,7 @@ nvim
 On first launch, `vim.pack` automatically:
 
 1. Installs all remote plugins from GitHub
-2. Runs post-install builds (Mason update, Treesitter parsers, Markdown preview deps)
+2. Installs the configured Tree-sitter parsers and runs post-install builds
 3. Initializes LSP servers via Mason (installs any missing servers on next startup)
 4. Applies the heap.nvim colorscheme
 
@@ -436,3 +436,4 @@ Plugins are locked via `nvim-pack-lock.json` for reproducible installs. Run `:Pa
 - Git
 - ripgrep (rg)
 - Node.js (for LSP servers)
+- Bun (for Markdown preview dependencies)

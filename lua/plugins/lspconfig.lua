@@ -16,9 +16,9 @@ function M.setup()
   })
 
   require("mason-lspconfig").setup({
-    automatic_enable = {
-      exclude = { "biome" },
-    },
+    -- This config owns server enablement so Mason cannot start a second
+    -- client with a different configuration.
+    automatic_enable = false,
     ensure_installed = {
       "bashls",
       "gopls",
@@ -61,10 +61,23 @@ function M.setup()
       "goimports",
       "markdownlint",
       "fprettify",
+      "codelldb",
     },
   })
 
-  vim.lsp.log.set_level(vim.log.levels.OFF)
+  local log_levels = {
+    TRACE = vim.log.levels.TRACE,
+    DEBUG = vim.log.levels.DEBUG,
+    INFO = vim.log.levels.INFO,
+    WARN = vim.log.levels.WARN,
+    ERROR = vim.log.levels.ERROR,
+    OFF = vim.log.levels.OFF,
+  }
+  local configured_log_level = vim.g.lsp_log_level
+  if type(configured_log_level) ~= "number" then
+    configured_log_level = log_levels[(vim.env.NVIM_LSP_LOG_LEVEL or ""):upper()] or vim.log.levels.WARN
+  end
+  vim.lsp.log.set_level(configured_log_level)
   require("plugins.lsp.diagnostics")
 
   ---@type fun(client: vim.lsp.Client, bufnr: integer): nil

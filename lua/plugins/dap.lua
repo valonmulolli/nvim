@@ -67,6 +67,20 @@ end
 
 local M = {}
 
+---@param name string
+---@return string|nil
+local function resolve_executable(name)
+  local path = vim.fn.exepath(name)
+  if path ~= "" then
+    return path
+  end
+
+  local mason_path = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "bin", name)
+  if vim.fn.executable(mason_path) == 1 then
+    return mason_path
+  end
+end
+
 M.keys = {
   { "<leader>db", dap_toggle_breakpoint, desc = "Toggle Breakpoint" },
   { "<leader>dB", dap_set_breakpoint_condition, desc = "Conditional Breakpoint" },
@@ -100,14 +114,21 @@ function M.setup()
     return vim.fn.input("cwd: ", vim.fn.getcwd() .. "/build", "file")
   end
 
-  dap.adapters.codelldb = {
-    type = "server",
-    port = "${port}",
-    executable = {
-      command = vim.env.HOME .. "/.local/share/nvim/mason/bin/codelldb",
-      args = { "--port", "${port}" },
-    },
-  }
+  local codelldb = resolve_executable("codelldb")
+  if codelldb then
+    dap.adapters.codelldb = {
+      type = "server",
+      port = "${port}",
+      executable = {
+        command = codelldb,
+        args = { "--port", "${port}" },
+      },
+    }
+  else
+    vim.schedule(function()
+      vim.notify("codelldb is unavailable; install the Mason codelldb package to use DAP", vim.log.levels.WARN)
+    end)
+  end
 
   dap.configurations.c = {
     {

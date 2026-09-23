@@ -14,10 +14,10 @@ local function setup()
   ---@type table[]
   local modules, failures = runtime.load_modules(registry.modules)
 
-  runtime.register_build_hooks(registry.builds)
-  runtime.run_inits(modules)
+  runtime.register_build_hooks(registry.builds, failures)
+  runtime.run_inits(modules, failures)
   if registry.local_plugins then
-    runtime.add_local_paths(registry.local_plugins)
+    runtime.add_local_paths(registry.local_plugins, failures)
   end
 
   vim.pack.add(registry.remote, {

@@ -9,13 +9,11 @@ local augroup = vim.api.nvim_create_augroup
 ---@param name string
 ---@return integer
 local function group(name)
-  return augroup(name, {})
+  return augroup(name, { clear = true })
 end
 
 ---@type string
 local last_search_key = "_lastsearch"
----@type integer
-local large_file_line_limit = 1000
 ---@type string[]
 local quick_close_exclude = { "", "diff", "prompt", "terminal" }
 ---@type string[]
@@ -54,18 +52,6 @@ end
 
 ---@param ev vim.api.keyset.create_autocmd.callback_args
 ---@return nil
-local function toggle_lazyredraw_for_large_buffers(ev)
-  ---@type integer
-  local line_count = vim.api.nvim_buf_line_count(ev.buf)
-  if line_count >= large_file_line_limit and vim.o.lazyredraw == false then
-    vim.o.lazyredraw = true
-  elseif line_count < large_file_line_limit and vim.o.lazyredraw == true then
-    vim.o.lazyredraw = false
-  end
-end
-
----@param ev vim.api.keyset.create_autocmd.callback_args
----@return nil
 local function setup_quick_close(ev)
   ---@type boolean
   local is_eligible = vim.bo.readonly or vim.bo.modifiable == false or vim.wo.previewwindow
@@ -83,12 +69,6 @@ autocmd({ "FocusLost", "VimSuspend" }, {
   group = group("FocusLostStopInsert"),
   pattern = "*",
   command = "if empty(&buftype) | stopinsert | endif",
-})
-
-autocmd("FocusLost", {
-  desc = "Write all buffers on FocusLost if they are normal files",
-  group = group("FocusLostWriteAll"),
-  command = "if &modifiable && &buftype == '' | silent! wall | endif",
 })
 
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
@@ -121,14 +101,6 @@ autocmd({ "BufEnter", "FileType" }, {
   pattern = "*",
   callback = disable_auto_comment,
 })
-
-
-autocmd("BufEnter", {
-  desc = "Enable lazyredraw for buffers with lots of lines",
-  group = group("LazyredrawLargeFiles"),
-  callback = toggle_lazyredraw_for_large_buffers,
-})
-
 autocmd("BufWinEnter", {
   desc = "Apply q keymap to close local buffers that match criteria",
   group = group("QuickClose"),

@@ -26,7 +26,8 @@ local util = require("config.util")
 -- Setup tmux status bar
 util.setup_tmux_mode()
 
--- Apply colorscheme
-vim.cmd.colorscheme("heap")
-
-
+-- Apply colorscheme (heap is local source; fall back cleanly on other machines)
+if not pcall(vim.cmd.colorscheme, "heap") then
+  vim.cmd.colorscheme("default")
+  vim.notify("heap colorscheme not found, using fallback", vim.log.levels.WARN)
+end
