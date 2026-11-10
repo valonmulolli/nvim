@@ -6,11 +6,31 @@ local function gh(repo, opts)
   return opts
 end
 
+local function build_zignite(path)
+  local rust_manifest = vim.fs.joinpath(path, "rust", "Cargo.toml")
+  if vim.fn.filereadable(rust_manifest) ~= 1 then
+    error("zignite.nvim Rust backend manifest not found: " .. rust_manifest)
+  end
+
+  vim.system({ "cargo", "build", "--manifest-path", rust_manifest, "--release", "--locked" }, {
+    cwd = path,
+    text = true,
+  }, function(result)
+    if result.code ~= 0 then
+      vim.schedule(function()
+        vim.notify(
+          "Build failed for zignite.nvim:\n" .. (result.stderr ~= "" and result.stderr or result.stdout),
+          vim.log.levels.ERROR
+        )
+      end)
+    end
+  end)
+end
+
 local registry = {
   remote = {
     gh("saghen/blink.cmp", { name = "blink.cmp" }),
     gh("rafamadriz/friendly-snippets"),
-    gh("akinsho/bufferline.nvim"),
     gh("nvim-tree/nvim-web-devicons"),
     gh("stevearc/conform.nvim"),
     gh("nvim-neotest/nvim-nio"),
@@ -36,7 +56,6 @@ local registry = {
     gh("folke/todo-comments.nvim"),
     gh("nvim-treesitter/nvim-treesitter"),
     gh("windwp/nvim-ts-autotag"),
-    gh("JoosepAlviste/nvim-ts-context-commentstring"),
     gh("nvim-treesitter/nvim-treesitter-textobjects"),
     gh("hiphish/rainbow-delimiters.nvim"),
     gh("nvim-treesitter/nvim-treesitter-context"),
@@ -66,7 +85,6 @@ local registry = {
     "plugins.utils",
     "plugins.git",
     "plugins.flash",
-    "plugins.bufferline",
     "plugins.session",
     "plugins.todo-comments",
     "plugins.conform",
@@ -85,9 +103,8 @@ local registry = {
 
   builds = {
     ["markdown-preview.nvim"] = "cd app && bun install",
-    ["mason.nvim"] = ":MasonUpdate",
     ["nvim-treesitter"] = ":TSUpdate",
-    ["zignite.nvim"] = "cd zig && zig build -Doptimize=ReleaseFast",
+    ["zignite.nvim"] = build_zignite,
   },
 }
 
@@ -112,8 +129,9 @@ local function prefer_local(name, path, build)
   }
 end
 
-prefer_local("zignite.nvim", paths.plugins.zignite, "cd zig && zig build -Doptimize=ReleaseFast")
+prefer_local("zignite.nvim", paths.plugins.zignite, build_zignite)
 prefer_local("heap-nvim", paths.plugins.heap)
+prefer_local("retroline.nvim", paths.plugins.retroline)
 
 if #local_plugins > 0 then
   registry.local_plugins = local_plugins

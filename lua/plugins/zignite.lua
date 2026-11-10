@@ -17,12 +17,29 @@ function M.setup()
     keymaps = {},
     mode = "float",
 
-    runners = {},
+    runners = {
+      asm = {
+        cmd = {
+          "nasm -f elf64 $file -o /tmp/$fileNameWithoutExt.o",
+          "ld /tmp/$fileNameWithoutExt.o -o /tmp/$fileNameWithoutExt",
+          "/tmp/$fileNameWithoutExt",
+        },
+        cleanup_command = "rm -f /tmp/$fileNameWithoutExt.o /tmp/$fileNameWithoutExt",
+      },
+
+      nasm = {
+        cmd = {
+          "nasm -f elf64 $file -o /tmp/$fileNameWithoutExt.o",
+          "ld /tmp/$fileNameWithoutExt.o -o /tmp/$fileNameWithoutExt",
+          "/tmp/$fileNameWithoutExt",
+        },
+        cleanup_command = "rm -f /tmp/$fileNameWithoutExt.o /tmp/$fileNameWithoutExt",
+      },
+    },
     build_commands = {},
 
     detect = {
       zig = true,
-      go = true,
       rust = true,
       odin = true,
       c_cpp_make = true,
