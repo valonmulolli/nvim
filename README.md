@@ -52,7 +52,6 @@ Leader key: `<Space>`
 | Key         | Mode | Description                          |
 | ----------- | ---- | ------------------------------------ |
 | `<C-s>`     | n, i | Format and save                      |
-| `<C-z>`     | i    | Undo                                 |
 | `<Esc>`     | n    | Clear search highlight               |
 | `<Leader>q` | n    | Quit window                          |
 | `<Leader>h` | n    | Search and replace word under cursor |
@@ -78,7 +77,7 @@ Leader key: `<Space>`
 | `<A-j>` / `<A-Down>` | v    | Move lines down               |
 | `<A-k>` / `<A-Up>`   | v    | Move lines up                 |
 | `<C-S-d>`            | n    | Duplicate line                |
-| `J`                  | n    | Join lines (cursor stays)     |
+| `J`                  | n    | Join lines                    |
 | `Y`                  | n    | Yank to end of line           |
 | `<Leader>p`          | x    | Paste without yanking         |
 | `<`                  | v    | Indent left (stay in visual)  |
@@ -97,22 +96,6 @@ Leader key: `<Space>`
 | `<C-w>d`     | n    | Delete current buffer |
 | `<Leader>nt` | n    | New tab               |
 | `<Leader>nf` | n    | New file              |
-
-### Bufferline
-
-| Key          | Mode | Description              |
-| ------------ | ---- | ------------------------ |
-| `<S-h>`      | n    | Previous buffer          |
-| `<S-l>`      | n    | Next buffer              |
-| `[b`         | n    | Previous buffer          |
-| `]b`         | n    | Next buffer              |
-| `[B`         | n    | Move buffer left         |
-| `]B`         | n    | Move buffer right        |
-| `<Leader>bp` | n    | Toggle pin               |
-| `<Leader>bP` | n    | Close non-pinned buffers |
-| `<Leader>bo` | n    | Close other buffers      |
-| `<Leader>br` | n    | Close buffers to right   |
-| `<Leader>bl` | n    | Close buffers to left    |
 
 ### Picker and Explorer (Snacks)
 
@@ -151,10 +134,10 @@ Leader key: `<Space>`
 | `gK`         | n    | Signature help                |
 | `<C-y>`      | i    | Signature help                |
 | `<C-k>`      | n    | Signature help (Neovim 0.12+) |
-| `<Leader>cl` | n    | LSP info                      |
+| `<Leader>cl` | n    | LSP health                    |
 | `<Leader>cr` | n    | Rename symbol                 |
 | `<Leader>ca` | n, v | Code action                   |
-| `<Leader>cC` | n    | Refresh codelens              |
+| `<Leader>cC` | n    | Enable codelens               |
 | `<Leader>cf` | n, v | Format buffer                 |
 | `[d`         | n    | Previous diagnostic           |
 | `]d`         | n    | Next diagnostic               |
@@ -238,7 +221,7 @@ Leader key: `<Space>`
 | Key          | Mode       | Description                |
 | ------------ | ---------- | -------------------------- |
 | `<C-.>`      | n, i, t, x | Toggle and focus Sidekick  |
-| `<Tab>`      | n          | Apply next edit suggestion |
+| `<Leader>an` | n          | Apply next edit suggestion |
 | `<Leader>aa` | n          | Toggle CLI                 |
 | `<Leader>as` | n          | Select CLI tool            |
 | `<Leader>ad` | n          | Detach CLI session         |
@@ -376,7 +359,7 @@ Powered by [retroline.nvim](https://github.com/valonmulolli/retroline.nvim). Con
 Astro, Bash, C, CSS, Dockerfile, Go, HTML, JavaScript/JSX, JSON/JSONC, Just, Lua, Markdown, Odin, Python, Regex, Rust, TOML, TypeScript/TSX, Vim, YAML, Zig
 
 **LSP servers:**
-C/C++ (clangd), Go (gopls), Java (jdtls), Lua (lua_ls), Odin (ols), Python (pyright), QML (qmlls), Rust (rust-analyzer), Zig (zls), Astro, Bash, CSS/HTML, Fortran, Hyprlang, JSON, LaTeX (texlab), Marksman, Prisma, SQL, Tailwind, Templ, Tinymist/Typst, WGSL, YAML
+C/C++ (clangd), Go (gopls), Java (jdtls), JavaScript/TypeScript (typescript-tools), Lua (lua_ls), Odin (ols), Python (pyright), QML (qmlls), Rust (rust-analyzer), Zig (zls), Astro, Bash, CSS/HTML, ESLint, Fortran, JSON, LaTeX (texlab), Marksman, Prisma, SQL, Tailwind, Templ, Tinymist/Typst, YAML
 
 **Code runners (Zignite):**
 C, C++, Rust, Go, Zig, Java, Python, JavaScript/TypeScript, Lua, Haskell, Odin, Fortran, Shell
@@ -391,7 +374,6 @@ C, C++, Rust, Go, Zig, Java, Python, JavaScript/TypeScript, Lua, Haskell, Odin, 
 | flash.nvim            | Motion and navigation             |
 | conform.nvim          | Formatting                        |
 | gitsigns.nvim         | Git hunks and inline blame/diff   |
-| bufferline.nvim       | Buffer tabs                       |
 | which-key.nvim        | Keybinding hints                  |
 | nvim-dap              | Debugging                         |
 | auto-session          | Session save/restore              |
