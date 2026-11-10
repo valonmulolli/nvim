@@ -285,13 +285,9 @@ Leader key: `<Space>`
 | ------------ | ---- | --------------- |
 | `<Leader>uu` | n    | Toggle Undotree |
 
-### Neocodeium
+### GitHub Copilot
 
-| Key     | Mode | Description      |
-| ------- | ---- | ---------------- |
-| `<C-e>` | i    | Accept word      |
-| `<C-r>` | i    | Accept line      |
-| `<C-x>` | i    | Clear suggestion |
+Run `:Copilot auth` once to authenticate. Copilot suggestions appear in the Blink completion menu alongside LSP results; accept the selected item with `<Tab>` or `<CR>`.
 
 ### Snacks Toggles
 
@@ -348,7 +344,7 @@ Powered by [retroline.nvim](https://github.com/valonmulolli/retroline.nvim). Con
 - Server settings are split under `lua/plugins/lsp/servers/*.lua`
 - Startup is resilient: missing binaries are skipped instead of breaking all servers
 - Diagnostics shown inline and in lists; detailed float on demand with `<Leader>xd`
-- Completion uses `blink.cmp` with LSP + buffer sources and filetype-specific tuning
+- Completion uses `blink.cmp` with LSP, buffer, and GitHub Copilot sources plus filetype-specific tuning
 - Keyword items boosted in code-heavy filetypes
 - Formatting handled by Conform with `lsp_fallback = true`
 - LSP logging defaults to `WARN`; set `NVIM_LSP_LOG_LEVEL=DEBUG` when troubleshooting
@@ -380,7 +376,8 @@ C, C++, Rust, Go, Zig, Java, Python, JavaScript/TypeScript, Lua, Haskell, Odin, 
 | todo-comments.nvim    | TODO highlighting and lists       |
 | typescript-tools.nvim | TypeScript tooling and LSP bridge |
 | sidekick.nvim         | AI assistant                      |
-| neocodeium            | AI completions                    |
+| copilot.lua           | GitHub Copilot client             |
+| blink-cmp-copilot     | Copilot source for Blink          |
 | zignite.nvim          | Run file and build workflows      |
 | retroline.nvim        | Native statusline                 |
 | heap.nvim             | Colorscheme                       |

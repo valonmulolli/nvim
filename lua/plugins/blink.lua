@@ -48,16 +48,16 @@ local opts = {
     nerd_font_variant = "mono",
   },
   sources = {
-    default = { "lsp", "path", "snippets", "buffer" },
+    default = { "lsp", "path", "snippets", "buffer", "copilot" },
     per_filetype = {
-      c = { "lsp", "buffer", "path", "snippets" },
-      cpp = { "lsp", "buffer", "path", "snippets" },
-      zig = { "lsp", "buffer", "path", "snippets" },
-      sql = { "dadbod", "lsp", "buffer", "snippets", "path" },
-      markdown = { "buffer", "path", "snippets" },
-      text = { "buffer", "path", "snippets" },
-      json = { "lsp", "buffer", "path" },
-      jsonc = { "lsp", "buffer", "path" },
+      c = { "lsp", "buffer", "path", "snippets", "copilot" },
+      cpp = { "lsp", "buffer", "path", "snippets", "copilot" },
+      zig = { "lsp", "buffer", "path", "snippets", "copilot" },
+      sql = { "dadbod", "lsp", "buffer", "snippets", "path", "copilot" },
+      markdown = { "buffer", "path", "snippets", "copilot" },
+      text = { "buffer", "path", "snippets", "copilot" },
+      json = { "lsp", "buffer", "path", "copilot" },
+      jsonc = { "lsp", "buffer", "path", "copilot" },
     },
     ---@param ctx blink.cmp.Context
     ---@param items blink.cmp.CompletionItem[]
@@ -108,6 +108,12 @@ local opts = {
         score_offset = -4,
       },
       dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+      copilot = {
+        name = "Copilot",
+        module = "blink-cmp-copilot",
+        score_offset = 100,
+        async = true,
+      },
     },
   },
   snippets = {
@@ -139,6 +145,7 @@ local opts = {
         border = "rounded",
         max_width = 44,
         max_height = 12,
+        scrollbar = false,
       },
     },
     menu = {
@@ -175,7 +182,7 @@ local opts = {
             end,
           },
           label = {
-            width = { fill = true, max = 42 },
+            width = { fill = true, max = 34 },
           },
           label_description = {
             width = { max = 18 },
