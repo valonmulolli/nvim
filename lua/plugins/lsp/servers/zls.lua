@@ -5,6 +5,7 @@ return {
   settings = {
     zls = {
       enable_snippets = true,
+      enable_argument_placeholders = false,
       -- Keep this off so opening/saving a Zig project does not eagerly create
       -- .zig-cache / zig-out through background build steps.
       enable_build_on_save = false,

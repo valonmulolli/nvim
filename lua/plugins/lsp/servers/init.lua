@@ -48,8 +48,6 @@ M.enable = {
   "prismals",
   "texlab",
   -- "intelephense",
-  "hyprls",
-  "wgsl_analyzer",
   "ols",
 }
 
@@ -80,8 +78,6 @@ M.executables = {
   prismals = "prisma-language-server",
   texlab = "texlab",
   -- intelephense = "intelephense",
-  hyprls = "hyprls",
-  wgsl_analyzer = "wgsl-analyzer",
   ols = "ols",
 }
 

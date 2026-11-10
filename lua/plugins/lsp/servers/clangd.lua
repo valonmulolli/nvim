@@ -7,13 +7,17 @@ for _, compiler in ipairs({ "gcc", "g++", "clang", "clang++" }) do
 end
 
 local cmd = {
-    "clangd",
-    "--background-index",
-    "--header-insertion=never",
-    "--clang-tidy",
-    "--completion-style=detailed",
-    "--pch-storage=memory",
-  }
+  "clangd",
+  "--background-index",
+  "--background-index-priority=low",
+  "--clang-tidy",
+  "--header-insertion=never",
+  "--completion-style=detailed",
+  "--pch-storage=memory",
+  "--function-arg-placeholders=false",
+  "--fallback-style=llvm",
+  "-j=4",
+}
 if #drivers > 0 then
   cmd[#cmd + 1] = "--query-driver=" .. table.concat(drivers, ",")
 end
@@ -26,8 +30,9 @@ return {
   root_markers = {
     "compile_commands.json",
     "compile_flags.txt",
+    ".git",
+    "CMakeLists.txt",
     ".clangd",
     "Kbuild",
-    ".git",
   },
 }
