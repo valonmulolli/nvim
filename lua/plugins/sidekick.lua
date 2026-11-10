@@ -136,7 +136,7 @@ local opts = {
 }
 
 M.keys = {
-  -- Tab: Navigate/apply next edit suggestions
+  -- Jump to or apply the next edit suggestion
   {
     "<leader>an",
     sidekick_nes_jump_or_apply,

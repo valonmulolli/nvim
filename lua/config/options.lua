@@ -7,7 +7,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes:1"
 vim.opt.scrolloff = 3
-vim.opt.showtabline = 2
+vim.opt.showtabline = 0
 vim.opt.ruler = false
 vim.opt.winminwidth = 5
 vim.opt.showmode = false
@@ -64,8 +64,7 @@ vim.opt.spelloptions = { "camel", "noplainbuffer" }
 vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldmethod = "manual"
 vim.opt.foldtext = "v:lua.require('config.util').foldtext()"
 
 -- Command-line completion

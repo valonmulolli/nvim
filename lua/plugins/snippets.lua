@@ -13,6 +13,28 @@ function M.setup()
   local ls = require("luasnip")
   ls.setup({})
 
+  local removed_cpp_triggers = {
+    interface = true,
+    namespace = true,
+  }
+
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "LuasnipSnippetsAdded",
+    callback = function()
+      if ls.session.latest_load_ft ~= "cpp" then
+        return
+      end
+
+      for _, snippet in ipairs(ls.get_snippets("cpp")) do
+        if removed_cpp_triggers[snippet.trigger] then
+          snippet:invalidate()
+        end
+      end
+
+      ls.clean_invalidated({ inv_limit = 0 })
+    end,
+  })
+
   require("luasnip.loaders.from_vscode").lazy_load()
 
   ---@type plugins.LuaSnipSnippetMap

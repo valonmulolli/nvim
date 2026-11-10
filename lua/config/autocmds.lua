@@ -101,6 +101,24 @@ autocmd({ "BufEnter", "FileType" }, {
   pattern = "*",
   callback = disable_auto_comment,
 })
+autocmd("FileType", {
+  desc = "Avoid reindenting C++ lines when typing scope-resolution colons",
+  group = group("CppIndentKeys"),
+  pattern = "cpp",
+  callback = function(ev)
+    vim.schedule(function()
+      if not vim.api.nvim_buf_is_valid(ev.buf) or vim.bo[ev.buf].filetype ~= "cpp" then
+        return
+      end
+
+      local indentkeys = vim.split(vim.bo[ev.buf].indentkeys, ",", { plain = true })
+      indentkeys = vim.tbl_filter(function(key)
+        return key ~= ":"
+      end, indentkeys)
+      vim.bo[ev.buf].indentkeys = table.concat(indentkeys, ",")
+    end)
+  end,
+})
 autocmd("BufWinEnter", {
   desc = "Apply q keymap to close local buffers that match criteria",
   group = group("QuickClose"),

@@ -93,7 +93,6 @@ end
 ---@field debug table<string, any>
 ---@field indent table<string, any>
 ---@field toggle table<string, any>
----@field winbar table<string, any>
 ---@field image table<string, any>
 
 local M = {}
@@ -236,8 +235,6 @@ local opts = {
     debug = { enabled = false },
     indent = { enabled = false },
     toggle = { enabled = true },
-    winbar = { enabled = true },
-
     image = {
       enabled = true,
     },

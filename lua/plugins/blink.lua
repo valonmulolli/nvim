@@ -11,7 +11,7 @@ local function tab_keymap(cmp)
   local column = vim.api.nvim_win_get_cursor(0)[2]
   local next_char = line:sub(column + 1, column + 1)
   if vim.tbl_contains({ ")", "]", "}", ">", "'", '"', "`", ";" }, next_char) then
-    return "<Right>"
+    return vim.api.nvim_replace_termcodes("<Right>", true, false, true)
   end
 end
 
@@ -97,24 +97,6 @@ local opts = {
         score_offset = 5,
         -- Show buffer words alongside active LSP results.
         fallbacks = {},
-        transform_items = function(_, items)
-          local kind = require("blink.cmp.types").CompletionItemKind
-          for _, item in ipairs(items) do
-            local is_call = item.kind == kind.Function or item.kind == kind.Method
-            local label = type(item.label) == "string" and item.label:match("[_%a][_%w]*") or nil
-            if is_call and label ~= nil then
-              local call_snippet = label .. "($0)"
-              item.insertTextFormat = vim.lsp.protocol.InsertTextFormat.Snippet
-              item.insertText = call_snippet
-
-              if type(item.textEdit) == "table" and item.textEdit.newText ~= nil then
-                item.textEdit.newText = call_snippet
-              end
-            end
-          end
-
-          return items
-        end,
       },
       snippets = {
 

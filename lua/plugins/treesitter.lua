@@ -69,8 +69,23 @@ local function is_large_file(buf)
 end
 
 ---@param buf integer
+---@param method string
+---@param expr string
+---@return nil
+local function set_folding(buf, method, expr)
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_get_buf(win) == buf then
+      vim.wo[win].foldmethod = method
+      vim.wo[win].foldexpr = expr
+    end
+  end
+end
+
+---@param buf integer
 ---@return boolean
 local function start_treesitter(buf)
+  set_folding(buf, "manual", "0")
+
   local filetype = vim.bo[buf].filetype
   local language = vim.treesitter.language.get_lang(filetype)
   if not language or not configured_languages[language] or is_large_file(buf) then
@@ -83,13 +98,7 @@ local function start_treesitter(buf)
   end
 
   vim.treesitter.start(buf, language)
-
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    if vim.api.nvim_win_get_buf(win) == buf then
-      vim.wo[win].foldmethod = "expr"
-      vim.wo[win].foldexpr = "v:lua.vim.treesitter.foldexpr()"
-    end
-  end
+  set_folding(buf, "expr", "v:lua.vim.treesitter.foldexpr()")
 
   if not indentation_disabled[filetype] then
     vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
@@ -200,11 +209,6 @@ function M.setup()
     autotag_internal._parser_guarded = true
   end
 
-  require("ts_context_commentstring").setup({
-    enable_autocmd = false,
-    languages = {},
-  })
-  pcall(vim.api.nvim_del_augroup_by_name, "context_commentstring_ft")
   require("treesitter-context").setup({ max_lines = 1 })
 
   local ts = require("nvim-treesitter")

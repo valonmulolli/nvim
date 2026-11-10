@@ -11,7 +11,7 @@ function M.setup()
       separator = " ",
     },
     path = {
-      style = "relative",
+      style = "filename",
       keep_segments = 2,
       max_length = 56,
     },
