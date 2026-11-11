@@ -28,6 +28,7 @@ local opts = {
   keymap = {
     preset = "none",
     -- ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+    ["<C-e>"] = { function(cmp) return cmp.show({ providers = { "copilot" } }) end },
     ["<C-f>"] = { "hide" },
     ["<CR>"] = { "accept", "fallback" },
     ["<Tab>"] = {
@@ -48,16 +49,16 @@ local opts = {
     nerd_font_variant = "mono",
   },
   sources = {
-    default = { "lsp", "path", "snippets", "buffer", "copilot" },
+    default = { "lsp", "path", "snippets", "buffer" },
     per_filetype = {
-      c = { "lsp", "buffer", "path", "snippets", "copilot" },
-      cpp = { "lsp", "buffer", "path", "snippets", "copilot" },
-      zig = { "lsp", "buffer", "path", "snippets", "copilot" },
-      sql = { "dadbod", "lsp", "buffer", "snippets", "path", "copilot" },
-      markdown = { "buffer", "path", "snippets", "copilot" },
-      text = { "buffer", "path", "snippets", "copilot" },
-      json = { "lsp", "buffer", "path", "copilot" },
-      jsonc = { "lsp", "buffer", "path", "copilot" },
+      c = { "lsp", "buffer", "path", "snippets" },
+      cpp = { "lsp", "buffer", "path", "snippets" },
+      zig = { "lsp", "buffer", "path", "snippets" },
+      sql = { "dadbod", "lsp", "buffer", "snippets", "path" },
+      markdown = { "buffer", "path", "snippets" },
+      text = { "buffer", "path", "snippets" },
+      json = { "lsp", "buffer", "path" },
+      jsonc = { "lsp", "buffer", "path" },
     },
     ---@param ctx blink.cmp.Context
     ---@param items blink.cmp.CompletionItem[]

@@ -36,18 +36,6 @@ local snippets = {
     i(1, "// code here"),
     t({ "", "}" }),
   }),
-  -- Generic function
-  s("fn", {
-    t({ "fn " }),
-    i(1, "functionName"),
-    t({ "(" }),
-    i(2, "params"),
-    t({ ") " }),
-    i(3, "returnType"),
-    t({ " {", "\t" }),
-    i(4, "// body"),
-    t({ "", "}" }),
-  }),
   -- If statement
   s("if", {
     t({ "if (" }),
