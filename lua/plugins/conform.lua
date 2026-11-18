@@ -1,6 +1,6 @@
 ---@return nil
 local function conform_format()
-  require("conform").format({ async = true, lsp_fallback = true })
+  require("conform").format({ async = true, lsp_format = "fallback" })
 end
 
 ---@class plugins.ConformOpts
@@ -30,6 +30,7 @@ local opts = {
     odin = { "odinfmt" },
     lua = { "stylua" },
     python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+    java = { "google-java-format" },
     fortran = { "fprettify" },
     sql = { "sqlfluff" },
     javascript = { "biome", "prettierd", "prettier", stop_after_first = true },
@@ -49,6 +50,11 @@ local opts = {
     yaml = { "prettierd", "prettier", stop_after_first = true },
     toml = { "taplo" },
   },
+  formatters = {
+    ["google-java-format"] = {
+      prepend_args = { "--aosp" },
+    },
+  },
   ---@param bufnr integer
   ---@return table<string, boolean|integer>|nil
   format_on_save = function(bufnr)
@@ -59,7 +65,7 @@ local opts = {
     end
     return {
       timeout_ms = 500,
-      lsp_fallback = true,
+      lsp_format = "fallback",
     }
   end,
   notify_on_error = true,

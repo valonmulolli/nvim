@@ -84,6 +84,7 @@ vim.opt.shortmess:append({
   s = true,
   S = true,
 })
+
 vim.opt.whichwrap:append("<,>,[]")
 vim.o.guifont = "TX-02:h14"
 vim.opt.guicursor:append("n-v-c:blinkon500-blinkoff500")

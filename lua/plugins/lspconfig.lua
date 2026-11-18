@@ -56,6 +56,8 @@ function M.setup()
       "sqlfluff",
       "goimports",
       "fprettify",
+      "google-java-format",
+      "typstyle",
       "codelldb",
     },
   })

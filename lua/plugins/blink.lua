@@ -1,10 +1,43 @@
 local M = {}
 
+local function move_cursor_into_empty_call(bufnr, row, start_col)
+  if vim.api.nvim_get_current_buf() ~= bufnr then
+    return
+  end
+
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  if cursor[1] ~= row then
+    return
+  end
+
+  local line = vim.api.nvim_buf_get_lines(bufnr, row - 1, row, false)[1]
+  local open, close = line:find("%(%s*%)", math.max(1, start_col + 1))
+  if open and close <= cursor[2] + 1 then
+    vim.api.nvim_win_set_cursor(0, { row, open })
+  end
+end
+
+local function after_accept_callback(cmp)
+  local item = cmp.get_selected_item()
+  local item_kind = vim.lsp.protocol.CompletionItemKind
+  if item == nil or (item.kind ~= item_kind.Method and item.kind ~= item_kind.Function) then
+    return function() end
+  end
+
+  local bufnr = vim.api.nvim_get_current_buf()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local row, start_col = cursor[1], cursor[2]
+
+  return function()
+    move_cursor_into_empty_call(bufnr, row, start_col)
+  end
+end
+
 ---@param cmp blink.cmp
 ---@return boolean|string|nil
 local function tab_keymap(cmp)
   if cmp.is_visible() then
-    return cmp.select_and_accept()
+    return cmp.select_and_accept({ callback = after_accept_callback(cmp) })
   end
 
   local line = vim.api.nvim_get_current_line()
@@ -28,9 +61,13 @@ local opts = {
   keymap = {
     preset = "none",
     -- ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
-    ["<C-e>"] = { function(cmp) return cmp.show({ providers = { "copilot" } }) end },
     ["<C-f>"] = { "hide" },
-    ["<CR>"] = { "accept", "fallback" },
+    ["<CR>"] = {
+      function(cmp)
+        return cmp.accept({ callback = after_accept_callback(cmp) })
+      end,
+      "fallback",
+    },
     ["<Tab>"] = {
       tab_keymap,
       "snippet_forward",
@@ -109,12 +146,6 @@ local opts = {
         score_offset = -4,
       },
       dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-      copilot = {
-        name = "Copilot",
-        module = "blink-cmp-copilot",
-        score_offset = 100,
-        async = true,
-      },
     },
   },
   snippets = {
@@ -132,7 +163,7 @@ local opts = {
     },
     accept = {
       auto_brackets = {
-        enabled = false,
+        enabled = true,
       },
     },
     ghost_text = {

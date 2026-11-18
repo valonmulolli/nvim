@@ -45,14 +45,14 @@ local snippets = {
   -- gen words
   s("exist", t("existentialist")),
   s("phil", t("philosophy")),
-  s("phil", t("philosophical")),
+  s("philo", t("philosophical")),
   s("bec", t("because")),
   s("there", t("therefore")),
   s("math", t("mathematical")),
   s("org", t("organization")),
   s("cs", t("computer Science")),
   s("pe", t("people")),
-  s("pe", t("person")),
+  s("person", t("person")),
   s("dif", t("different")),
 
   -- misc
@@ -66,7 +66,7 @@ local snippets = {
   }),
   -- markdown stuff
   s("td", t("- [ ]")),
-  s("td", t("- [x]")),
+  s("tdx", t("- [x]")),
 }
 
 ---@return table<integer, any>

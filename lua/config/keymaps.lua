@@ -91,3 +91,11 @@ util.register_keymaps(defaults, {
   { "t", "<Esc>",      "<C-\\><C-n>",        { desc = "Exit terminal mode" } },
 
 })
+
+-- Keep :w as typed, but suppress Neovim's write summary after it runs.
+vim.keymap.set("c", "<CR>", function()
+  if vim.fn.getcmdtype() == ":" and vim.fn.getcmdline() == "w" then
+    return "<C-c><Cmd>silent write<CR>"
+  end
+  return "<CR>"
+end, { expr = true, replace_keycodes = true, silent = true, desc = "Write silently" })

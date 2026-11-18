@@ -5,7 +5,6 @@ function M.setup()
     transparent_background = true,
     plugins = {
       blink = true,
-      telescope = true,
       snacks = true,
     },
   })

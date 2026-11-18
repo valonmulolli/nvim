@@ -1,7 +1,6 @@
 local M = {}
 
 M.keys = {
-  { "<leader>r", ":RunFile<CR>", mode = "n", desc = "Run file" },
   { "<leader>rf", ":RunFile<CR>", mode = "n", desc = "Run file" },
   { "<leader>rb", ":RunBuildSelect<CR>", mode = "n", desc = "Select build command" },
   { "<leader>rl", ":RunLive<CR>", mode = "n", desc = "Run live/watch command" },
